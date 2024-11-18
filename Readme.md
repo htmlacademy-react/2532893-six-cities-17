@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Yuriy Andreyev](https://up.htmlacademy.ru/react/17/user/2532893).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Сударев](https://htmlacademy.ru/profile/id1152185).
 
 ---
 
