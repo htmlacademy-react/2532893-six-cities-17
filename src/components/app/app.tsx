@@ -1,7 +1,11 @@
 import MainScreen from '../pages/main-page-screen/main-screen.tsx';
 
-export default function App():JSX.Element{
+type AppProps = {
+  offersCount: number;
+}
+
+export default function App({offersCount}: AppProps):JSX.Element{
   return (
-    <MainScreen/>
+    <MainScreen offersCount={offersCount}/>
   );
 }
