@@ -1,4 +1,5 @@
 import PlaceCard from '../../ui/place-card/place-card.tsx';
+import {ReactNode} from 'react';
 
 type MainScreenProps = {
   offersCount: number;
@@ -134,13 +135,7 @@ export default function MainScreen ({offersCount}: MainScreenProps): JSX.Element
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard/>
-                <PlaceCard/>
-                <PlaceCard/>
-                <PlaceCard/>
-                <PlaceCard/>
-                <PlaceCard/>
-                <PlaceCard/>
+                {Array.from({length: 7}).map((_, index: number):ReactNode => <PlaceCard key={index}/>)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -152,3 +147,4 @@ export default function MainScreen ({offersCount}: MainScreenProps): JSX.Element
     </div>
   );
 }
+
