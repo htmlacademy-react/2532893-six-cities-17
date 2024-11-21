@@ -1,5 +1,6 @@
 import PlaceCard from '../../ui/place-card/place-card.tsx';
 import {ReactNode} from 'react';
+import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 
 type MainScreenProps = {
   offersCount: number;
@@ -135,7 +136,7 @@ export default function MainScreen ({offersCount}: MainScreenProps): JSX.Element
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: 7}).map((_, index: number):ReactNode => <PlaceCard key={index}/>)}
+                {Array.from({length: OFFERS_SHOW_COUNT}).map((_, index: number):ReactNode => <PlaceCard key={index}/>)}
               </div>
             </section>
             <div className="cities__right-section">
