@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import Logo from '../../ui/logo/logo.tsx';
-import Nav from "../../../blocks/nav/nav.tsx";
+import Nav from "../../blocks/nav/nav.tsx";
 
 export default function Header():ReactNode{
   return (

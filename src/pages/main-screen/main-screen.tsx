@@ -1,13 +1,13 @@
-import PlaceCard from '../../ui/place-card/place-card.tsx';
+import PlaceCard from '../../components/ui/place-card/place-card.tsx';
 import {ReactNode} from 'react';
-import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
-import Header from '../../layout/header/header.tsx';
+import {OFFERS_SHOW_COUNT} from '../../data/magic-numbers.ts';
+import Header from '../../components/layout/header/header.tsx';
 
 type MainScreenProps = {
   offersCount: number;
 }
 
-export default function MainScreen ({offersCount}: MainScreenProps): ReactNode{
+export default function MainScreen ({offersCount}: MainScreenProps): JSX.Element{
   return (
     <div className="page page--gray page--main">
       <Header/>
