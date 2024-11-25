@@ -1,14 +1,20 @@
-import PlaceCard from '../../components/ui/place-card/place-card.tsx';
+// noinspection JSDeprecatedSymbols
+
+import {useId} from 'react';
+import PlaceCard from '../../components/blocks/place-card/place-card.tsx';
 import {ReactNode} from 'react';
 import {OFFERS_SHOW_COUNT} from '../../data/magic-numbers.ts';
 import Header from '../../components/layout/header/header.tsx';
+
 
 type MainScreenProps = {
   offersCount: number;
 }
 
 export default function MainScreen ({offersCount}: MainScreenProps): JSX.Element{
+  const uniqueKey = useId();
   return (
+
     <div className="page page--gray page--main">
       <Header/>
 
@@ -101,7 +107,7 @@ export default function MainScreen ({offersCount}: MainScreenProps): JSX.Element
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: OFFERS_SHOW_COUNT}).map((_, index: number):ReactNode => <PlaceCard key={index}/>)}
+                {Array.from({length: OFFERS_SHOW_COUNT}).map(():ReactNode => <PlaceCard key={uniqueKey}/>)}
               </div>
             </section>
             <div className="cities__right-section">
