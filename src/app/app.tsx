@@ -1,5 +1,13 @@
 import {ReactNode} from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import MainScreen from '../pages/main-screen/main-screen.tsx';
+import NotFoundScreen from '../pages/not-found-screen/not-found-screen.tsx';
+import LoginScreen from '../pages/login-screen/login-screen.tsx';
+import FavoriteScreen from '../pages/favorites-screen/favorite-screen.tsx';
 // import FavoriteScreen from "../pages/favorites-screen/favorite-screen.tsx";
 // import FavoritesEmptyScreen from "../pages/favorites-empty-screen/favorites-empty-screen.tsx";
 // import LoginScreen from "../pages/login-screen/login-screen.tsx";
@@ -14,6 +22,25 @@ type AppProps = {
 
 export default function App({offersCount}: AppProps): ReactNode {
   return (
-    <MainScreen offersCount={offersCount}/>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          element={<MainScreen offersCount={offersCount}/>}
+        />
+        <Route
+          path='/login'
+          element={<LoginScreen/>}
+        />
+        <Route
+          path='/favorites'
+          element={<FavoriteScreen/>}
+        />
+        <Route
+          path='*'
+          element={<NotFoundScreen/>}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
