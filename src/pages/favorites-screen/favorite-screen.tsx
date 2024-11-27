@@ -3,7 +3,7 @@
 
 import Header from '../../components/layout/header/header.tsx';
 
-import {RoutePath} from "../../data/routes.ts";
+import {RoutePath} from '../../data/routes.ts';
 
 export default function FavoriteScreen(): JSX.Element{
   return (
