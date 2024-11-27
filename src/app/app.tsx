@@ -27,11 +27,7 @@ export default function App({offersCount}:AppProps): JSX.Element {
           <Route index element={<MainScreen offersCount={offersCount}/>} />
           <Route
             path={RoutePath.LOGIN}
-            element={
-              <PrivateRoute loginStatus={LoginStatus.NoAuth}>
-                <LoginScreen/>
-              </PrivateRoute>
-            }
+            element={<LoginScreen/>}
           />
           <Route
             path={RoutePath.FAVORITES}

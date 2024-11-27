@@ -13,6 +13,6 @@ type PrivateRouteProps = {
 export default function PrivateRoute({children, loginStatus}: PrivateRouteProps): JSX.Element{
 
   return (
-    loginStatus ? children : <Navigate to={RoutePath.LOGIN}/>
+    loginStatus === LoginStatus.Auth ? children : <Navigate to={RoutePath.LOGIN}/>
   );
 }
