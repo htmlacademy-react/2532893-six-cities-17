@@ -1,6 +1,8 @@
 import Header from '../../components/layout/header/header.tsx';
 
-export default function OfferScreen(): JSX.Element{
+// noinspection JSDeprecatedSymbols
+export default function OfferScreen() : JSX.Element{
+
   return (
     <div className="page">
       <Header/>

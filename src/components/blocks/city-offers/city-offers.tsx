@@ -1,7 +1,9 @@
+// noinspection JSDeprecatedSymbols
+
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 import {ReactNode} from 'react';
 import PlaceCard from '../place-card/place-card.tsx';
-import {useId} from "react";
+import {useId} from 'react';
 
 type MainScreenProps = {
   offersCount: number;
@@ -9,7 +11,7 @@ type MainScreenProps = {
 
 
 export default function CityOffers({offersCount}: MainScreenProps):JSX.Element{
-  const uniqueKey = useId()
+  const uniqueKey = useId();
 
   return (
     <section className="cities__places places">

@@ -3,10 +3,12 @@
 import CityOffers from '../../components/blocks/city-offers/city-offers.tsx';
 import Header from '../../components/layout/header/header.tsx';
 import Tabs from '../../components/blocks/tabs/tabs.tsx';
-import {OFFERS_SHOW_COUNT} from '../../data/magic-numbers.ts';
 
+type AppProps = {
+  offersCount: number;
+}
 
-export default function MainScreen (): JSX.Element{
+export default function MainScreen ({offersCount}:AppProps): JSX.Element{
   return (
 
     <div className="page page--gray page--main">
@@ -21,7 +23,7 @@ export default function MainScreen (): JSX.Element{
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CityOffers offersCount={OFFERS_SHOW_COUNT}/>
+            <CityOffers offersCount={offersCount}/>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
             </div>
