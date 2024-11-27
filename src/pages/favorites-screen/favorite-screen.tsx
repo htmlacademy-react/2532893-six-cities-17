@@ -3,6 +3,8 @@
 
 import Header from '../../components/layout/header/header.tsx';
 
+import {RoutePath} from "../../data/routes.ts";
+
 export default function FavoriteScreen(): JSX.Element{
   return (
     <div className="page">
@@ -173,7 +175,7 @@ export default function FavoriteScreen(): JSX.Element{
       </main>
       <footer className="footer container">
         <a className="footer__logo-link"
-          href="/src/components/pages/main-screen/main-screen.tsx"
+          href={RoutePath.INDEX}
         >
           <img className="footer__logo"
             src="/markup/img/logo.svg"

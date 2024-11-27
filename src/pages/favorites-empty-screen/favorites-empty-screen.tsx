@@ -1,6 +1,7 @@
 // noinspection JSDeprecatedSymbols
 
 import Header from '../../components/layout/header/header.tsx';
+import {RoutePath} from '../../data/routes.ts';
 
 export default function FavoritesEmptyScreen (): JSX.Element{
   return (
@@ -22,7 +23,7 @@ export default function FavoritesEmptyScreen (): JSX.Element{
       </main>
       <footer className="footer">
         <a className="footer__logo-link"
-          href="main.html"
+          href={RoutePath.INDEX}
         >
           <img className="footer__logo"
             src="img/logo.svg"
