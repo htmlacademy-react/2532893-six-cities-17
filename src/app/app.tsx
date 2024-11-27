@@ -2,11 +2,7 @@
 // noinspection JSDeprecatedSymbols
 // noinspection JSDeprecatedSymbols
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import {BrowserRouter, Route, Routes,} from 'react-router-dom';
 
 import MainScreen from '../pages/main-screen/main-screen.tsx';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen.tsx';
@@ -16,6 +12,7 @@ import OfferScreen from '../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../components/routes/private-route/private-route.tsx';
 
 import {RoutePath} from '../data/routes.ts';
+import {LoginStatus} from '../data/login-status.ts';
 
 type AppProps = {
   offersCount: number;
@@ -31,7 +28,7 @@ export default function App({offersCount}:AppProps): JSX.Element {
           <Route
             path={RoutePath.LOGIN}
             element={
-              <PrivateRoute>
+              <PrivateRoute loginStatus={LoginStatus.NoAuth}>
                 <LoginScreen/>
               </PrivateRoute>
             }
@@ -39,7 +36,7 @@ export default function App({offersCount}:AppProps): JSX.Element {
           <Route
             path={RoutePath.FAVORITES}
             element={
-              <PrivateRoute>
+              <PrivateRoute loginStatus={LoginStatus.NoAuth}>
                 <FavoriteScreen/>
               </PrivateRoute>
             }
