@@ -50,3 +50,5 @@ export default function App({offersCount}:AppProps): JSX.Element {
     </BrowserRouter>
   );
 }
+
+console.log(typeof window.location.href);

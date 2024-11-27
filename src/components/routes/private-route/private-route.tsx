@@ -3,7 +3,7 @@
 import {Navigate} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 
-import {LoginStatus} from "../../../data/login-status.ts";
+import {LoginStatus} from '../../../data/login-status.ts';
 
 type PrivateRouteProps = {
   children: JSX.Element;
