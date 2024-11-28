@@ -1,13 +1,12 @@
 // noinspection JSDeprecatedSymbols
 
 import CityOffers from '../../components/blocks/city-offers/city-offers.tsx';
-// import {PlaceCardPropsType} from '../../components/blocks/place-card/place-card.tsx';
 import Tabs from '../../components/blocks/tabs/tabs.tsx';
 import Layout from '../../components/layout/layout/layout.tsx';
-import {OffersCountProps} from '../../components/blocks/city-offers/city-offers.tsx';
+import {IMocksDataProps} from '../../data/mocks.ts';
 
 
-export default function MainScreen ({offersCount}: OffersCountProps): JSX.Element{
+export default function MainScreen ({offers}:IMocksDataProps): JSX.Element{
   return (
 
     <div className="page page--gray page--main">
@@ -22,7 +21,7 @@ export default function MainScreen ({offersCount}: OffersCountProps): JSX.Elemen
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CityOffers offersCount={offersCount}/>
+            <CityOffers offers={offers}/>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
             </div>

@@ -2,14 +2,12 @@
 
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 import PlaceCard from '../place-card/place-card.tsx';
-import {mocksData, IMocksData} from '../../../data/mocks.ts';
-// import {PlaceCardPropsType} from '../place-card/place-card.tsx';
+import {IMocksData, IMocksDataProps} from '../../../data/mocks.ts';
+import {City} from '../../../data/cities.ts';
 
-export type OffersCountProps = {
-  offersCount: number;
-}
+export default function CityOffers({offers}: IMocksDataProps): JSX.Element{
 
-export default function CityOffers({offersCount}: OffersCountProps):JSX.Element{
+  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === City.AMSTERDAM).length;
 
   return (
     <section className="cities__places places">
@@ -51,7 +49,7 @@ export default function CityOffers({offersCount}: OffersCountProps):JSX.Element{
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {mocksData.map((item: IMocksData): JSX.Element => <PlaceCard key={item.id}/>).slice(0, OFFERS_SHOW_COUNT)}
+        {offers.length ? offers.map((offer: IMocksData): JSX.Element => <PlaceCard {...offer} key={offer.id}/>).slice(0, OFFERS_SHOW_COUNT) : null}
       </div>
     </section>
   );

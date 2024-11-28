@@ -22,6 +22,10 @@ export interface IMocksData {
   rating: number;
 }
 
+export interface IMocksDataProps {
+  offers: IMocksData[];
+}
+
 export const mocksData:IMocksData[] = [
   {
     'id': '9e97e7fe-597b-4bb9-bc11-571ac8f85040',

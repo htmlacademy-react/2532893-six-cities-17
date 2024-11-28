@@ -13,20 +13,14 @@ import PrivateRoute from '../components/routes/private-route/private-route.tsx';
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
-// import {IMocksData} from '../data/mocks.ts';
+import {IMocksDataProps} from '../data/mocks.ts';
 
-
-type AppProps = {
-  offersCount: number;
-}
-
-
-export default function App({offersCount}:AppProps): JSX.Element {
+export default function App({offers}:IMocksDataProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offersCount={offersCount}/>} />
+          <Route index element={<MainScreen offers={offers}/>} />
           <Route
             path={RoutePath.LOGIN}
             element={<LoginScreen/>}

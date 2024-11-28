@@ -6,23 +6,19 @@ import {RoutePath} from '../../../data/routes.ts';
 export type PlaceCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage'>;
 
 
-export default function PlaceCard(): JSX.Element {
+export default function PlaceCard({isPremium, previewImage, price}:PlaceCardPropsType): JSX.Element {
 
   return (
     <article className="cities__card place-card">
-      {/*{isPremium ?*/}
-      {/*  <div className="place-card__mark">*/}
-      {/*    <span>Premium</span>*/}
-      {/*  </div>*/}
-      {/*  : null}*/}
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={RoutePath.OFFER}>
           <img className="place-card__image"
-            src="img/apartment-01.jpg"
-            // src={previewImage}
+            src={previewImage}
             width="260"
             height="200"
             alt="Place image"
@@ -32,8 +28,7 @@ export default function PlaceCard(): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            {/*<b className="place-card__price-value">&euro;{price}</b>*/}
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button"
