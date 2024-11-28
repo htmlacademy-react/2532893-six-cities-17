@@ -1,4 +1,4 @@
-interface MocksData {
+export interface IMocksData {
   id: string;
   title: string;
   type: string;
@@ -22,7 +22,7 @@ interface MocksData {
   rating: number;
 }
 
-export const mocksData:MocksData[] = [
+export const mocksData:IMocksData[] = [
   {
     'id': '9e97e7fe-597b-4bb9-bc11-571ac8f85040',
     'title': 'Penthouse, 4-5 rooms + 5 balconies',

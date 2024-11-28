@@ -2,11 +2,12 @@
 // noinspection JSDeprecatedSymbols
 
 import {Link} from 'react-router-dom';
+import {RoutePath} from '../../../data/routes.ts';
 
 
 export default function Logo() :JSX.Element{
   return (
-    <Link to='/' className="header__logo-link header__logo-link--active">
+    <Link to={RoutePath.INDEX} className="header__logo-link header__logo-link--active">
       <img className="header__logo"
         src="/public/img/logo.svg"
         alt="6 cities logo"

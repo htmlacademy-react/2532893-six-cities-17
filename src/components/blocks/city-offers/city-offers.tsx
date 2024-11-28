@@ -1,17 +1,21 @@
 // noinspection JSDeprecatedSymbols
 
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
-import {ReactNode} from 'react';
 import PlaceCard from '../place-card/place-card.tsx';
 import {useId} from 'react';
+import {mocksData} from '../../../data/mocks.ts';
+import {PlaceCardPropsType} from '../place-card/place-card.tsx';
 
 type MainScreenProps = {
   offersCount: number;
 }
 
+export type CityOffersPropsType = MainScreenProps & PlaceCardPropsType;
 
-export default function CityOffers({offersCount}: MainScreenProps):JSX.Element{
+
+export default function   CityOffers({offersCount, isPremium, price, previewImage}: CityOffersPropsType):JSX.Element{
   const uniqueKey = useId();
+  console.log(mocksData);
 
   return (
     <section className="cities__places places">
@@ -53,7 +57,7 @@ export default function CityOffers({offersCount}: MainScreenProps):JSX.Element{
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {Array.from({length: OFFERS_SHOW_COUNT}).map((): ReactNode => <PlaceCard key={uniqueKey}/>)}
+        {mocksData.map((): JSX.Element => <PlaceCard key={uniqueKey} isPremium={isPremium} price={price} previewImage={previewImage}/>).slice(0, OFFERS_SHOW_COUNT)}
       </div>
     </section>
   );

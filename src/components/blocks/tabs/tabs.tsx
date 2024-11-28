@@ -10,7 +10,7 @@ export default function Tabs():JSX.Element{
 
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((item):JSX.Element => <TabsItem name={item} key={uniqueKey}/>)}
+      {cities && cities.map((item):JSX.Element => <TabsItem name={item} key={uniqueKey}/>)}
     </ul>
   );
 }

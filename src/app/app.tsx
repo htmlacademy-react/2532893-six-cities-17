@@ -14,6 +14,7 @@ import PrivateRoute from '../components/routes/private-route/private-route.tsx';
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
 
+
 type AppProps = {
   offersCount: number;
 }
@@ -51,4 +52,3 @@ export default function App({offersCount}:AppProps): JSX.Element {
   );
 }
 
-console.log(typeof window.location.href);

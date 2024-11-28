@@ -1,6 +1,6 @@
 // noinspection JSDeprecatedSymbols
 
-import CityOffers from '../../components/blocks/city-offers/city-offers.tsx';
+import CityOffers, {CityOffersPropsType} from '../../components/blocks/city-offers/city-offers.tsx';
 import Tabs from '../../components/blocks/tabs/tabs.tsx';
 import Layout from '../../components/layout/layout/layout.tsx';
 
@@ -8,7 +8,9 @@ type AppProps = {
   offersCount: number;
 }
 
-export default function MainScreen ({offersCount}:AppProps): JSX.Element{
+type MainScreenPropsType = AppProps & CityOffersPropsType
+
+export default function MainScreen ({offersCount, price, isPremium, previewImage}:MainScreenPropsType): JSX.Element{
   return (
 
     <div className="page page--gray page--main">
@@ -23,7 +25,7 @@ export default function MainScreen ({offersCount}:AppProps): JSX.Element{
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CityOffers offersCount={offersCount}/>
+            <CityOffers isPremium={isPremium} offersCount={offersCount} price={price} previewImage={previewImage}/>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
             </div>
