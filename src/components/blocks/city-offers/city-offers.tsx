@@ -2,20 +2,14 @@
 
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 import PlaceCard from '../place-card/place-card.tsx';
-import {useId} from 'react';
-import {mocksData} from '../../../data/mocks.ts';
-import {PlaceCardPropsType} from '../place-card/place-card.tsx';
+import {mocksData, IMocksData} from '../../../data/mocks.ts';
+// import {PlaceCardPropsType} from '../place-card/place-card.tsx';
 
-type MainScreenProps = {
+export type OffersCountProps = {
   offersCount: number;
 }
 
-export type CityOffersPropsType = MainScreenProps & PlaceCardPropsType;
-
-
-export default function   CityOffers({offersCount, isPremium, price, previewImage}: CityOffersPropsType):JSX.Element{
-  const uniqueKey = useId();
-  console.log(mocksData);
+export default function CityOffers({offersCount}: OffersCountProps):JSX.Element{
 
   return (
     <section className="cities__places places">
@@ -57,7 +51,7 @@ export default function   CityOffers({offersCount, isPremium, price, previewImag
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {mocksData.map((): JSX.Element => <PlaceCard key={uniqueKey} isPremium={isPremium} price={price} previewImage={previewImage}/>).slice(0, OFFERS_SHOW_COUNT)}
+        {mocksData.map((item: IMocksData): JSX.Element => <PlaceCard key={item.id}/>).slice(0, OFFERS_SHOW_COUNT)}
       </div>
     </section>
   );

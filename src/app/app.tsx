@@ -13,6 +13,7 @@ import PrivateRoute from '../components/routes/private-route/private-route.tsx';
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
+// import {IMocksData} from '../data/mocks.ts';
 
 
 type AppProps = {
