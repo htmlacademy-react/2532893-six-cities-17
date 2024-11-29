@@ -2,14 +2,18 @@
 import Layout from '../../components/layout/layout/layout.tsx';
 import {IMocksData, IMocksDataProps} from '../../data/mocks.ts';
 import {useParams} from 'react-router-dom';
+import OfferMark from '../../components/ui/offer-mark/offer-mark.tsx';
+import {getCapitalizeWord} from '../../utility/utility.ts';
 
-export default function OfferScreen({offers}: IMocksDataProps) : JSX.Element{
+// noinspection JSDeprecatedSymbols
+export default function OfferScreen({offers}: IMocksDataProps): JSX.Element {
 
   const params = useParams();
-  const offer:IMocksData | undefined = offers.find((item) => item.id === params.id);
+  const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
+
   return (
     <div className="page">
-      <Layout />
+      <Layout/>
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -55,9 +59,8 @@ export default function OfferScreen({offers}: IMocksDataProps) : JSX.Element{
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {offer?.isPremium ? <OfferMark status={'Premium'}/> : null}
+
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   {offer && offer.title}
@@ -79,11 +82,13 @@ export default function OfferScreen({offers}: IMocksDataProps) : JSX.Element{
                   <span style={{width: '80%'}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">
+                  {offer?.rating ? Math.round(offer.rating) : null}
+                </span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {offer?.type && getCapitalizeWord(offer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   3 Bedrooms
@@ -93,7 +98,7 @@ export default function OfferScreen({offers}: IMocksDataProps) : JSX.Element{
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{offer?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">

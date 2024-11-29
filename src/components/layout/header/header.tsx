@@ -11,7 +11,9 @@ export default function Header():ReactNode{
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          {pathname.includes(RoutePath.LOGIN) ? <Logo/> : <><Logo/><Nav/></>}
+          {pathname.includes(RoutePath.LOGIN)
+            ? <Logo/>
+            : <><Logo/><Nav/></>}
         </div>
       </div>
     </header>
