@@ -1,5 +1,5 @@
 // noinspection JSDeprecatedSymbols
-import Header from '../../components/layout/header/header.tsx';
+import Layout from '../../components/layout/layout/layout.tsx';
 import {IMocksData, IMocksDataProps} from '../../data/mocks.ts';
 import {useParams} from 'react-router-dom';
 
@@ -9,7 +9,7 @@ export default function OfferScreen({offers}: IMocksDataProps) : JSX.Element{
   const offer:IMocksData | undefined = offers.find((item) => item.id === params.id);
   return (
     <div className="page">
-      <Header/>
+      <Layout />
 
       <main className="page__main page__main--offer">
         <section className="offer">
