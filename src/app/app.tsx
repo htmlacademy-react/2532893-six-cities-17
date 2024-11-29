@@ -35,7 +35,7 @@ export default function App({offers}:IMocksDataProps): JSX.Element {
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen/>}
+            element={<OfferScreen offers={offers}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}

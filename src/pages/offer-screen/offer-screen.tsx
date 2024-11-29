@@ -1,8 +1,12 @@
-import Header from '../../components/layout/header/header.tsx';
-
 // noinspection JSDeprecatedSymbols
-export default function OfferScreen() : JSX.Element{
+import Header from '../../components/layout/header/header.tsx';
+import {IMocksData, IMocksDataProps} from '../../data/mocks.ts';
+import {useParams} from 'react-router-dom';
 
+export default function OfferScreen({offers}: IMocksDataProps) : JSX.Element{
+
+  const params = useParams();
+  const offer:IMocksData | undefined = offers.find((item) => item.id === params.id);
   return (
     <div className="page">
       <Header/>
@@ -56,7 +60,7 @@ export default function OfferScreen() : JSX.Element{
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offer && offer.title}
                 </h1>
                 <button className="offer__bookmark-button button"
                   type="button"

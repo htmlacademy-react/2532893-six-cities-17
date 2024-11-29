@@ -3,7 +3,7 @@
 import {IMocksData} from '../../../data/mocks.ts';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
-export type PlaceCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage'>;
+export type PlaceCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' >;
 
 
 export default function PlaceCard({isPremium, previewImage, price}:PlaceCardPropsType): JSX.Element {
