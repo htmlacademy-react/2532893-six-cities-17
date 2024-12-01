@@ -1,11 +1,10 @@
 // noinspection JSDeprecatedSymbols
 import Layout from '../../components/layout/layout/layout.tsx';
-import {IMocksData, IMocksDataProps} from '../../data/mocks.ts';
+import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
 import {useParams} from 'react-router-dom';
 import OfferMark from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
 
-// noinspection JSDeprecatedSymbols
 export default function OfferScreen({offers}: IMocksDataProps): JSX.Element {
 
   const params = useParams();

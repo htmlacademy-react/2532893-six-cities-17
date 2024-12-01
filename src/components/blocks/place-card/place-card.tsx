@@ -1,6 +1,6 @@
 // noinspection JSDeprecatedSymbols
 
-import {IMocksData} from '../../../data/mocks.ts';
+import {IMocksData} from '../../../mocks/offers.ts';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 export type PlaceCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' >;

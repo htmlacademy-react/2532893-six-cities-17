@@ -13,7 +13,7 @@ import PrivateRoute from '../components/routes/private-route/private-route.tsx';
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
-import {IMocksDataProps} from '../data/mocks.ts';
+import {IMocksDataProps} from '../mocks/offers.ts';
 
 export default function App({offers}:IMocksDataProps): JSX.Element {
   return (

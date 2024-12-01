@@ -2,7 +2,7 @@
 
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 import PlaceCard from '../place-card/place-card.tsx';
-import {IMocksData, IMocksDataProps} from '../../../data/mocks.ts';
+import {IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
 import {City} from '../../../data/cities.ts';
 
 export default function CityOffers({offers}: IMocksDataProps): JSX.Element{

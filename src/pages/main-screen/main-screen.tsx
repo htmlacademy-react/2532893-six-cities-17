@@ -3,7 +3,7 @@
 import CityOffers from '../../components/blocks/city-offers/city-offers.tsx';
 import Tabs from '../../components/blocks/tabs/tabs.tsx';
 import Layout from '../../components/layout/layout/layout.tsx';
-import {IMocksDataProps} from '../../data/mocks.ts';
+import {IMocksDataProps} from '../../mocks/offers.ts';
 
 
 export default function MainScreen ({offers}:IMocksDataProps): JSX.Element{
