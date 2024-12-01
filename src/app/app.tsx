@@ -29,7 +29,7 @@ export default function App({offers}:IMocksDataProps): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <PrivateRoute loginStatus={LoginStatus.NoAuth}>
-                <FavoriteScreen/>
+                <FavoriteScreen offers={offers}/>
               </PrivateRoute>
             }
           />
