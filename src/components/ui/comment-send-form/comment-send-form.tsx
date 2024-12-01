@@ -9,8 +9,7 @@ export default function CommentSendForm(){
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
 
-    const {name, value} = evt.target;
-    setFormData({...formData, [name]: value});
+    setFormData(evt.target.value);
   };
 
   return (
