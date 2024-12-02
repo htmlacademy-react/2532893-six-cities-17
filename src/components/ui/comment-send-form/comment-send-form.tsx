@@ -1,11 +1,8 @@
 import {useState} from 'react';
 import React from 'react';
 
-
 export default function CommentSendForm(){
-  const [formData, setFormData] = useState({
-    comment: '',
-  });
+  const [formData, setFormData] = useState('');
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
 
@@ -117,7 +114,7 @@ export default function CommentSendForm(){
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleFieldChange}
-        value={formData.comment}
+        value={formData}
       >
       </textarea>
       <div className="reviews__button-wrapper">
