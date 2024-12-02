@@ -1,17 +1,13 @@
 // noinspection JSDeprecatedSymbols
 
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
-import {ReactNode} from 'react';
 import PlaceCard from '../place-card/place-card.tsx';
-import {useId} from 'react';
+import {IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
+import {City} from '../../../data/cities.ts';
 
-type MainScreenProps = {
-  offersCount: number;
-}
+export default function CityOffers({offers}: IMocksDataProps): JSX.Element{
 
-
-export default function CityOffers({offersCount}: MainScreenProps):JSX.Element{
-  const uniqueKey = useId();
+  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === City.AMSTERDAM).length;
 
   return (
     <section className="cities__places places">
@@ -53,7 +49,7 @@ export default function CityOffers({offersCount}: MainScreenProps):JSX.Element{
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {Array.from({length: OFFERS_SHOW_COUNT}).map((): ReactNode => <PlaceCard key={uniqueKey}/>)}
+        {offers.length ? offers.map((offer: IMocksData): JSX.Element => <PlaceCard {...offer} key={offer.id}/>).slice(0, OFFERS_SHOW_COUNT) : null}
       </div>
     </section>
   );
