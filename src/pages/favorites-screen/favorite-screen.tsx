@@ -7,7 +7,7 @@ import Layout from '../../components/layout/layout/layout.tsx';
 import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
 
 export default function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
-  const favoriteOffers: IMocksData[] = offers.filter((item) => item.isPremium);
+  const favoriteOffers: IMocksData[] = offers.filter((item) => item.isFavorite);
   return (
     <div className="page">
       <Layout/>
