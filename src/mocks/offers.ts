@@ -69,7 +69,7 @@ export const offersData:IMocksData[] = [
       'longitude': 2.330499,
       'zoom': 16
     },
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': true,
     'rating': 1.6
   },
@@ -92,7 +92,7 @@ export const offersData:IMocksData[] = [
       'longitude': 2.335499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 3.5
   },
@@ -276,7 +276,7 @@ export const offersData:IMocksData[] = [
       'longitude': 2.350499,
       'zoom': 16
     },
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': false,
     'rating': 3.8
   },
@@ -345,8 +345,8 @@ export const offersData:IMocksData[] = [
       'longitude': 2.333499,
       'zoom': 16
     },
-    'isFavorite': true,
-    'isPremium': true,
+    'isFavorite': false,
+    'isPremium': false,
     'rating': 3
   },
   {
@@ -437,7 +437,7 @@ export const offersData:IMocksData[] = [
       'longitude': 2.364499,
       'zoom': 16
     },
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': true,
     'rating': 3.1
   },

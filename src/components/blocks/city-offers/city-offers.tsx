@@ -3,11 +3,10 @@
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 import PlaceCard from '../place-card/place-card.tsx';
 import {IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
-import {City} from '../../../data/cities.ts';
 
 export default function CityOffers({offers}: IMocksDataProps): JSX.Element{
 
-  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === City.AMSTERDAM).length;
+  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === 'Amsterdam').length;
 
   return (
     <section className="cities__places places">
