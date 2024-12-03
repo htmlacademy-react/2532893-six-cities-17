@@ -16,7 +16,7 @@ export default function MainScreen ({offers}:IMocksDataProps): JSX.Element{
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Tabs/>
+            <Tabs offers={offers}/>
           </section>
         </div>
         <div className="cities">

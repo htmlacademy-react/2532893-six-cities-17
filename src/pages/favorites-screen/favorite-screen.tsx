@@ -10,7 +10,7 @@ import {createUniqueCityList} from '../../utility/utility.ts';
 
 export default function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
   const favoriteOffers: IMocksData[] = offers.filter((item) => item.isFavorite);
-  const uniqueOffers = createUniqueCityList(favoriteOffers);
+  const uniqueOffers: string[] = createUniqueCityList(favoriteOffers);
 
   return (
     <div className="page">
