@@ -3,6 +3,7 @@ import React from 'react';
 
 export default function CommentSendForm(){
   const [formData, setFormData] = useState('');
+  const [value, setValue] = useState(5);
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
 
@@ -24,6 +25,8 @@ export default function CommentSendForm(){
           value="5"
           id="5-stars"
           type="radio"
+          checked={value === 5}
+          onChange={() => setValue(5)}
         />
         <label htmlFor="5-stars"
           className="reviews__rating-label form__rating-label"
@@ -42,6 +45,8 @@ export default function CommentSendForm(){
           value="4"
           id="4-stars"
           type="radio"
+          checked={value === 4}
+          onChange={() => setValue(4)}
         />
         <label htmlFor="4-stars"
           className="reviews__rating-label form__rating-label"
@@ -60,6 +65,8 @@ export default function CommentSendForm(){
           value="3"
           id="3-stars"
           type="radio"
+          checked={value === 3}
+          onChange={() => setValue(3)}
         />
         <label htmlFor="3-stars"
           className="reviews__rating-label form__rating-label"
@@ -78,6 +85,8 @@ export default function CommentSendForm(){
           value="2"
           id="2-stars"
           type="radio"
+          checked={value === 2}
+          onChange={() => setValue(2)}
         />
         <label htmlFor="2-stars"
           className="reviews__rating-label form__rating-label"
@@ -96,6 +105,8 @@ export default function CommentSendForm(){
           value="1"
           id="1-star"
           type="radio"
+          checked={value === 1}
+          onChange={() => setValue(1)}
         />
         <label htmlFor="1-star"
           className="reviews__rating-label form__rating-label"
