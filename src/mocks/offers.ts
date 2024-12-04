@@ -1,11 +1,14 @@
+type AccommodationTypesType = 'apartment' | 'room' | 'house' | 'hotel';
+type CityNameTypes = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg'| 'Dusseldorf';
+
 export interface IMocksData {
   id: string;
   title: string;
-  type: string;
+  type: AccommodationTypesType;
   price: number;
   previewImage: string;
   city: {
-    name: string;
+    name: CityNameTypes;
     location: {
       latitude: number;
       longitude: number;
@@ -26,7 +29,7 @@ export interface IMocksDataProps {
   offers: IMocksData[];
 }
 
-export const offersData:IMocksData[] = [
+export const OFFERS_DATA_MOCK:IMocksData[] = [
   {
     'id': '09c74efc-cacd-47e6-921e-a7a7a832620a',
     'title': 'The Joshua Tree House',

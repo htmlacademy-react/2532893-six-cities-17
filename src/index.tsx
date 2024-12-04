@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app.tsx';
-import {offersData} from './mocks/offers.ts';
-
+import {OFFERS_DATA_MOCK} from './mocks/offers.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,7 +9,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={offersData} />
+    <App offers={OFFERS_DATA_MOCK} />
   </React.StrictMode>
 );
 
