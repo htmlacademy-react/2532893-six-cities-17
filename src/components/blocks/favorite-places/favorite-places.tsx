@@ -9,7 +9,7 @@ export default function FavoritePlaces({cityName, offers}: FavoritesLocationsIte
   const cityFavoritesOffersList: IMocksData[] = favoriteOffersList.filter((offer) => offer.city.name === cityName);
   return (
     <div className="favorites__places">
-      {cityFavoritesOffersList.length ? cityFavoritesOffersList.map((item) => (<FavoriteCard offers={offers} key={item.id}/>)) : null}
+      {cityFavoritesOffersList.length ? cityFavoritesOffersList.map((item) => (<FavoriteCard offers={offers} cityName={cityName} key={item.id}/>)) : null}
     </div>
   );
 }

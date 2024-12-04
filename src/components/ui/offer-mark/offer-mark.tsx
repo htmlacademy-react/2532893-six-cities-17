@@ -5,7 +5,7 @@ type OfferMarkPropsType = {
 
 export default function OfferMark({status}: OfferMarkPropsType){
   return (
-    <div className="offer__mark">
+    <div className="place-card__mark">
       <span>{status}</span>
     </div>
   );

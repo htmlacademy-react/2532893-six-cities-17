@@ -1,11 +1,11 @@
 
 import OfferMark from '../../ui/offer-mark/offer-mark.tsx';
-import {IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
-import {useParams} from 'react-router-dom';
+import {IMocksData} from '../../../mocks/offers.ts';
+import {FavoritesLocationsItemPropsType} from '../favorites-locations-item/favorites-locations-item.tsx';
 
-export default function FavoriteCard({offers}:IMocksDataProps){
-  const params = useParams();
-  const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
+export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemPropsType){
+
+  const offer: IMocksData | undefined = offers.find((item) => item.city.name === cityName);
 
   return (
     <article className="favorites__card place-card">
