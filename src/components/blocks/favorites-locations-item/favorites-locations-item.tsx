@@ -1,5 +1,5 @@
 
-import FavoritePlaces from '../favorite-places.tsx';
+import FavoritePlaces from '../favorite-places/favorite-places.tsx';
 import {IMocksDataProps} from '../../../mocks/offers.ts';
 
 type FavoritesLocationsItemPropsType = {

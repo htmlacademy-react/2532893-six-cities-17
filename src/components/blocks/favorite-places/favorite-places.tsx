@@ -1,6 +1,6 @@
-import FavoriteCard from './favorite-card/favorite-card.tsx';
-import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
-import {createUniqueCityList} from '../../utility/utility.ts';
+import FavoriteCard from '../favorite-card/favorite-card.tsx';
+import {IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
+import {createUniqueCityList} from '../../../utility/utility.ts';
 
 
 // noinspection JSDeprecatedSymbols

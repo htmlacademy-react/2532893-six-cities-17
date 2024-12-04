@@ -1,13 +1,17 @@
-import {useState} from 'react';
-import React from 'react';
+// noinspection JSDeprecatedSymbols
 
-export default function CommentSendForm(){
-  const [formData, setFormData] = useState('');
-  const [value, setValue] = useState(5);
+import React, {useState} from 'react';
+import {RatingInputValues} from '../../../data/rating-input-values.ts';
+
+export default function CommentSendForm(): JSX.Element{
+  const [formData, setFormData] = useState({
+    text: '',
+  });
+  const [ratingValue, setRatingValue] = useState(RatingInputValues.PERFECT);
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
-
-    setFormData(evt.target.value);
+    const {value} = evt.target;
+    setFormData({...formData, text: value});
   };
 
   return (
@@ -25,8 +29,8 @@ export default function CommentSendForm(){
           value="5"
           id="5-stars"
           type="radio"
-          checked={value === 5}
-          onChange={() => setValue(5)}
+          checked={ratingValue === RatingInputValues.PERFECT}
+          onChange={() => setRatingValue(RatingInputValues.PERFECT)}
         />
         <label htmlFor="5-stars"
           className="reviews__rating-label form__rating-label"
@@ -45,8 +49,8 @@ export default function CommentSendForm(){
           value="4"
           id="4-stars"
           type="radio"
-          checked={value === 4}
-          onChange={() => setValue(4)}
+          checked={ratingValue === RatingInputValues.GOOD}
+          onChange={() => setRatingValue(RatingInputValues.GOOD)}
         />
         <label htmlFor="4-stars"
           className="reviews__rating-label form__rating-label"
@@ -65,8 +69,8 @@ export default function CommentSendForm(){
           value="3"
           id="3-stars"
           type="radio"
-          checked={value === 3}
-          onChange={() => setValue(3)}
+          checked={ratingValue === RatingInputValues.SATISFACTORY}
+          onChange={() => setRatingValue(RatingInputValues.SATISFACTORY)}
         />
         <label htmlFor="3-stars"
           className="reviews__rating-label form__rating-label"
@@ -85,8 +89,8 @@ export default function CommentSendForm(){
           value="2"
           id="2-stars"
           type="radio"
-          checked={value === 2}
-          onChange={() => setValue(2)}
+          checked={ratingValue === RatingInputValues.BAD}
+          onChange={() => setRatingValue(RatingInputValues.BAD)}
         />
         <label htmlFor="2-stars"
           className="reviews__rating-label form__rating-label"
@@ -105,8 +109,8 @@ export default function CommentSendForm(){
           value="1"
           id="1-star"
           type="radio"
-          checked={value === 1}
-          onChange={() => setValue(1)}
+          checked={ratingValue === RatingInputValues.TERRIBLE}
+          onChange={() => setRatingValue(RatingInputValues.TERRIBLE)}
         />
         <label htmlFor="1-star"
           className="reviews__rating-label form__rating-label"
@@ -125,7 +129,6 @@ export default function CommentSendForm(){
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleFieldChange}
-        value={formData}
       >
       </textarea>
       <div className="reviews__button-wrapper">
