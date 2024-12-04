@@ -21,7 +21,7 @@ export default function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {uniqueOffers.length && uniqueOffers.map((item) => <FavoritesLocationsItem offers={offers} key={item}/>)}
+              {uniqueOffers.length && uniqueOffers.map((item) => <FavoritesLocationsItem key={item} cityName={item} offers={offers}/>)}
 
             </ul>
           </section>
