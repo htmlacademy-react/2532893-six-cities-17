@@ -1,10 +1,10 @@
 
 import FavoritePlaces from '../favorite-places/favorite-places.tsx';
-import {IMocksDataProps} from '../../../mocks/offers.ts';
+import {IMocksData} from '../../../mocks/offers.ts';
 
-type FavoritesLocationsItemPropsType = {
+export type FavoritesLocationsItemPropsType = {
   cityName: string;
-  offers: IMocksDataProps;
+  offers: IMocksData[];
 }
 
 export default function FavoritesLocationsItem({cityName, offers}: FavoritesLocationsItemPropsType): JSX.Element{
@@ -20,7 +20,7 @@ export default function FavoritesLocationsItem({cityName, offers}: FavoritesLoca
           </a>
         </div>
       </div>
-      <FavoritePlaces offers={offers}/>
+      <FavoritePlaces offers={offers} cityName={cityName}/>
     </li>
   );
 }

@@ -989,7 +989,7 @@ export const offersData:IMocksData[] = [
       'longitude': 4.371696999999999,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 3.7
   },
@@ -1035,7 +1035,7 @@ export const offersData:IMocksData[] = [
       'longitude': 4.374696999999999,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.5
   },
