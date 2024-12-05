@@ -3,13 +3,20 @@
 import {IMocksData} from '../../../mocks/offers.ts';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
-export type PlaceCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' >;
+import {SetStateAction} from 'react';
+export type CardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'id'>;
 
+type PlaceCardPropsType = CardPropsType & {
+  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
+}
 
-export default function PlaceCard({isPremium, previewImage, price}:PlaceCardPropsType): JSX.Element {
+export default function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element {
 
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card"
+      onMouseEnter={() => onHandleActiveOfferChange(id)}
+      onMouseLeave={() => onHandleActiveOfferChange('')}
+    >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>

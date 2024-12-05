@@ -2,6 +2,8 @@
 import OfferMark from '../../ui/offer-mark/offer-mark.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {FavoritesLocationsItemPropsType} from '../favorites-locations-item/favorites-locations-item.tsx';
+import {Link} from 'react-router-dom';
+import {RoutePath} from '../../../data/routes.ts';
 
 export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemPropsType){
 
@@ -11,14 +13,14 @@ export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemP
     <article className="favorites__card place-card">
       {offer?.isPremium ? <OfferMark status={'Premium'}/> : null}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={RoutePath.OFFER}>
           <img className="place-card__image"
             src={offer?.previewImage}
             width="150"
             height="110"
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -45,7 +47,7 @@ export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemP
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Nice, cozy, warm big bed apartment</a>
+          <Link to={RoutePath.OFFER}>Nice, cozy, warm big bed apartment</Link>
         </h2>
         <p className="place-card__type">{offer?.type}</p>
       </div>
