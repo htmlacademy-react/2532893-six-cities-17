@@ -3,9 +3,9 @@
 import React, {useState} from 'react';
 import {RatingInputValues} from '../../../data/rating-input-values.ts';
 import CommentSendStarInput from '../comment-send-star-input/comment-send-star-input.tsx';
-import {createArrayFromEnumValues} from '../../../utility/utility.ts';
+import {createArrayFromObjectValues} from '../../../utility/utility.ts';
 
-const ratingValuesList: number[] = createArrayFromEnumValues(RatingInputValues);
+const ratingValuesList: number[] = createArrayFromObjectValues(RatingInputValues);
 type RatingValuesTupleType = [number, React.Dispatch<React.SetStateAction<number>>]
 
 export default function CommentSendForm(): JSX.Element{

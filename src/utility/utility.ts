@@ -11,7 +11,7 @@ export const createUniqueCityList = (itemsList: IMocksData[]) => {
   return Array.from(new Set(result));
 };
 
-export const createArrayFromEnumValues = (value: RatingInputValuesType): number[] => {
+export const createArrayFromObjectValues = (value: RatingInputValuesType): number[] => {
   const values = Object.values(value);
   return values.sort((a, b) => b - a);
 };
