@@ -1,21 +1,21 @@
 
 import OfferMark from '../../ui/offer-mark/offer-mark.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
-import {FavoritesLocationsItemPropsType} from '../favorites-locations-item/favorites-locations-item.tsx';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 
-export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemPropsType){
+export type FavoriteCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'type'>;
 
-  const offer: IMocksData | undefined = offers.find((item) => item.city.name === cityName);
+export default function FavoriteCard({isPremium, previewImage, price, type}: FavoriteCardPropsType){
+
 
   return (
     <article className="favorites__card place-card">
-      {offer?.isPremium ? <OfferMark status={'Premium'}/> : null}
+      {isPremium ? <OfferMark status={'Premium'}/> : null}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={RoutePath.OFFER}>
           <img className="place-card__image"
-            src={offer?.previewImage}
+            src={previewImage}
             width="150"
             height="110"
             alt="Place image"
@@ -25,7 +25,7 @@ export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemP
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer?.price}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button"
@@ -49,7 +49,7 @@ export default function FavoriteCard({cityName, offers}: FavoritesLocationsItemP
         <h2 className="place-card__name">
           <Link to={RoutePath.OFFER}>Nice, cozy, warm big bed apartment</Link>
         </h2>
-        <p className="place-card__type">{offer?.type}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

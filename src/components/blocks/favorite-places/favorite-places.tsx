@@ -6,10 +6,11 @@ import {FavoritesLocationsItemPropsType} from '../favorites-locations-item/favor
 // noinspection JSDeprecatedSymbols
 export default function FavoritePlaces({cityName, offers}: FavoritesLocationsItemPropsType): JSX.Element{
   const favoriteOffersList: IMocksData[] = offers.filter((offer) => offer.isFavorite);
+  const favoriteOffer = favoriteOffersList.find((item) => item.city.name === cityName);
   const cityFavoritesOffersList: IMocksData[] = favoriteOffersList.filter((offer) => offer.city.name === cityName);
   return (
     <div className="favorites__places">
-      {cityFavoritesOffersList.length ? cityFavoritesOffersList.map((item) => (<FavoriteCard offers={offers} cityName={cityName} key={item.id}/>)) : null}
+      {cityFavoritesOffersList.length ? cityFavoritesOffersList.map((item) => (<FavoriteCard {...favoriteOffer} key={item.id}/>)) : null}
     </div>
   );
 }
