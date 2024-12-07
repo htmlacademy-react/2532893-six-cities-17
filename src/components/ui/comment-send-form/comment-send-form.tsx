@@ -6,18 +6,23 @@ import CommentSendStarInput from '../comment-send-star-input/comment-send-star-i
 import {createArrayFromObjectValues} from '../../../utility/utility.ts';
 
 const ratingValuesList: number[] = createArrayFromObjectValues(RatingInputValues);
-type RatingValuesTupleType = [number, React.Dispatch<React.SetStateAction<number>>]
 
 export default function CommentSendForm(): JSX.Element{
+
   const [formData, setFormData] = useState({
     text: '',
+    rating: '',
   });
-  const [ratingValue, setRatingValue]: RatingValuesTupleType = useState(RatingInputValues.PERFECT);
 
-  const handleFieldChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const handleValueChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const {value} = evt.target;
-    setFormData({...formData, text: value});
+    if (evt.target.type === 'textarea'){
+      setFormData({...formData, text: value});
+    }
+    setFormData({...formData, rating: value});
+
   };
+
 
   return (
     <form className="reviews__form form"
@@ -29,13 +34,13 @@ export default function CommentSendForm(): JSX.Element{
       >Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {ratingValuesList.map((item: number) => <CommentSendStarInput value={item} ratingValue={ratingValue} setRatingValue={setRatingValue} key={item}/>)}
+        {ratingValuesList.map((item: number) => <CommentSendStarInput value={item} onChange={handleValueChange} key={item}/>)}
       </div>
       <textarea className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleFieldChange}
+        onChange={handleValueChange}
       >
       </textarea>
       <div className="reviews__button-wrapper">
