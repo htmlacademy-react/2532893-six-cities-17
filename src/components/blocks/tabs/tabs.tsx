@@ -1,14 +1,13 @@
 // noinspection JSDeprecatedSymbols
 
 import TabsItem from '../tabs-item/tabs-item.tsx';
-import {IMocksDataProps} from '../../../mocks/offers.ts';
-import {createUniqueCityList} from '../../../utility/utility.ts';
+import {CitiesList} from '../../../data/cities-list.ts';
 
-export default function Tabs({offers}: IMocksDataProps):JSX.Element{
-  const uniqueOffers: string[] = createUniqueCityList(offers);
+export default function Tabs():JSX.Element{
+
   return (
     <ul className="locations__list tabs__list">
-      {uniqueOffers && uniqueOffers.map((item):JSX.Element => <TabsItem name={item} key={item}/>)}
+      {CitiesList && CitiesList.map((item):JSX.Element => <TabsItem name={item} key={item}/>)}
     </ul>
   );
 }
