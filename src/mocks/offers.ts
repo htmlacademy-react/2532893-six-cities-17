@@ -1,5 +1,5 @@
 type AccommodationTypesType = 'apartment' | 'room' | 'house' | 'hotel';
-export type CityNameTypes = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg'| 'Dusseldorf';
+export type CityNameTypes = string;
 
 export interface IMocksData {
   id: string;
@@ -8,7 +8,7 @@ export interface IMocksData {
   price: number;
   previewImage: string;
   city: {
-    name: CityNameTypes;
+    name: string;
     location: {
       latitude: number;
       longitude: number;
