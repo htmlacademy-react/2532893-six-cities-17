@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 
 
-export default function Logo() :JSX.Element{
+export function Logo() :JSX.Element{
   return (
     <div className="header__left">
       <Link to={RoutePath.INDEX}

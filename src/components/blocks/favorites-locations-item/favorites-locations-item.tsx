@@ -1,4 +1,4 @@
-import FavoriteCard from '../favorite-card/favorite-card.tsx';
+import {FavoriteCard} from '../favorite-card/favorite-card.tsx';
 import {CityNameTypes, IMocksData} from '../../../mocks/offers.ts';
 
 type FavoritesItemType = {
@@ -7,7 +7,7 @@ type FavoritesItemType = {
 }
 
 // noinspection JSDeprecatedSymbols
-export default function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JSX.Element{
+export function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JSX.Element{
 
   const favoriteCityOffers = offers.filter((offer) => offer.city.name === cityName);
   return (

@@ -1,7 +1,9 @@
 import {ReactNode} from 'react';
+import {Link} from 'react-router-dom';
+import {RoutePath} from '../../../data/routes.ts';
 
 
-export default function Nav():ReactNode{
+export function Nav():ReactNode{
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -11,7 +13,9 @@ export default function Nav():ReactNode{
           >
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+            <span className="header__user-name user__name">
+              <Link to={RoutePath.FAVORITES}>Oliver.conner@gmail.com</Link>
+            </span>
             <span className="header__favorite-count">3</span>
           </a>
         </li>

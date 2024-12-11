@@ -1,9 +1,9 @@
 // noinspection JSDeprecatedSymbols
 
-import TabsItem from '../tabs-item/tabs-item.tsx';
+import {TabsItem} from '../tabs-item/tabs-item.tsx';
 import {CitiesList} from '../../../data/cities-list.ts';
 
-export default function Tabs():JSX.Element{
+export function Tabs():JSX.Element{
 
   return (
     <ul className="locations__list tabs__list">

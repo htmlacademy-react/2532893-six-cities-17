@@ -1,8 +1,8 @@
 // noinspection JSDeprecatedSymbols
 import {RoutePath} from '../../data/routes.ts';
-import Layout from '../../components/layout/layout/layout.tsx';
+import {Layout} from '../../components/layout/layout/layout.tsx';
 
-export default function FavoritesEmptyScreen (): JSX.Element{
+export function FavoritesEmptyScreen (): JSX.Element{
   return (
     <div className="page page--favorites-empty">
       <Layout/>

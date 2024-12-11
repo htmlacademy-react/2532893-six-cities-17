@@ -2,9 +2,9 @@
 
 import {Link} from 'react-router-dom';
 import styles from './not-found-screen.module.css';
-import Logo from '../../components/ui/logo/logo.tsx';
+import {Logo} from '../../components/ui/logo/logo.tsx';
 
-export default function NotFoundScreen(): JSX.Element{
+export function NotFoundScreen(): JSX.Element{
   return(
     <>
       <div className={styles.logo}>

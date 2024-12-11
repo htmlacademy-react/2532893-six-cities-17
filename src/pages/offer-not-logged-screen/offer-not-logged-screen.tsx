@@ -1,5 +1,5 @@
 // noinspection JSDeprecatedSymbols
-import Logo from '../../components/ui/logo/logo.tsx';
+import {Logo} from '../../components/ui/logo/logo.tsx';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../data/routes.ts';
 

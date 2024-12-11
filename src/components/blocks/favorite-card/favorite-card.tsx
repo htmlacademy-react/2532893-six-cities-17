@@ -1,14 +1,14 @@
 
 // noinspection JSDeprecatedSymbols
 
-import OfferMark from '../../ui/offer-mark/offer-mark.tsx';
+import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 
 // export type FavoriteCardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'type'>;
 
-export default function FavoriteCard({...offer}: IMocksData): JSX.Element{
+export function FavoriteCard({...offer}: IMocksData): JSX.Element{
 
   const {isPremium, previewImage, price, type} = offer;
   return (

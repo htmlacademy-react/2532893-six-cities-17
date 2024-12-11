@@ -4,18 +4,19 @@
 
 import {BrowserRouter, Route, Routes,} from 'react-router-dom';
 
-import MainScreen from '../pages/main-screen/main-screen.tsx';
-import NotFoundScreen from '../pages/not-found-screen/not-found-screen.tsx';
-import LoginScreen from '../pages/login-screen/login-screen.tsx';
-import FavoriteScreen from '../pages/favorites-screen/favorite-screen.tsx';
-import OfferScreen from '../pages/offer-screen/offer-screen.tsx';
-import PrivateRoute from '../components/routes/private-route/private-route.tsx';
+import {MainScreen} from '../pages/main-screen/main-screen.tsx';
+import {NotFoundScreen} from '../pages/not-found-screen/not-found-screen.tsx';
+import {LoginScreen} from '../pages/login-screen/login-screen.tsx';
+import {FavoriteScreen} from '../pages/favorites-screen/favorite-screen.tsx';
+import {OfferScreen} from '../pages/offer-screen/offer-screen.tsx';
+import {PrivateRoute} from '../components/routes/private-route/private-route.tsx';
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import {IMocksDataProps} from '../mocks/offers.ts';
+import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
 
-export default function App({offers}: IMocksDataProps): JSX.Element {
+export function App({offers}: IMocksDataProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +30,9 @@ export default function App({offers}: IMocksDataProps): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <PrivateRoute loginStatus={LoginStatus.Auth}>
-                <FavoriteScreen offers={offers}/>
+                {offers.some((item) => item.isFavorite)
+                  ? <FavoriteScreen offers={offers}/>
+                  : <FavoritesEmptyScreen/>}
               </PrivateRoute>
             }
           />

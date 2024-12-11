@@ -1,7 +1,7 @@
 // noinspection JSDeprecatedSymbols
 
 import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
-import PlaceCard from '../place-card/place-card.tsx';
+import {PlaceCard} from '../place-card/place-card.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {SetStateAction} from 'react';
 
@@ -10,7 +10,7 @@ export type CityOfferPropsType = {
   onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
 }
 
-export default function CityOffers({offers, onHandleActiveOfferChange}: CityOfferPropsType): JSX.Element{
+export function CityOffers({offers, onHandleActiveOfferChange}: CityOfferPropsType): JSX.Element{
 
   const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === 'Amsterdam').length;
 
