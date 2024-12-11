@@ -23,7 +23,7 @@ export default function PlaceCard({isPremium, previewImage, price, id, onHandleA
         </div>
         : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={RoutePath.OFFER}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image"
             src={previewImage}
             width="260"
