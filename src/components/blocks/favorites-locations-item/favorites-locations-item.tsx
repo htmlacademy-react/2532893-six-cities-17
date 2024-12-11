@@ -1,5 +1,5 @@
 import FavoriteCard from '../favorite-card/favorite-card.tsx';
-import {CityNameTypes, IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
+import {CityNameTypes, IMocksData} from '../../../mocks/offers.ts';
 
 type FavoritesItemType = {
   offers: IMocksData[];
