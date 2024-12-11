@@ -1,34 +1,37 @@
 // noinspection JSDeprecatedSymbols
 
-import CityOffers from '../../components/blocks/city-offers/city-offers.tsx';
-import Header from '../../components/layout/header/header.tsx';
+import React from 'react';
 import Tabs from '../../components/blocks/tabs/tabs.tsx';
+import Layout from '../../components/layout/layout/layout.tsx';
+import {IMocksDataProps} from '../../mocks/offers.ts';
+import {SetStateAction, useState} from 'react';
+import Cities from '../../components/blocks/cities/cities.tsx';
+import MainEmptyBlock from '../../components/blocks/main-empty-block/main-empty-block.tsx';
 
-type AppProps = {
-  offersCount: number;
-}
+type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
 
-export default function MainScreen ({offersCount}:AppProps): JSX.Element{
+
+export default function MainScreen ({offers}:IMocksDataProps): JSX.Element{
+  const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
+  const activeOfferHandler = (id: SetStateAction<string>): void => {
+    setActiveOffer(id);
+  };
+
   return (
 
     <div className="page page--gray page--main">
-      <Header/>
-
+      <Layout/>
+      {/*Заглушка для линтера*/}
+      <div style={{display: 'none'}}>{activeOffer}</div>
+      {/*Заглушка для линтера*/}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Tabs/>
+            <Tabs />
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <CityOffers offersCount={offersCount}/>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
-        </div>
+        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={activeOfferHandler}/> : <MainEmptyBlock/>}
       </main>
     </div>
   );

@@ -2,11 +2,7 @@
 // noinspection JSDeprecatedSymbols
 // noinspection JSDeprecatedSymbols
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import {BrowserRouter, Route, Routes,} from 'react-router-dom';
 
 import MainScreen from '../pages/main-screen/main-screen.tsx';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen.tsx';
@@ -16,37 +12,30 @@ import OfferScreen from '../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../components/routes/private-route/private-route.tsx';
 
 import {RoutePath} from '../data/routes.ts';
+import {LoginStatus} from '../data/login-status.ts';
+import {IMocksDataProps} from '../mocks/offers.ts';
 
-type AppProps = {
-  offersCount: number;
-}
-
-
-export default function App({offersCount}:AppProps): JSX.Element {
+export default function App({offers}: IMocksDataProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offersCount={offersCount}/>} />
+          <Route index element={<MainScreen offers={offers}/>} />
           <Route
             path={RoutePath.LOGIN}
-            element={
-              <PrivateRoute>
-                <LoginScreen/>
-              </PrivateRoute>
-            }
+            element={<LoginScreen/>}
           />
           <Route
             path={RoutePath.FAVORITES}
             element={
-              <PrivateRoute>
-                <FavoriteScreen/>
+              <PrivateRoute loginStatus={LoginStatus.Auth}>
+                <FavoriteScreen offers={offers}/>
               </PrivateRoute>
             }
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen/>}
+            element={<OfferScreen offers={offers}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}
@@ -57,3 +46,4 @@ export default function App({offersCount}:AppProps): JSX.Element {
     </BrowserRouter>
   );
 }
+
