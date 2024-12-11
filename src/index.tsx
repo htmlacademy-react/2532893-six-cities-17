@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={OFFERS_DATA_MOCK} />
+    <App offers={OFFERS_DATA_MOCK}/>
   </React.StrictMode>
 );
 

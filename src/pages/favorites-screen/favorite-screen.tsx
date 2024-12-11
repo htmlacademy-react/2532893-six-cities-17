@@ -5,12 +5,11 @@ import {RoutePath} from '../../data/routes.ts';
 import Layout from '../../components/layout/layout/layout.tsx';
 import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
 import FavoritesLocationsItem from '../../components/blocks/favorites-locations-item/favorites-locations-item.tsx';
-import {createUniqueCityList} from '../../utility/utility.ts';
+import {createFavoriteGroups} from '../../utility/favorite-groups.ts';
 
 
 export default function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
-  const favoriteOffers: IMocksData[] = offers.filter((item) => item.isFavorite);
-  const uniqueOffers: string[] = createUniqueCityList(favoriteOffers);
+  const offerGroups = createFavoriteGroups(offers.filter((item) => item.isFavorite));
 
   return (
     <div className="page">
@@ -21,8 +20,13 @@ export default function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {uniqueOffers.length && uniqueOffers.map((item) => <FavoritesLocationsItem key={item} cityName={item} offers={offers}/>)}
 
+              {
+                Object.keys(offerGroups).map((groupKey) => {
+                  const group: IMocksData[] = offerGroups[groupKey];
+                  return <FavoritesLocationsItem key={groupKey} offers={group} cityName={groupKey}/>;
+                })
+              }
             </ul>
           </section>
         </div>

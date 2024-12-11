@@ -1,5 +1,5 @@
 type AccommodationTypesType = 'apartment' | 'room' | 'house' | 'hotel';
-type CityNameTypes = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg'| 'Dusseldorf';
+export type CityNameTypes = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg'| 'Dusseldorf';
 
 export interface IMocksData {
   id: string;

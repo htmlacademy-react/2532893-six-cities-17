@@ -15,7 +15,7 @@ import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import {IMocksDataProps} from '../mocks/offers.ts';
 
-export default function App({offers}:IMocksDataProps): JSX.Element {
+export default function App({offers}: IMocksDataProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

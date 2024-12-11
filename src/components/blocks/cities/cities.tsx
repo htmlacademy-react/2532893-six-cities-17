@@ -1,5 +1,5 @@
-import CityOffers from './city-offers/city-offers.tsx';
-import {CityOfferPropsType} from './city-offers/city-offers.tsx';
+import CityOffers from '../city-offers/city-offers.tsx';
+import {CityOfferPropsType} from '../city-offers/city-offers.tsx';
 
 export default function Cities({offers, onHandleActiveOfferChange}: CityOfferPropsType): JSX.Element{
   return (

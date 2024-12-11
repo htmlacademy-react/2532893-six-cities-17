@@ -1,14 +1,15 @@
+import FavoriteCard from '../favorite-card/favorite-card.tsx';
+import {CityNameTypes, IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
 
-import FavoritePlaces from '../favorite-places/favorite-places.tsx';
-import {IMocksData} from '../../../mocks/offers.ts';
-
-export type FavoritesLocationsItemPropsType = {
-  cityName: string;
+type FavoritesItemType = {
   offers: IMocksData[];
+  cityName: CityNameTypes;
 }
 
-export default function FavoritesLocationsItem({cityName, offers}: FavoritesLocationsItemPropsType): JSX.Element{
+// noinspection JSDeprecatedSymbols
+export default function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JSX.Element{
 
+  const favoriteCityOffers = offers.filter((offer) => offer.city.name === cityName);
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -20,7 +21,10 @@ export default function FavoritesLocationsItem({cityName, offers}: FavoritesLoca
           </a>
         </div>
       </div>
-      <FavoritePlaces offers={offers} cityName={cityName}/>
+      <div className="favorites__places">
+        {favoriteCityOffers.map((item) => <FavoriteCard {...item} key={item.id}/>)}
+
+      </div>
     </li>
   );
 }
