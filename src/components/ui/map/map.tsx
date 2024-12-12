@@ -1,7 +1,7 @@
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {IMocksData, IMocksDataProps} from '../../../mocks/offers.ts';
-import React, {MutableRefObject, useEffect, useRef} from 'react';
+import {IMocksData} from '../../../mocks/offers.ts';
+import {MutableRefObject, useEffect, useRef} from 'react';
 import {useMap} from './useMap.ts';
 import {URL_PIN} from '../../../data/pin-url.ts';
 import {defaultCityType} from '../../../mocks/default-city.ts';
@@ -10,6 +10,7 @@ export type refType = MutableRefObject<HTMLElement | null>
 export type MapPropsType = {
   offers: IMocksData[];
   defaultCity: defaultCityType;
+  activeOffer: string;
 }
 
 export type useMapPropsType = {
@@ -17,8 +18,10 @@ export type useMapPropsType = {
   defaultCity: defaultCityType;
 }
 
-export function Map({offers, defaultCity}: MapPropsType) {
-  const mapRef: refType = useRef(null);
+export function Map({offers, defaultCity, activeOffer}: MapPropsType) {
+  // console.log(activeOffer);
+
+  const mapRef = useRef(null);
   const map = useMap(mapRef, defaultCity);
 
   const defaultCustomIcon = leaflet.icon({
@@ -40,7 +43,7 @@ export function Map({offers, defaultCity}: MapPropsType) {
             lat: point.location.latitude,
             lng: point.location.longitude,
           }, {
-            icon: defaultCustomIcon,
+            icon: (point.id === activeOffer) ? currentCustomIcon : defaultCustomIcon,
           })
           .addTo(map);
       });

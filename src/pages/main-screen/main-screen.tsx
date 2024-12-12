@@ -16,6 +16,7 @@ export function MainScreen ({offers}:IMocksDataProps): JSX.Element{
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
   };
+  console.log(activeOffer);
 
   return (
 
@@ -31,7 +32,7 @@ export function MainScreen ({offers}:IMocksDataProps): JSX.Element{
             <Tabs />
           </section>
         </div>
-        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={activeOfferHandler}/> : <MainEmptyBlock/>}
+        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/> : <MainEmptyBlock/>}
       </main>
     </div>
   );

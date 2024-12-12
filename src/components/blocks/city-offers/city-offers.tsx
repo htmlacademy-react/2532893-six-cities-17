@@ -8,9 +8,15 @@ import {SetStateAction} from 'react';
 export type CityOfferPropsType = {
   offers: IMocksData[];
   onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
+  activeOffer: string;
 }
 
-export function CityOffers({offers, onHandleActiveOfferChange}: CityOfferPropsType): JSX.Element{
+export type CityOffersPropsType = {
+  offers: IMocksData[];
+  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
+}
+
+export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsType): JSX.Element{
 
   const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === 'Amsterdam').length;
 
