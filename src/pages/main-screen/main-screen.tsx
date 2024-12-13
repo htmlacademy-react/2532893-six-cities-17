@@ -16,7 +16,6 @@ export function MainScreen ({offers}:IMocksDataProps): JSX.Element{
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
   };
-  console.log(activeOffer);
 
   return (
 

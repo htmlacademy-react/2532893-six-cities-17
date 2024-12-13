@@ -7,7 +7,7 @@ export type defaultCityType = {
 
 export const DEFAULT_CITY: defaultCityType = {
   title: 'Amsterdam',
-  lat: 52.37454,
-  lng: 4.897976,
-  zoom: 13,
+  lat: 52.3653713,
+  lng: 4.9025705,
+  zoom: 12,
 };

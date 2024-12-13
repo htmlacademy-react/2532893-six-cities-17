@@ -1,6 +1,5 @@
 // noinspection JSDeprecatedSymbols
 
-import {OFFERS_SHOW_COUNT} from '../../../data/magic-numbers.ts';
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {SetStateAction} from 'react';
@@ -60,7 +59,7 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.length ? offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id}/>).slice(0, OFFERS_SHOW_COUNT) : null}
+        {offers.length ? offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id}/>) : null}
       </div>
     </section>
   );

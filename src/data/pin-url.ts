@@ -1,5 +1,11 @@
 
-export enum URL_PIN {
-  URL_PIN_DEFAULT = '/public/img/pin.svg',
-  URL_PIN_ACTIVE = '/public/img/pin-active.svg',
-}
+// export enum URL_PIN {
+//   URL_PIN_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+//   URL_PIN_ACTIVE = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+// }
+
+export const URL_MARKER_DEFAULT =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
+export const URL_MARKER_CURRENT =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';

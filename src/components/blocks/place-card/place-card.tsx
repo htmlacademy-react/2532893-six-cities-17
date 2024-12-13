@@ -15,7 +15,6 @@ export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOff
   return (
     <article className="cities__card place-card"
       onMouseEnter={() => onHandleActiveOfferChange(id)}
-
       onMouseLeave={() => onHandleActiveOfferChange('')}
     >
       {isPremium ?

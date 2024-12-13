@@ -1,10 +1,10 @@
-import leaflet from 'leaflet';
+import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {MutableRefObject, useEffect, useRef} from 'react';
 import {useMap} from './useMap.ts';
-import {URL_PIN} from '../../../data/pin-url.ts';
 import {defaultCityType} from '../../../mocks/default-city.ts';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../../data/pin-url.ts';
 
 export type refType = MutableRefObject<HTMLElement | null>
 export type MapPropsType = {
@@ -13,48 +13,48 @@ export type MapPropsType = {
   activeOffer: string;
 }
 
-export type useMapPropsType = {
-  mapRef: refType;
-  defaultCity: defaultCityType;
-}
 
 export function Map({offers, defaultCity, activeOffer}: MapPropsType) {
-  // console.log(activeOffer);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, defaultCity);
 
-  const defaultCustomIcon = leaflet.icon({
-    iconUrl: URL_PIN.URL_PIN_DEFAULT,
+  const defaultCustomIcon = new Icon({
+    iconUrl: URL_MARKER_DEFAULT,
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
 
-  const currentCustomIcon = leaflet.icon({
-    iconUrl: URL_PIN.URL_PIN_ACTIVE,
+  const currentCustomIcon = new Icon({
+    iconUrl: URL_MARKER_CURRENT,
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
   useEffect(() => {
     if (map) {
+      const markerLayer = layerGroup().addTo(map);
       offers.forEach((point) => {
-        leaflet
-          .marker({
-            lat: point.location.latitude,
-            lng: point.location.longitude,
-          }, {
-            icon: (point.id === activeOffer) ? currentCustomIcon : defaultCustomIcon,
-          })
-          .addTo(map);
+        const marker = new Marker({
+          lat: point.location.latitude,
+          lng: point.location.longitude
+        });
+
+        marker
+          .setIcon(
+            activeOffer !== undefined && point.id === activeOffer
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
       });
+
+      return ():void => {
+        map.removeLayer(markerLayer);
+      };
     }
-  }, [map, offers]);
+  }, [map, offers, activeOffer]);
   return (
-    <div
-      style={{height: '921.594px'}}
-      ref={mapRef}
-    >
-    </div>
+    <section className="cities__map map" ref={mapRef}/>
   );
 }
 
