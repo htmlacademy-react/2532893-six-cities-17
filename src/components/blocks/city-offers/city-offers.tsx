@@ -3,6 +3,7 @@
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {SetStateAction} from 'react';
+import {DEFAULT_CITY} from '../../../mocks/default-city.ts';
 
 export type CityOfferPropsType = {
   offers: IMocksData[];
@@ -17,12 +18,12 @@ export type CityOffersPropsType = {
 
 export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsType): JSX.Element{
 
-  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === 'Amsterdam').length;
+  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === `${DEFAULT_CITY[0].title}`).length;
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+      <b className="places__found">{offersCount} places to stay in {`${DEFAULT_CITY[0].title}`}</b>
       <form className="places__sorting"
         action="#"
         method="get"
