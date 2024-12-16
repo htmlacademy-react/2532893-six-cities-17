@@ -8,7 +8,7 @@ import {SetStateAction, useState} from 'react';
 import {Cities} from '../../components/blocks/cities/cities.tsx';
 import {MainEmptyBlock} from '../../components/blocks/main-empty-block/main-empty-block.tsx';
 
-type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
+export type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
 
 
 export function MainScreen ({offers}:IMocksDataProps): JSX.Element{
