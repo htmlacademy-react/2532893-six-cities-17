@@ -7,7 +7,7 @@ type RatingStarsType = {
   value: number;
 }
 
-export default function CommentSendStarInput({onChange, value}: RatingStarsType): JSX.Element{
+export function CommentSendStarInput({onChange, value}: RatingStarsType): JSX.Element{
 
   return(
     <>

@@ -1,5 +1,5 @@
-import {CityNameTypes} from '../mocks/offers.ts';
-import {IMocksData} from '../mocks/offers.ts';
+import {CityNameTypes} from '../../mocks/offers.ts';
+import {IMocksData} from '../../mocks/offers.ts';
 
 type FavoriteGroupsType = Record<CityNameTypes, IMocksData[]>
 

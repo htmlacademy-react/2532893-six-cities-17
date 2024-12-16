@@ -2,12 +2,12 @@
 
 import React, {useState} from 'react';
 import {RatingInputValues} from '../../../data/rating-input-values.ts';
-import CommentSendStarInput from '../comment-send-star-input/comment-send-star-input.tsx';
+import {CommentSendStarInput} from '../comment-send-star-input/comment-send-star-input.tsx';
 import {createArrayFromObjectValues} from '../../../utility/utility.ts';
 
 const ratingValuesList: number[] = createArrayFromObjectValues(RatingInputValues);
 
-export default function CommentSendForm(): JSX.Element{
+export function CommentSendForm(): JSX.Element{
 
   const [formData, setFormData] = useState({
     text: '',

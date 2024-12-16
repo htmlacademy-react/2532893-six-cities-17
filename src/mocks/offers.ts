@@ -1,3 +1,4 @@
+
 type AccommodationTypesType = 'apartment' | 'room' | 'house' | 'hotel';
 export type CityNameTypes = string;
 

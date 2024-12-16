@@ -10,7 +10,7 @@ type PrivateRouteProps = {
   loginStatus: LoginStatus;
 }
 
-export default function PrivateRoute({children, loginStatus}: PrivateRouteProps): JSX.Element{
+export function PrivateRoute({children, loginStatus}: PrivateRouteProps): JSX.Element{
 
   return (
     loginStatus === LoginStatus.Auth ? children : <Navigate to={RoutePath.LOGIN}/>

@@ -1,17 +1,17 @@
 // noinspection JSDeprecatedSymbols
 
 import React from 'react';
-import Tabs from '../../components/blocks/tabs/tabs.tsx';
-import Layout from '../../components/layout/layout/layout.tsx';
+import {Tabs} from '../../components/blocks/tabs/tabs.tsx';
+import {Layout} from '../../components/layout/layout/layout.tsx';
 import {IMocksDataProps} from '../../mocks/offers.ts';
 import {SetStateAction, useState} from 'react';
-import Cities from '../../components/blocks/cities/cities.tsx';
-import MainEmptyBlock from '../../components/blocks/main-empty-block/main-empty-block.tsx';
+import {Cities} from '../../components/blocks/cities/cities.tsx';
+import {MainEmptyBlock} from '../../components/blocks/main-empty-block/main-empty-block.tsx';
 
 type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
 
 
-export default function MainScreen ({offers}:IMocksDataProps): JSX.Element{
+export function MainScreen ({offers}:IMocksDataProps): JSX.Element{
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
@@ -31,7 +31,7 @@ export default function MainScreen ({offers}:IMocksDataProps): JSX.Element{
             <Tabs />
           </section>
         </div>
-        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={activeOfferHandler}/> : <MainEmptyBlock/>}
+        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/> : <MainEmptyBlock/>}
       </main>
     </div>
   );

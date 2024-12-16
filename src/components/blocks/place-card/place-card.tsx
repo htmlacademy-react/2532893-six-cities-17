@@ -10,7 +10,7 @@ type PlaceCardPropsType = CardPropsType & {
   onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
 }
 
-export default function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element {
+export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element {
 
   return (
     <article className="cities__card place-card"

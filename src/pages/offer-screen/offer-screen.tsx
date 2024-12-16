@@ -1,13 +1,13 @@
 // noinspection JSDeprecatedSymbols
-import Layout from '../../components/layout/layout/layout.tsx';
+import {Layout} from '../../components/layout/layout/layout.tsx';
 import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
 import {Link, useParams} from 'react-router-dom';
-import OfferMark from '../../components/ui/offer-mark/offer-mark.tsx';
+import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
-import CommentSendForm from '../../components/ui/comment-send-form/comment-send-form.tsx';
+import {CommentSendForm} from '../../components/ui/comment-send-form/comment-send-form.tsx';
 import {RoutePath} from '../../data/routes.ts';
 
-export default function OfferScreen({offers}: IMocksDataProps): JSX.Element {
+export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
 
   const params = useParams();
   const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);

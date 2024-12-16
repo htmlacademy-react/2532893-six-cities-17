@@ -2,13 +2,13 @@
 // noinspection JSDeprecatedSymbols
 
 import {RoutePath} from '../../data/routes.ts';
-import Layout from '../../components/layout/layout/layout.tsx';
+import {Layout} from '../../components/layout/layout/layout.tsx';
 import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
-import FavoritesLocationsItem from '../../components/blocks/favorites-locations-item/favorites-locations-item.tsx';
-import {createFavoriteGroups} from '../../utility/favorite-groups.ts';
+import {FavoritesLocationsItem} from '../../components/blocks/favorites-locations-item/favorites-locations-item.tsx';
+import {createFavoriteGroups} from './favorite-groups.ts';
 
 
-export default function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
+export function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
   const offerGroups = createFavoriteGroups(offers.filter((item) => item.isFavorite));
 
   return (
