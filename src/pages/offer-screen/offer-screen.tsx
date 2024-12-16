@@ -11,9 +11,12 @@ import {REVIEWS_LIST_DATA_MOCK} from '../../mocks/reviews.ts';
 import {Map} from '../../components/ui/map/map.tsx';
 import {DEFAULT_CITY} from '../../mocks/default-city.ts';
 import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
+import {OFFER_INSIDE_FEATURES} from '../../data/offer-inside-features.ts';
 import {NearbyOfferCard} from '../../components/blocks/nearby-offer-card/nearby-offer-card.tsx';
+import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
 import {SetStateAction, useState} from 'react';
 import {ActiveOfferTupleType} from '../main-screen/main-screen.tsx';
+import {OfferInsideItem} from '../../components/blocks/offer-inside-item/offer-inside-item.tsx';
 
 // noinspection JSDeprecatedSymbols
 export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
@@ -121,36 +124,9 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="offer__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Towels
-                  </li>
-                  <li className="offer__inside-item">
-                    Heating
-                  </li>
-                  <li className="offer__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="offer__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="offer__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="offer__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="offer__inside-item">
-                    Fridge
-                  </li>
+                  {OFFER_INSIDE_FEATURES.map((item: string) => {
+                    <OfferInsideItem offerInsideProp={item} key={item}/>;
+                  })}
                 </ul>
               </div>
               <div className="offer__host">
@@ -196,12 +172,9 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
           </section>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {NEARBY_OFFERS_MOCK.map((item) => <NearbyOfferCard {...item} key={item.id} onHandleActiveOfferChange={activeOfferHandler}/>)}
-            </div>
-          </section>
+          <NearbyOffersList>
+            {NEARBY_OFFERS_MOCK.map((item) => <NearbyOfferCard {...item} key={item.id} onHandleActiveOfferChange={activeOfferHandler}/>)}
+          </NearbyOffersList>
         </div>
       </main>
     </div>
