@@ -1,21 +1,40 @@
 // noinspection JSDeprecatedSymbols
 import {Layout} from '../../components/layout/layout/layout.tsx';
+import {ReviewsList} from '../../components/blocks/reviews-list/reviews-list.tsx';
 import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
 import {CommentSendForm} from '../../components/ui/comment-send-form/comment-send-form.tsx';
-import {RoutePath} from '../../data/routes.ts';
 
+import {REVIEWS_LIST_DATA_MOCK} from '../../mocks/reviews.ts';
+import {Map} from '../../components/ui/map/map.tsx';
+import {DEFAULT_CITY} from '../../mocks/default-city.ts';
+import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
+import {OFFER_INSIDE_FEATURES} from '../../data/offer-inside-features.ts';
+import {NearbyOfferCard} from '../../components/blocks/nearby-offer-card/nearby-offer-card.tsx';
+import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
+import {SetStateAction, useState} from 'react';
+import {ActiveOfferTupleType} from '../main-screen/main-screen.tsx';
+import {OfferInsideItem} from '../../components/blocks/offer-inside-item/offer-inside-item.tsx';
+
+// noinspection JSDeprecatedSymbols
 export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
 
   const params = useParams();
   const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
 
+  const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
+  const activeOfferHandler = (id: SetStateAction<string>): void => {
+    setActiveOffer(id);
+  };
   return (
+
     <div className="page">
       <Layout/>
-
+      {/*Заглушка для линтера*/}
+      <div style={{display: 'none'}}>{activeOffer}</div>
+      {/*Заглушка для линтера*/}
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -105,36 +124,9 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="offer__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Towels
-                  </li>
-                  <li className="offer__inside-item">
-                    Heating
-                  </li>
-                  <li className="offer__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="offer__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="offer__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="offer__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="offer__inside-item">
-                    Fridge
-                  </li>
+                  {OFFER_INSIDE_FEATURES.map((item: string) => {
+                    <OfferInsideItem offerInsideProp={item} key={item}/>;
+                  })}
                 </ul>
               </div>
               <div className="offer__host">
@@ -168,179 +160,21 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar"
-                          src="img/avatar-max.jpg"
-                          width="54"
-                          height="54"
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                        The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time"
-                        dateTime="2019-04-24"
-                      >April 2019
-                      </time>
-                    </div>
-                  </li>
-                </ul>
+                <ReviewsList reviews={REVIEWS_LIST_DATA_MOCK}/>
                 <CommentSendForm/>
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <section className="offer__map map" style={{height: '579px'}}>
+            {
+              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={offer.id} className={'offer__map map'}/> : null
+            }
+          </section>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to={RoutePath.OFFER}>
-                    <img className="place-card__image"
-                      src="img/room.jpg"
-                      width="260"
-                      height="200"
-                      alt="Place image"
-                    />
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;80</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                    <button className="place-card__bookmark-button place-card__bookmark-button--active button"
-                      type="button"
-                    >
-                      <svg className="place-card__bookmark-icon"
-                        width="18"
-                        height="19"
-                      >
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">In bookmarks</span>
-                    </button>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to={RoutePath.OFFER}>Wood and stone place</Link>
-                  </h2>
-                  <p className="place-card__type">Room</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to={RoutePath.OFFER}>
-                    <img className="place-card__image"
-                      src="img/apartment-02.jpg"
-                      width="260"
-                      height="200"
-                      alt="Place image"
-                    />
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;132</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                    <button className="place-card__bookmark-button button"
-                      type="button"
-                    >
-                      <svg className="place-card__bookmark-icon"
-                        width="18"
-                        height="19"
-                      >
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </button>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to={RoutePath.OFFER}>Canal View Prinsengracht</Link>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <div className="place-card__mark">
-                  <span>Premium</span>
-                </div>
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to={RoutePath.OFFER}>
-                    <img className="place-card__image"
-                      src="img/apartment-03.jpg"
-                      width="260"
-                      height="200"
-                      alt="Place image"
-                    />
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;180</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                    <button className="place-card__bookmark-button button"
-                      type="button"
-                    >
-                      <svg className="place-card__bookmark-icon"
-                        width="18"
-                        height="19"
-                      >
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </button>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to={RoutePath.OFFER}>Nice, cozy, warm big bed apartment</Link>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-            </div>
-          </section>
+          <NearbyOffersList>
+            {NEARBY_OFFERS_MOCK.map((item) => <NearbyOfferCard {...item} key={item.id} onHandleActiveOfferChange={activeOfferHandler}/>)}
+          </NearbyOffersList>
         </div>
       </main>
     </div>

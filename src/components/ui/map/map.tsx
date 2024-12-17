@@ -10,6 +10,7 @@ export type MapPropsType = {
   offers: IMocksData[];
   defaultCity: defaultCityType[];
   activeOffer: string;
+  className: string;
 }
 
 const defaultCustomIcon = new Icon({
@@ -24,7 +25,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-export function Map({offers, defaultCity, activeOffer}: MapPropsType) {
+export function Map({offers, defaultCity, activeOffer, className}: MapPropsType) {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, defaultCity[0]);
@@ -53,7 +54,7 @@ export function Map({offers, defaultCity, activeOffer}: MapPropsType) {
     }
   }, [map, offers, activeOffer]);
   return (
-    <section className="cities__map map" ref={mapRef}/>
+    <section className={className} ref={mapRef}/>
   );
 }
 
