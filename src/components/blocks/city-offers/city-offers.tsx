@@ -60,7 +60,7 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.length ? offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id}/>) : null}
+        {offers.length && offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id}/>)}
       </div>
     </section>
   );

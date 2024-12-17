@@ -124,9 +124,8 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  {OFFER_INSIDE_FEATURES.map((item: string) => {
-                    <OfferInsideItem offerInsideProp={item} key={item}/>;
-                  })}
+                  {OFFER_INSIDE_FEATURES.length && OFFER_INSIDE_FEATURES.map((item: string): JSX.Element => {
+                    <OfferInsideItem offerInsideProp={item} key={item}/>})}
                 </ul>
               </div>
               <div className="offer__host">
@@ -159,7 +158,7 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{REVIEWS_LIST_DATA_MOCK.length}</span></h2>
                 <ReviewsList reviews={REVIEWS_LIST_DATA_MOCK}/>
                 <CommentSendForm/>
               </section>
@@ -173,7 +172,7 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
         </section>
         <div className="container">
           <NearbyOffersList>
-            {NEARBY_OFFERS_MOCK.map((item) => <NearbyOfferCard {...item} key={item.id} onHandleActiveOfferChange={activeOfferHandler}/>)}
+            {NEARBY_OFFERS_MOCK.length && NEARBY_OFFERS_MOCK.map((item: IMocksData): JSX.Element => <NearbyOfferCard {...item} key={item.id} onHandleActiveOfferChange={activeOfferHandler}/>)}
           </NearbyOffersList>
         </div>
       </main>

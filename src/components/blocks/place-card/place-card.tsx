@@ -18,7 +18,7 @@ export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOff
       onMouseEnter={() => onHandleActiveOfferChange(id)}
       onMouseLeave={() => onHandleActiveOfferChange('')}
     >
-      {isPremium ? <OfferMark status={'Premium'}/> : null}
+      {isPremium && <OfferMark status={'Premium'}/>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
           <img className="place-card__image"
