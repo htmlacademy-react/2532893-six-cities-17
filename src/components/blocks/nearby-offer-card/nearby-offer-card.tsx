@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 import {PlaceCardPropsType} from '../place-card/place-card.tsx';
 import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';
+import {MARK_CLASS_NAMES} from "../../../data/mark-class-names.ts";
 
 
 export function NearbyOfferCard({isPremium, previewImage, price, id, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element{
@@ -12,7 +13,7 @@ export function NearbyOfferCard({isPremium, previewImage, price, id, onHandleAct
       onMouseEnter={() => onHandleActiveOfferChange(id)}
       onMouseLeave={() => onHandleActiveOfferChange('')}
     >
-      {isPremium ? <OfferMark status={'Premium'}/> : null}
+      {isPremium ? <OfferMark className={MARK_CLASS_NAMES.PLACE_CARD_MARK} status={'Premium'}/> : null}
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
           <img className="place-card__image"

@@ -15,6 +15,7 @@ import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
 import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
 import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-inside-list.tsx';
 import {SetStateAction} from 'react';
+import {MARK_CLASS_NAMES} from "../../data/mark-class-names.ts";
 
 export type MainOfferScreenProps = {
   offers: IMocksData[];
@@ -76,7 +77,7 @@ export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer}: Ma
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium ? <OfferMark status={'Premium'}/> : null}
+              {offer?.isPremium ? <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/>: null}
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">

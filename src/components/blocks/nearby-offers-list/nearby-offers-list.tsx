@@ -16,7 +16,7 @@ export function NearbyOffersList({onHandleActiveOfferChange}:onHandleActiveOffer
     <>
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        {NEARBY_OFFERS_MOCK.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} className={CARD_CLASS_NAMES.FAVORITES_CARD} onHandleActiveOfferChange={onHandleActiveOfferChange}/>)}
+        {NEARBY_OFFERS_MOCK.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} className={CARD_CLASS_NAMES.NEAR_PLACES_CARD} onHandleActiveOfferChange={onHandleActiveOfferChange}/>)}
       </div>
     </>
   );

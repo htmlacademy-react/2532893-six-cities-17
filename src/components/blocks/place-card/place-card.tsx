@@ -6,6 +6,7 @@ import {RoutePath} from '../../../data/routes.ts';
 import {SetStateAction} from 'react';
 import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';
 import {CARD_CLASS_NAMES} from "../../../data/card-class-names.ts";
+import {MARK_CLASS_NAMES} from "../../../data/mark-class-names.ts";
 
 export type CardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'id'>;
 
@@ -21,7 +22,7 @@ export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOff
       onMouseEnter={() => onHandleActiveOfferChange(id)}
       onMouseLeave={() => onHandleActiveOfferChange('')}
     >
-      {isPremium && <OfferMark status={'Premium'}/>}
+      {isPremium && <OfferMark className={MARK_CLASS_NAMES.PLACE_CARD_MARK} status={'Premium'}/>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image"
