@@ -1,5 +1,7 @@
-import {FavoriteCard} from '../favorite-card/favorite-card.tsx';
+
+import {PlaceCard} from "../place-card/place-card.tsx";
 import {CityNameTypes, IMocksData} from '../../../mocks/offers.ts';
+import {CARD_CLASS_NAMES} from "../../../data/card-class-names.ts";
 
 type FavoritesItemType = {
   offers: IMocksData[];
@@ -22,7 +24,7 @@ export function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JS
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteCityOffers.map((item) => <FavoriteCard {...item} key={item.id}/>)}
+        {favoriteCityOffers.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} className={CARD_CLASS_NAMES.FAVORITES_CARD} onHandleActiveOfferChange={() => {}}/>)}
 
       </div>
     </li>

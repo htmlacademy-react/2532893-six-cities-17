@@ -4,6 +4,7 @@ import {PlaceCard} from '../place-card/place-card.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {SetStateAction} from 'react';
 import {DEFAULT_CITY} from '../../../mocks/default-city.ts';
+import {CARD_CLASS_NAMES} from "../../../data/card-class-names.ts";
 
 export type CityOfferPropsType = {
   offers: IMocksData[];
@@ -60,7 +61,7 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.length && offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id}/>)}
+        {offers.length && offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD}/>)}
       </div>
     </section>
   );

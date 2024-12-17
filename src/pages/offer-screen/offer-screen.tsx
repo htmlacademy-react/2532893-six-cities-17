@@ -1,7 +1,7 @@
 // noinspection JSDeprecatedSymbols
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {ReviewsList} from '../../components/blocks/reviews-list/reviews-list.tsx';
-import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
+import {IMocksData} from '../../mocks/offers.ts';
 import {useParams} from 'react-router-dom';
 import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
@@ -11,30 +11,27 @@ import {REVIEWS_LIST_DATA_MOCK} from '../../mocks/reviews.ts';
 import {Map} from '../../components/ui/map/map.tsx';
 import {DEFAULT_CITY} from '../../mocks/default-city.ts';
 import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
-import {OFFER_INSIDE_FEATURES} from '../../data/offer-inside-features.ts';
-import {NearbyOfferCard} from '../../components/blocks/nearby-offer-card/nearby-offer-card.tsx';
-import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
-import {SetStateAction, useState} from 'react';
-import {ActiveOfferTupleType} from '../main-screen/main-screen.tsx';
-import {OfferInsideItem} from '../../components/blocks/offer-inside-item/offer-inside-item.tsx';
 
+import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
+import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-inside-list.tsx';
+import {SetStateAction} from 'react';
+
+export type MainOfferScreenProps = {
+  offers: IMocksData[];
+  onHandleActiveOfferChange: (id: SetStateAction<string>) => void;
+  activeOffer: string;
+}
 // noinspection JSDeprecatedSymbols
-export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
+export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer}: MainOfferScreenProps): JSX.Element {
 
   const params = useParams();
   const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
 
-  const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
-  const activeOfferHandler = (id: SetStateAction<string>): void => {
-    setActiveOffer(id);
-  };
   return (
 
     <div className="page">
       <Layout/>
-      {/*Заглушка для линтера*/}
-      <div style={{display: 'none'}}>{activeOffer}</div>
-      {/*Заглушка для линтера*/}
+
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -123,10 +120,7 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
-                <ul className="offer__inside-list">
-                  {OFFER_INSIDE_FEATURES.length && OFFER_INSIDE_FEATURES.map((item: string): JSX.Element => {
-                    <OfferInsideItem offerInsideProp={item} key={item}/>})}
-                </ul>
+                <OfferInsideList/>
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
@@ -166,14 +160,12 @@ export function OfferScreen({offers}: IMocksDataProps): JSX.Element {
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={offer.id} className={'offer__map map'}/> : null
+              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={activeOffer} className={'offer__map map'}/> : null
             }
           </section>
         </section>
         <div className="container">
-          <NearbyOffersList>
-            {NEARBY_OFFERS_MOCK.length && NEARBY_OFFERS_MOCK.map((item: IMocksData): JSX.Element => <NearbyOfferCard {...item} key={item.id} onHandleActiveOfferChange={activeOfferHandler}/>)}
-          </NearbyOffersList>
+          <NearbyOffersList onHandleActiveOfferChange={onHandleActiveOfferChange}/>
         </div>
       </main>
     </div>
