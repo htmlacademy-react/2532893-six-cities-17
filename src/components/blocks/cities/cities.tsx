@@ -13,7 +13,7 @@ export function Cities({offers, onHandleActiveOfferChange, activeOffer, activeCi
       <div className="cities__places-container container">
         <CityOffers offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeCity={activeCity}/>
         <div className="cities__right-section">
-          <Map defaultCity={DEFAULT_CITY} offers={offers} activeOffer={activeOffer} className={'cities__map map'}/>
+          <Map defaultCity={DEFAULT_CITY} offers={offers} activeOffer={activeOffer} activeCity={activeCity} className={'cities__map map'}/>
         </div>
       </div>
     </div>

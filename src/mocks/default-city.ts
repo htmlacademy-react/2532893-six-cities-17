@@ -5,6 +5,7 @@ export type defaultCityType = {
     zoom: number;
 }
 
+
 export const DEFAULT_CITY: defaultCityType[] = [{
   title: 'Paris',
   lat: 48.8595107,

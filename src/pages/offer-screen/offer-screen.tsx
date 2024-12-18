@@ -21,9 +21,10 @@ export type MainOfferScreenProps = {
   offers: IMocksData[];
   onHandleActiveOfferChange: (id: SetStateAction<string>) => void;
   activeOffer: string;
+  activeCity: string;
 }
 // noinspection JSDeprecatedSymbols
-export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer}: MainOfferScreenProps): JSX.Element {
+export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer, activeCity}: MainOfferScreenProps): JSX.Element {
 
   const params = useParams();
   const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
@@ -161,7 +162,7 @@ export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer}: Ma
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={activeOffer} className={'offer__map map'}/> : null
+              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={activeOffer} className={'offer__map map'} activeCity={activeCity}/> : null
             }
           </section>
         </section>

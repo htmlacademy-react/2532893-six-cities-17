@@ -11,6 +11,7 @@ export type MapPropsType = {
   defaultCity: defaultCityType[];
   activeOffer: string;
   className: string;
+  activeCity: string;
 }
 
 const defaultCustomIcon = new Icon({
@@ -25,15 +26,17 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-export function Map({offers, defaultCity, activeOffer, className}: MapPropsType) {
+export function Map({offers, defaultCity, activeOffer, className, activeCity = 'Paris'}: MapPropsType) {
 
+  const mapCity: defaultCityType = defaultCity.find((item) => item.title === activeCity);
+  const cityOffers: IMocksData[] = offers.filter((offer) => offer.city.name === activeCity);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, defaultCity[0]);
+  const map = useMap(mapRef, mapCity);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offers.forEach((point) => {
+      cityOffers.forEach((point) => {
         const marker = new Marker({
           lat: point.location.latitude,
           lng: point.location.longitude
@@ -52,7 +55,7 @@ export function Map({offers, defaultCity, activeOffer, className}: MapPropsType)
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, cityOffers, activeOffer, mapCity, activeCity]);
   return (
     <section className={className} ref={mapRef}/>
   );

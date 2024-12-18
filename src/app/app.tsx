@@ -49,7 +49,7 @@ export function App({offers}: IMocksDataProps): JSX.Element {
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={offers} activeOffer={activeOffer} onHandleActiveOfferChange={activeOfferHandler}/>}
+            element={<OfferScreen offers={offers} activeOffer={activeOffer} onHandleActiveOfferChange={activeOfferHandler} activeCity={activeCity}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}
@@ -60,4 +60,3 @@ export function App({offers}: IMocksDataProps): JSX.Element {
     </BrowserRouter>
   );
 }
-
