@@ -32,7 +32,7 @@ export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer, onH
             <Tabs onHandleActiveCityChange={onHandleActiveCityChange} activeCity={activeCity}/>
           </section>
         </div>
-        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeOffer={activeOffer}/> : <MainEmptyBlock/>}
+        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeOffer={activeOffer} activeCity={activeCity}/> : <MainEmptyBlock/>}
       </main>
     </div>
   );
