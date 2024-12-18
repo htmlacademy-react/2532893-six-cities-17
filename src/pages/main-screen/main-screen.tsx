@@ -6,12 +6,19 @@ import {Layout} from '../../components/layout/layout/layout.tsx';
 import {SetStateAction} from 'react';
 import {Cities} from '../../components/blocks/cities/cities.tsx';
 import {MainEmptyBlock} from '../../components/blocks/main-empty-block/main-empty-block.tsx';
-import {MainOfferScreenProps} from '../offer-screen/offer-screen.tsx';
+import {IMocksData} from '../../mocks/offers.ts';
 
 export type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
+export type MainScreenProps = {
+  offers: IMocksData[];
+  onHandleActiveOfferChange: (id: SetStateAction<string>) => void;
+  activeOffer: string;
+  onHandleActiveCityChange: (id: SetStateAction<string>) => void;
+  activeCity: string;
 
+}
 
-export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer}:MainOfferScreenProps): JSX.Element{
+export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer, onHandleActiveCityChange, activeCity}:MainScreenProps): JSX.Element{
 
 
   return (
@@ -22,7 +29,7 @@ export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer}:Mai
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Tabs />
+            <Tabs onHandleActiveCityChange={onHandleActiveCityChange} activeCity={activeCity}/>
           </section>
         </div>
         {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeOffer={activeOffer}/> : <MainEmptyBlock/>}

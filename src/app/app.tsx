@@ -15,6 +15,7 @@ import {LoginStatus} from '../data/login-status.ts';
 import {IMocksDataProps} from '../mocks/offers.ts';
 import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
 import {SetStateAction, useState} from 'react';
+import {DEFAULT_CITY} from '../mocks/default-city.ts';
 
 export function App({offers}: IMocksDataProps): JSX.Element {
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
@@ -22,11 +23,16 @@ export function App({offers}: IMocksDataProps): JSX.Element {
     setActiveOffer(id);
   };
 
+  const [activeCity, setActiveCity]: ActiveOfferTupleType = useState(DEFAULT_CITY[0].title);
+  const activeCityHandler = (value: SetStateAction<string>): void => {
+    setActiveCity(value);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offers={offers} activeOffer={activeOffer} onHandleActiveOfferChange={activeOfferHandler}/>} />
+          <Route index element={<MainScreen offers={offers} activeOffer={activeOffer} onHandleActiveOfferChange={activeOfferHandler} onHandleActiveCityChange={activeCityHandler} activeCity={activeCity}/>}/>
           <Route
             path={RoutePath.LOGIN}
             element={<LoginScreen/>}
