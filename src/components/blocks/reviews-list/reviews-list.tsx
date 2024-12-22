@@ -1,5 +1,5 @@
 import {ReviewsItem} from '../reviews-item/reviews-item.tsx';
-import {ReviewsPropsType} from "../reviews-item/reviews-item.tsx";
+import {ReviewsPropsType} from '../reviews-item/reviews-item.tsx';
 
 export function ReviewsList({reviews}: ReviewsPropsType){
   return (
