@@ -13,12 +13,11 @@ export type MainScreenProps = {
   offers: IMocksData[];
   onHandleActiveOfferChange: (id: SetStateAction<string>) => void;
   activeOffer: string;
-  onHandleActiveCityChange: (id: SetStateAction<string>) => void;
   activeCity: string;
 
 }
 
-export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer, onHandleActiveCityChange, activeCity}:MainScreenProps): JSX.Element{
+export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer, activeCity}:MainScreenProps): JSX.Element{
 
 
   return (
@@ -29,7 +28,7 @@ export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer, onH
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Tabs onHandleActiveCityChange={onHandleActiveCityChange} activeCity={activeCity}/>
+            <Tabs activeCity={activeCity}/>
           </section>
         </div>
         {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeOffer={activeOffer} activeCity={activeCity}/> : <MainEmptyBlock/>}

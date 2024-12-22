@@ -7,7 +7,7 @@ import {defaultCityType} from '../../../mocks/default-city.ts';
 
 export function useMap(
   mapRef: refType,
-  city: defaultCityType,
+  city: defaultCityType
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);

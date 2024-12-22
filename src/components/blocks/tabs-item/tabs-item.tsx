@@ -1,18 +1,18 @@
 // noinspection JSDeprecatedSymbols
 
-import {SetStateAction} from 'react';
+import {useAppDispatch} from '../../../utility/hooks.ts';
+import {changeCity} from '../../../store/action.ts';
 
 type TabsItemPropsType = {
   name: string;
-  onHandleActiveCityChange: (id: SetStateAction<string>) => void;
   isActive: boolean;
 }
 
-export function TabsItem({name, onHandleActiveCityChange, isActive}: TabsItemPropsType):JSX.Element{
-
+export function TabsItem({name, isActive}: TabsItemPropsType):JSX.Element{
+  const dispatch = useAppDispatch();
   return (
     <li className="locations__item"
-      onClick={() => onHandleActiveCityChange(name)}
+      onClick={() => dispatch(changeCity(name))}
     >
       <a className={isActive ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item '}
         href="#"

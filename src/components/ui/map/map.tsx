@@ -28,7 +28,7 @@ const currentCustomIcon = new Icon({
 
 export function Map({offers, defaultCity, activeOffer, className, activeCity = 'Paris'}: MapPropsType) {
 
-  const mapCity = defaultCity.find((item) => item.title === activeCity);
+  const mapCity: defaultCityType = defaultCity.find((item) => item.title === activeCity) ?? defaultCity[0];
   const cityOffers: IMocksData[] = offers.filter((offer) => offer.city.name === activeCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, mapCity);
