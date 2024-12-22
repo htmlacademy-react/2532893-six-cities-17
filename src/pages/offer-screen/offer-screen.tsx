@@ -14,17 +14,15 @@ import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
 
 import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
 import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-inside-list.tsx';
-import {SetStateAction} from 'react';
-import {MARK_CLASS_NAMES} from "../../data/mark-class-names.ts";
+import {MARK_CLASS_NAMES} from '../../data/mark-class-names.ts';
 
 export type MainOfferScreenProps = {
   offers: IMocksData[];
-  onHandleActiveOfferChange: (id: SetStateAction<string>) => void;
   activeOffer: string;
   activeCity: string;
 }
 // noinspection JSDeprecatedSymbols
-export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer, activeCity}: MainOfferScreenProps): JSX.Element {
+export function OfferScreen({offers, activeOffer, activeCity}: MainOfferScreenProps): JSX.Element {
 
   const params = useParams();
   const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
@@ -78,7 +76,7 @@ export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer, act
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium ? <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/>: null}
+              {offer?.isPremium ? <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/> : null}
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
@@ -167,7 +165,7 @@ export function OfferScreen({offers, onHandleActiveOfferChange, activeOffer, act
           </section>
         </section>
         <div className="container">
-          <NearbyOffersList onHandleActiveOfferChange={onHandleActiveOfferChange}/>
+          <NearbyOffersList/>
         </div>
       </main>
     </div>

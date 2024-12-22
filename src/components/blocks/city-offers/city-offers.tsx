@@ -2,23 +2,20 @@
 
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
-import {SetStateAction} from 'react';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 
 export type CityOfferPropsType = {
   offers: IMocksData[];
-  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
   activeOffer: string;
   activeCity: string;
 }
 
 export type CityOffersPropsType = {
   offers: IMocksData[];
-  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
   activeCity: string;
 }
 
-export function CityOffers({offers, onHandleActiveOfferChange, activeCity}: CityOffersPropsType): JSX.Element{
+export function CityOffers({offers, activeCity}: CityOffersPropsType): JSX.Element{
 
   const cityOffers: IMocksData[] = offers.filter((item: IMocksData):boolean => item.city.name === activeCity);
   const offersCount: number = cityOffers.length;
@@ -63,7 +60,7 @@ export function CityOffers({offers, onHandleActiveOfferChange, activeCity}: City
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {cityOffers.length && cityOffers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD}/>)}
+        {cityOffers.length && cityOffers.map((offer: IMocksData) => <PlaceCard {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD}/>)}
       </div>
     </section>
   );

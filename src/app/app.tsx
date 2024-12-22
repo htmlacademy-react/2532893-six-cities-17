@@ -3,7 +3,7 @@
 
 import {BrowserRouter, Route, Routes,} from 'react-router-dom';
 
-import {ActiveOfferTupleType, MainScreen} from '../pages/main-screen/main-screen.tsx';
+import {MainScreen} from '../pages/main-screen/main-screen.tsx';
 import {NotFoundScreen} from '../pages/not-found-screen/not-found-screen.tsx';
 import {LoginScreen} from '../pages/login-screen/login-screen.tsx';
 import {FavoriteScreen} from '../pages/favorites-screen/favorite-screen.tsx';
@@ -14,27 +14,21 @@ import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import {IMocksDataProps} from '../mocks/offers.ts';
 import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
-import {SetStateAction, useState} from 'react';
 import {useAppSelector} from '../utility/hooks.ts';
 
 export function App({offers}: IMocksDataProps): JSX.Element {
-  const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
-  const activeOfferHandler = (id: SetStateAction<string>): void => {
-    setActiveOffer(id);
-  };
-
-  // const [activeCity, setActiveCity]: ActiveOfferTupleType = useState(DEFAULT_CITY[0].title);
-  // const activeCityHandler = (value: SetStateAction<string>): void => {
-  //   setActiveCity(value);
+  // const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
+  // const activeOfferHandler = (id: SetStateAction<string>): void => {
+  //   setActiveOffer(id);
   // };
-
+  const activeOffer = useAppSelector((state) => state.activeOffer);
   const activeCity = useAppSelector((state) => state.cityName);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offers={offers} activeOffer={activeOffer} onHandleActiveOfferChange={activeOfferHandler} activeCity={activeCity}/>}/>
+          <Route index element={<MainScreen offers={offers} activeOffer={activeOffer} activeCity={activeCity}/>}/>
           <Route
             path={RoutePath.LOGIN}
             element={<LoginScreen/>}
@@ -51,7 +45,7 @@ export function App({offers}: IMocksDataProps): JSX.Element {
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={offers} activeOffer={activeOffer} onHandleActiveOfferChange={activeOfferHandler} activeCity={activeCity}/>}
+            element={<OfferScreen offers={offers} activeOffer={activeOffer} activeCity={activeCity}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}

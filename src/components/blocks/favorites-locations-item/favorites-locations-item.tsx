@@ -1,14 +1,16 @@
 
-import {PlaceCard} from "../place-card/place-card.tsx";
+// noinspection JSDeprecatedSymbols
+
+import {PlaceCard} from '../place-card/place-card.tsx';
 import {CityNameTypes, IMocksData} from '../../../mocks/offers.ts';
-import {CARD_CLASS_NAMES} from "../../../data/card-class-names.ts";
+import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 
 type FavoritesItemType = {
   offers: IMocksData[];
   cityName: CityNameTypes;
 }
 
-// noinspection JSDeprecatedSymbols
+
 export function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JSX.Element{
 
   const favoriteCityOffers = offers.filter((offer) => offer.city.name === cityName);
@@ -24,7 +26,7 @@ export function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JS
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteCityOffers.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} className={CARD_CLASS_NAMES.FAVORITES_CARD} onHandleActiveOfferChange={() => {}}/>)}
+        {favoriteCityOffers.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} className={CARD_CLASS_NAMES.FAVORITES_CARD}/>)}
 
       </div>
     </li>

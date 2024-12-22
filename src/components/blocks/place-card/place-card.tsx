@@ -3,24 +3,24 @@
 import {IMocksData} from '../../../mocks/offers.ts';
 import {Link} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
-import {SetStateAction} from 'react';
 import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';
-import {CARD_CLASS_NAMES} from "../../../data/card-class-names.ts";
-import {MARK_CLASS_NAMES} from "../../../data/mark-class-names.ts";
+import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
+import {MARK_CLASS_NAMES} from '../../../data/mark-class-names.ts';
+import {useAppDispatch} from '../../../utility/hooks.ts';
+import {showActiveOffer} from '../../../store/action.ts';
 
 export type CardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'id'>;
 
 export type PlaceCardPropsType = CardPropsType & {
-  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
   className: string;
 }
 
-export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOfferChange, className}:PlaceCardPropsType): JSX.Element {
-
+export function PlaceCard({isPremium, previewImage, price, id, className}:PlaceCardPropsType): JSX.Element {
+  const dispatch = useAppDispatch();
   return (
     <article className={`${className}__card place-card`}
-      onMouseEnter={() => onHandleActiveOfferChange(id)}
-      onMouseLeave={() => onHandleActiveOfferChange('')}
+      onMouseEnter={() => dispatch(showActiveOffer(id))}
+      onMouseLeave={() => dispatch(showActiveOffer(''))}
     >
       {isPremium && <OfferMark className={MARK_CLASS_NAMES.PLACE_CARD_MARK} status={'Premium'}/>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
