@@ -1,13 +1,32 @@
 
 // noinspection JSDeprecatedSymbols
 
+// document.addEventListener('click', (evt) => {
+//   console.log(evt.target.innerText);
+// });
+
 import {SortingItem} from '../sorting-item.tsx';
 import {SORTING_TYPES} from '../../../data/sorting-types.ts';
 import {useState} from 'react';
 
+export interface IEvent extends EventTarget {
+    target: {
+      innerText: string;
+    };
+}
+
 export function SortingList(): JSX.Element{
   const [isOpened, setIsOpened] = useState(false);
   const openSortingHandler = (): void => isOpened ? setIsOpened(false) : setIsOpened(true);
+
+  const [sortingType, setSortingType] = useState(SORTING_TYPES.POPULAR);
+  const chooseSortingTypeHandler = (evt: IEvent): void => {
+    if (evt){
+      setSortingType(evt.target.innerText ?? SORTING_TYPES.POPULAR);
+      setIsOpened(!isOpened);
+    }
+
+  };
 
   return (
     <form className="places__sorting"
@@ -19,7 +38,7 @@ export function SortingList(): JSX.Element{
         tabIndex={0}
         onClick={openSortingHandler}
       >
-        {SORTING_TYPES.POPULAR}
+        {sortingType ?? SORTING_TYPES.POPULAR}
         <svg className="places__sorting-arrow"
           width="7"
           height="4"
@@ -28,7 +47,7 @@ export function SortingList(): JSX.Element{
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpened ? 'places__options--opened' : ''}`}>
-        {SORTING_TYPES && Object.values(SORTING_TYPES).map((item: string): JSX.Element => <SortingItem sortingValue={item} key={item}/>)}
+        {SORTING_TYPES && Object.values(SORTING_TYPES).map((item: string): JSX.Element => <SortingItem sortingValue={item} key={item} onChooseSortingTypeHandler={chooseSortingTypeHandler}/>)}
       </ul>
     </form>
   );
