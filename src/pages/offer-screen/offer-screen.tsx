@@ -19,10 +19,9 @@ import {MARK_CLASS_NAMES} from '../../data/mark-class-names.ts';
 export type MainOfferScreenProps = {
   offers: IMocksData[];
   activeOffer: string;
-  activeCity: string;
 }
 // noinspection JSDeprecatedSymbols
-export function OfferScreen({offers, activeOffer, activeCity}: MainOfferScreenProps): JSX.Element {
+export function OfferScreen({offers, activeOffer}: MainOfferScreenProps): JSX.Element {
 
   const params = useParams();
   const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
@@ -160,7 +159,7 @@ export function OfferScreen({offers, activeOffer, activeCity}: MainOfferScreenPr
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={activeOffer} className={'offer__map map'} activeCity={activeCity}/> : null
+              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={activeOffer} className={'offer__map map'}/> : null
             }
           </section>
         </section>

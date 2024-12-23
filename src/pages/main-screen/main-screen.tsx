@@ -11,13 +11,11 @@ import {IMocksData} from '../../mocks/offers.ts';
 export type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
 export type MainScreenProps = {
   offers: IMocksData[];
+  onHandleActiveOfferChange(id: SetStateAction<string>): void;
   activeOffer: string;
-  activeCity: string;
-
 }
 
-export function MainScreen ({offers, activeOffer, activeCity}:MainScreenProps): JSX.Element{
-
+export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer}:MainScreenProps): JSX.Element{
 
   return (
 
@@ -27,10 +25,10 @@ export function MainScreen ({offers, activeOffer, activeCity}:MainScreenProps): 
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Tabs activeCity={activeCity}/>
+            <Tabs/>
           </section>
         </div>
-        {offers.length ? <Cities offers={offers} activeOffer={activeOffer} activeCity={activeCity}/> : <MainEmptyBlock/>}
+        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeOffer={activeOffer}/> : <MainEmptyBlock/>}
       </main>
     </div>
   );

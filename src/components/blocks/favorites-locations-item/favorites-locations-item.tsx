@@ -26,7 +26,7 @@ export function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JS
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteCityOffers.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} className={CARD_CLASS_NAMES.FAVORITES_CARD}/>)}
+        {favoriteCityOffers.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} onHandleActiveOfferChange={() => {}} className={CARD_CLASS_NAMES.FAVORITES_CARD}/>)}
 
       </div>
     </li>
