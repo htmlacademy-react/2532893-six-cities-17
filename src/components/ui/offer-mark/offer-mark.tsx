@@ -1,11 +1,12 @@
 
 type OfferMarkPropsType = {
   status: string;
+  className: string;
 }
 
-export function OfferMark({status}: OfferMarkPropsType){
+export function OfferMark({status, className}: OfferMarkPropsType){
   return (
-    <div className="place-card__mark">
+    <div className={`${className}__mark`}>
       <span>{status}</span>
     </div>
   );

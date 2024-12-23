@@ -2,28 +2,32 @@
 
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
+import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
+import {useAppSelector} from '../../../utility/hooks.ts';
 import {SetStateAction} from 'react';
-import {DEFAULT_CITY} from '../../../mocks/default-city.ts';
 
 export type CityOfferPropsType = {
   offers: IMocksData[];
-  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
   activeOffer: string;
+  onHandleActiveOfferChange(id: SetStateAction<string>): void;
 }
 
 export type CityOffersPropsType = {
   offers: IMocksData[];
-  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
+  onHandleActiveOfferChange(id: SetStateAction<string>): void;
 }
 
 export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsType): JSX.Element{
 
-  const offersCount: number = offers.filter((item: IMocksData):boolean => item.city.name === `${DEFAULT_CITY[0].title}`).length;
+  const activeCityName = useAppSelector((state) => state.activeCityName);
+  const cityOffers: IMocksData[] = offers.filter((item: IMocksData):boolean => item.city.name === activeCityName);
+  const offersCount: number = cityOffers.length;
+
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offersCount} places to stay in {`${DEFAULT_CITY[0].title}`}</b>
+      <b className="places__found">{`${offersCount} places to stay in ${activeCityName}`}</b>
       <form className="places__sorting"
         action="#"
         method="get"
@@ -60,7 +64,7 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.length ? offers.map((offer: IMocksData) => <PlaceCard onHandleActiveOfferChange={onHandleActiveOfferChange} {...offer} key={offer.id}/>) : null}
+        {cityOffers.length && cityOffers.map((offer: IMocksData) => <PlaceCard {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD} onHandleActiveOfferChange={onHandleActiveOfferChange}/>)}
       </div>
     </section>
   );

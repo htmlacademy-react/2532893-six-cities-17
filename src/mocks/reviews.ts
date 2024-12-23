@@ -6,7 +6,7 @@ export const REVIEWS_LIST_DATA_MOCK: ReviewType[] = [
     'date': '2019-05-08T14:13:56.569Z',
     'user': {
       'name': 'Oliver Conner',
-      'avatarUrl': 'https://url-to-image/image.png',
+      'avatarUrl': 'img/avatar-max.jpg',
       'isPro': false
     },
     'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',

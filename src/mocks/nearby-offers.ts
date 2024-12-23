@@ -1,4 +1,4 @@
-import {IMocksData} from "./offers.ts";
+import {IMocksData} from './offers.ts';
 
 
 export const NEARBY_OFFERS_MOCK: IMocksData[] = [
@@ -71,4 +71,4 @@ export const NEARBY_OFFERS_MOCK: IMocksData[] = [
     'isPremium': true,
     'rating': 3.3
   },
-]
+];

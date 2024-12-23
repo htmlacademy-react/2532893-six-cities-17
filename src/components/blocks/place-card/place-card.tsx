@@ -2,24 +2,28 @@
 
 import {IMocksData} from '../../../mocks/offers.ts';
 import {Link} from 'react-router-dom';
-import {RoutePath} from '../../../data/routes.ts';
-import {SetStateAction} from 'react';
 import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';
+import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
+import {MARK_CLASS_NAMES} from '../../../data/mark-class-names.ts';
+import {SetStateAction} from 'react';
+
+
 export type CardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'id'>;
 
 export type PlaceCardPropsType = CardPropsType & {
-  onHandleActiveOfferChange:(id: SetStateAction<string>) => void;
+  className: string;
+  onHandleActiveOfferChange(id: SetStateAction<string>): void;
 }
 
-export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element {
+export function PlaceCard({isPremium, previewImage, price, id, className, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element {
 
   return (
-    <article className="cities__card place-card"
+    <article className={`${className}__card place-card`}
       onMouseEnter={() => onHandleActiveOfferChange(id)}
       onMouseLeave={() => onHandleActiveOfferChange('')}
     >
-      {isPremium ? <OfferMark status={'Premium'}/> : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      {isPremium && <OfferMark className={MARK_CLASS_NAMES.PLACE_CARD_MARK} status={'Premium'}/>}
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image"
             src={previewImage}
@@ -29,7 +33,7 @@ export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOff
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={className === CARD_CLASS_NAMES.FAVORITES_CARD ? `${CARD_CLASS_NAMES.FAVORITES_CARD}__card-info place-card__info` : 'place-card__info'}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -54,7 +58,7 @@ export function PlaceCard({isPremium, previewImage, price, id, onHandleActiveOff
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={RoutePath.OFFER}>
+          <Link to={`/offer/${id}`}>
             Beautiful &amp; luxurious apartment at great location
           </Link>
         </h2>

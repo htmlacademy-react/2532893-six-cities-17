@@ -4,6 +4,7 @@ import {MutableRefObject, useEffect, useRef} from 'react';
 import {useMap} from './useMap.ts';
 import {defaultCityType} from '../../../mocks/default-city.ts';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../../data/pin-url.ts';
+import {useAppSelector} from '../../../utility/hooks.ts';
 
 export type refType = MutableRefObject<HTMLElement | null>
 export type MapPropsType = {
@@ -26,14 +27,16 @@ const currentCustomIcon = new Icon({
 });
 
 export function Map({offers, defaultCity, activeOffer, className}: MapPropsType) {
-
+  const activeCityName = useAppSelector((state) => state.activeCityName);
+  const mapCity: defaultCityType = defaultCity.find((item) => item.title === activeCityName) ?? defaultCity[0];
+  const cityOffers: IMocksData[] = offers.filter((offer) => offer.city.name === activeCityName);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, defaultCity[0]);
+  const map = useMap(mapRef, mapCity);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      offers.forEach((point) => {
+      cityOffers.forEach((point) => {
         const marker = new Marker({
           lat: point.location.latitude,
           lng: point.location.longitude
@@ -52,7 +55,7 @@ export function Map({offers, defaultCity, activeOffer, className}: MapPropsType)
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, cityOffers, activeOffer, mapCity, activeCityName]);
   return (
     <section className={className} ref={mapRef}/>
   );

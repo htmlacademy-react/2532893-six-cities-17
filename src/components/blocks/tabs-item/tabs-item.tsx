@@ -1,14 +1,21 @@
 // noinspection JSDeprecatedSymbols
 
+import {useAppDispatch} from '../../../utility/hooks.ts';
+import {changeActiveCity} from '../../../store/action.ts';
 
 type TabsItemPropsType = {
+  isActive: boolean;
   name: string;
 }
 
-export function TabsItem({name}: TabsItemPropsType):JSX.Element{
+export function TabsItem({isActive, name}: TabsItemPropsType):JSX.Element{
+
+  const dispatch = useAppDispatch();
   return (
-    <li className="locations__item">
-      <a className="locations__item-link tabs__item"
+    <li className="locations__item"
+      onClick={() => dispatch(changeActiveCity(name))}
+    >
+      <a className={isActive ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item '}
         href="#"
       >
         <span>{name}</span>

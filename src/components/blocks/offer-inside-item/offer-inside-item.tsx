@@ -1,14 +1,12 @@
 
-export type offerInsidePropType = {
-  offerInsideProp: string;
+type OfferInsideItemType = {
+  value: string;
 }
 
-export function OfferInsideItem(props: offerInsidePropType){
-  const {offerInsideProp} = props;
-
+export function OfferInsideItem({value}: OfferInsideItemType){
   return (
     <li className="offer__inside-item">
-      {offerInsideProp}
+      {value}
     </li>
   );
 }

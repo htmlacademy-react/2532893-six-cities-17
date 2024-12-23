@@ -165,7 +165,7 @@ export const OFFERS_DATA_MOCK:IMocksData[] = [
       'longitude': 2.353499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 1.3
   },
@@ -602,7 +602,7 @@ export const OFFERS_DATA_MOCK:IMocksData[] = [
       'longitude': 6.967974,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 2.8
   },

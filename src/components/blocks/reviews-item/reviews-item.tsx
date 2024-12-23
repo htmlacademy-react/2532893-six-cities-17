@@ -19,6 +19,12 @@ export type ReviewsPropsType = {
 // noinspection JSDeprecatedSymbols
 export function ReviewsItem(review: ReviewType): JSX.Element{
   const { date, rating, user, comment} = review;
+
+  const reviewDate: string = (new Date(date)).toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'long',
+  });
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -46,7 +52,7 @@ export function ReviewsItem(review: ReviewType): JSX.Element{
         </p>
         <time className="reviews__time"
           dateTime={date}
-        >April 2019
+        >{reviewDate}
         </time>
       </div>
     </li>

@@ -3,35 +3,32 @@
 import React from 'react';
 import {Tabs} from '../../components/blocks/tabs/tabs.tsx';
 import {Layout} from '../../components/layout/layout/layout.tsx';
-import {IMocksDataProps} from '../../mocks/offers.ts';
-import {SetStateAction, useState} from 'react';
+import {SetStateAction} from 'react';
 import {Cities} from '../../components/blocks/cities/cities.tsx';
 import {MainEmptyBlock} from '../../components/blocks/main-empty-block/main-empty-block.tsx';
+import {IMocksData} from '../../mocks/offers.ts';
 
 export type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
+export type MainScreenProps = {
+  offers: IMocksData[];
+  onHandleActiveOfferChange(id: SetStateAction<string>): void;
+  activeOffer: string;
+}
 
-
-export function MainScreen ({offers}:IMocksDataProps): JSX.Element{
-  const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
-  const activeOfferHandler = (id: SetStateAction<string>): void => {
-    setActiveOffer(id);
-  };
+export function MainScreen ({offers, onHandleActiveOfferChange, activeOffer}:MainScreenProps): JSX.Element{
 
   return (
 
     <div className="page page--gray page--main">
       <Layout/>
-      {/*Заглушка для линтера*/}
-      <div style={{display: 'none'}}>{activeOffer}</div>
-      {/*Заглушка для линтера*/}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Tabs />
+            <Tabs/>
           </section>
         </div>
-        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/> : <MainEmptyBlock/>}
+        {offers.length ? <Cities offers={offers} onHandleActiveOfferChange={onHandleActiveOfferChange} activeOffer={activeOffer}/> : <MainEmptyBlock/>}
       </main>
     </div>
   );
