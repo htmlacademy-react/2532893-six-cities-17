@@ -1,11 +1,13 @@
 // noinspection JSDeprecatedSymbols
 
 import {PlaceCard} from '../place-card/place-card.tsx';
-import {SortingList} from '../sorting-list/sorting-list.tsx';
+import {EventType, SortingList} from '../sorting-list/sorting-list.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
-import {SetStateAction} from 'react';
+import {SetStateAction, useState} from 'react';
+import {SORTING_TYPES} from '../../../data/sorting-types.ts';
+import {getSortedOffersList} from '../../../utility/utility.ts';
 
 
 export type CityOfferPropsType = {
@@ -25,12 +27,23 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
   const cityOffers: IMocksData[] = offers.filter((item: IMocksData):boolean => item.city.name === activeCityName);
   const offersCount: number = cityOffers.length;
 
+  const [isOpened, setIsOpened] = useState(false);
+  const openSortingHandler = (): void => isOpened ? setIsOpened(false) : setIsOpened(true);
+
+  const [sortingType, setSortingType] = useState(SORTING_TYPES.POPULAR);
+  const chooseSortingTypeHandler = (evt: EventType): void => {
+    if (evt){
+      setSortingType(evt.target.innerText ?? SORTING_TYPES.POPULAR);
+      getSortedOffersList(cityOffers, sortingType);
+      setIsOpened(!isOpened);
+    }
+  };
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{`${offersCount} places to stay in ${activeCityName}`}</b>
-      <SortingList/>
+      <SortingList sortingType={sortingType} isOpened={isOpened} onSortingListOpenHandler={openSortingHandler} onChooseSortingTypeHandler={chooseSortingTypeHandler}/>
       <div className="cities__places-list places__list tabs__content">
         {cityOffers.length && cityOffers.map((offer: IMocksData) => <PlaceCard {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD} onHandleActiveOfferChange={onHandleActiveOfferChange}/>)}
       </div>

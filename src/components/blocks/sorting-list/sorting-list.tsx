@@ -1,32 +1,24 @@
 
 // noinspection JSDeprecatedSymbols
 
-// document.addEventListener('click', (evt) => {
-//   console.log(evt.target.innerText);
-// });
-
-import {SortingItem} from '../sorting-item.tsx';
+import {SortingItem} from '../sorting-item/sorting-item.tsx';
 import {SORTING_TYPES} from '../../../data/sorting-types.ts';
-import {useState} from 'react';
 
-export interface IEvent extends EventTarget {
+export type EventType = {
     target: {
       innerText: string;
     };
+};
+
+export type SortingListType = {
+  onSortingListOpenHandler: () => void;
+  onChooseSortingTypeHandler: (evt: EventType) => void;
+  sortingType: string;
+  isOpened: boolean;
 }
 
-export function SortingList(): JSX.Element{
-  const [isOpened, setIsOpened] = useState(false);
-  const openSortingHandler = (): void => isOpened ? setIsOpened(false) : setIsOpened(true);
-
-  const [sortingType, setSortingType] = useState(SORTING_TYPES.POPULAR);
-  const chooseSortingTypeHandler = (evt: IEvent): void => {
-    if (evt){
-      setSortingType(evt.target.innerText ?? SORTING_TYPES.POPULAR);
-      setIsOpened(!isOpened);
-    }
-
-  };
+export function SortingList({onSortingListOpenHandler, onChooseSortingTypeHandler, sortingType, isOpened}: SortingListType): JSX.Element{
+  ;
 
   return (
     <form className="places__sorting"
@@ -36,7 +28,7 @@ export function SortingList(): JSX.Element{
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type"
         tabIndex={0}
-        onClick={openSortingHandler}
+        onClick={onSortingListOpenHandler}
       >
         {sortingType ?? SORTING_TYPES.POPULAR}
         <svg className="places__sorting-arrow"
@@ -47,7 +39,7 @@ export function SortingList(): JSX.Element{
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpened ? 'places__options--opened' : ''}`}>
-        {SORTING_TYPES && Object.values(SORTING_TYPES).map((item: string): JSX.Element => <SortingItem sortingValue={item} key={item} onChooseSortingTypeHandler={chooseSortingTypeHandler}/>)}
+        {SORTING_TYPES && Object.values(SORTING_TYPES).map((item: string): JSX.Element => <SortingItem sortingValue={item} key={item} onChooseSortingTypeHandler={onChooseSortingTypeHandler}/>)}
       </ul>
     </form>
   );
