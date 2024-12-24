@@ -34,19 +34,21 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
   const chooseSortingTypeHandler = (evt: EventType): void => {
     if (evt){
       setSortingType(evt.target.innerText ?? SORTING_TYPES.POPULAR);
-      getSortedOffersList(cityOffers, sortingType);
       setIsOpened(!isOpened);
     }
   };
-
+  const sortedOffers: IMocksData[] = getSortedOffersList(cityOffers, sortingType);
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{`${offersCount} places to stay in ${activeCityName}`}</b>
       <SortingList sortingType={sortingType} isOpened={isOpened} onSortingListOpenHandler={openSortingHandler} onChooseSortingTypeHandler={chooseSortingTypeHandler}/>
       <div className="cities__places-list places__list tabs__content">
-        {cityOffers.length && cityOffers.map((offer: IMocksData) => <PlaceCard {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD} onHandleActiveOfferChange={onHandleActiveOfferChange}/>)}
+        {sortedOffers.length && sortedOffers.map((offer: IMocksData) => <PlaceCard {...offer} key={offer.id} className={CARD_CLASS_NAMES.CITIES_CARD} onHandleActiveOfferChange={onHandleActiveOfferChange}/>)}
+
       </div>
     </section>
   );
 }
+
+

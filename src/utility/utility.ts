@@ -25,7 +25,7 @@ export const getSortedOffersList = (list: IMocksData[], typeOfSorting: string) =
       result = [...list].sort((a: IMocksData, b: IMocksData) => b.price - a.price);
       break;
     case (SORTING_TYPES.TOP_RATED):
-      result = [...list].sort((a: IMocksData, b: IMocksData) => a.rating - b.rating);
+      result = [...list].sort((a: IMocksData, b: IMocksData) => b.rating - a.rating);
       break;
     default:
       result = [...list];

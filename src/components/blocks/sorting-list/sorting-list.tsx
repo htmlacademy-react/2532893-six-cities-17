@@ -18,7 +18,7 @@ export type SortingListType = {
 }
 
 export function SortingList({onSortingListOpenHandler, onChooseSortingTypeHandler, sortingType, isOpened}: SortingListType): JSX.Element{
-  ;
+
 
   return (
     <form className="places__sorting"
