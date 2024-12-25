@@ -1,7 +1,7 @@
 // noinspection JSDeprecatedSymbols
 
 import {PlaceCard} from '../place-card/place-card.tsx';
-import {EventType, SortingList} from '../sorting-list/sorting-list.tsx';
+import {SortingList} from '../sorting-list/sorting-list.tsx';
 import {IMocksData} from '../../../mocks/offers.ts';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
@@ -28,10 +28,9 @@ export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsT
   const offersCount: number = cityOffers.length;
 
   const [sortingType, setSortingType] = useState(SORTING_TYPES.POPULAR);
-  const chooseSortingTypeHandler = (evt: EventType): void => {
-    if (evt) {
-      setSortingType(evt.target.innerText ?? SORTING_TYPES.POPULAR);
-    }
+  const chooseSortingTypeHandler = (item: string): void => {
+    setSortingType(item ?? SORTING_TYPES.POPULAR);
+
   };
   const sortedOffers: IMocksData[] = getSortedOffersList(cityOffers, sortingType);
   return (

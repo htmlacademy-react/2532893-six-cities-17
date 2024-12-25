@@ -1,14 +1,13 @@
 
 // noinspection JSDeprecatedSymbols
 
-import {EventType} from '../sorting-list/sorting-list.tsx';
 import {useEffect} from 'react';
 import {getSortedOffersList} from '../../../utility/utility.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
 
 export type SortingValueType = {
   sortingValue: string;
-  onChooseSortingTypeHandler: (evt: EventType) => void;
+  onChooseSortingTypeHandler: () => void;
 }
 
 export function SortingItem({sortingValue, onChooseSortingTypeHandler}: SortingValueType): JSX.Element {
@@ -19,8 +18,8 @@ export function SortingItem({sortingValue, onChooseSortingTypeHandler}: SortingV
   return (
     <li className="places__option places__option--active"
       tabIndex={0}
-      onClick={(evt) => {
-        onChooseSortingTypeHandler(evt);
+      onClick={() => {
+        onChooseSortingTypeHandler();
         getSortedOffersList(cityOffers, sortingValue);
       }}
     >{sortingValue}

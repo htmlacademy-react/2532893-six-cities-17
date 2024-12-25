@@ -5,14 +5,9 @@ import {SortingItem} from '../sorting-item/sorting-item.tsx';
 import {SORTING_TYPES} from '../../../data/sorting-types.ts';
 import {useState} from 'react';
 
-export type EventType = {
-    target: {
-      innerText: string;
-    };
-};
 
 export type SortingListType = {
-  onChooseSortingTypeHandler: (evt: EventType) => void;
+  onChooseSortingTypeHandler: (item: string) => void;
   sortingType: string;
 }
 
@@ -43,9 +38,10 @@ export function SortingList({onChooseSortingTypeHandler, sortingType}: SortingLi
           (
             <SortingItem
               sortingValue={item}
-              key={item}
-              onChooseSortingTypeHandler={(evt) => {
-                onChooseSortingTypeHandler(evt);setIsOpened(false);
+              key={crypto.randomUUID()}
+              onChooseSortingTypeHandler={() => {
+                onChooseSortingTypeHandler(item);
+                setIsOpened(false);
               }}
             />))}
       </ul>
