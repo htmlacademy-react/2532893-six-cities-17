@@ -3,6 +3,7 @@
 
 import {SortingItem} from '../sorting-item/sorting-item.tsx';
 import {SORTING_TYPES} from '../../../data/sorting-types.ts';
+import {useState} from 'react';
 
 export type EventType = {
     target: {
@@ -11,14 +12,13 @@ export type EventType = {
 };
 
 export type SortingListType = {
-  onSortingListOpenHandler: () => void;
   onChooseSortingTypeHandler: (evt: EventType) => void;
   sortingType: string;
-  isOpened: boolean;
 }
 
-export function SortingList({onSortingListOpenHandler, onChooseSortingTypeHandler, sortingType, isOpened}: SortingListType): JSX.Element{
+export function SortingList({onChooseSortingTypeHandler, sortingType}: SortingListType): JSX.Element{
 
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
     <form className="places__sorting"
@@ -28,7 +28,7 @@ export function SortingList({onSortingListOpenHandler, onChooseSortingTypeHandle
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type"
         tabIndex={0}
-        onClick={onSortingListOpenHandler}
+        onClick={() => setIsOpened(!isOpened)}
       >
         {sortingType ?? SORTING_TYPES.POPULAR}
         <svg className="places__sorting-arrow"
@@ -39,7 +39,15 @@ export function SortingList({onSortingListOpenHandler, onChooseSortingTypeHandle
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpened ? 'places__options--opened' : ''}`}>
-        {SORTING_TYPES && Object.values(SORTING_TYPES).map((item: string): JSX.Element => <SortingItem sortingValue={item} key={item} onChooseSortingTypeHandler={onChooseSortingTypeHandler}/>)}
+        {SORTING_TYPES && Object.values(SORTING_TYPES).map((item: string): JSX.Element =>
+          (
+            <SortingItem
+              sortingValue={item}
+              key={item}
+              onChooseSortingTypeHandler={(evt) => {
+                onChooseSortingTypeHandler(evt);setIsOpened(false);
+              }}
+            />))}
       </ul>
     </form>
   );
