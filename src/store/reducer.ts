@@ -1,10 +1,10 @@
-import {DEFAULT_CITY, defaultCityType} from '../mocks/default-city.ts';
+import {CITIES_LIST, defaultCityType} from '../mocks/cities-list.ts';
 import {IMocksData, OFFERS_DATA_MOCK} from '../mocks/offers.ts';
 import {createReducer} from '@reduxjs/toolkit';
 import {changeActiveCity, showCityOffers} from './action.ts';
 import {ReducerWithInitialState} from '@reduxjs/toolkit/dist/createReducer';
 
-const defaultCity: defaultCityType = DEFAULT_CITY[0];
+const defaultCity: defaultCityType = CITIES_LIST[0];
 
 export type initialStateType = {
   activeCityName: string;
