@@ -9,7 +9,7 @@ import {CommentSendForm} from '../../components/ui/comment-send-form/comment-sen
 
 import {REVIEWS_LIST_DATA_MOCK} from '../../mocks/reviews.ts';
 import {Map} from '../../components/ui/map/map.tsx';
-import {DEFAULT_CITY} from '../../mocks/default-city.ts';
+import {CITIES_LIST} from '../../mocks/cities-list.ts';
 import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
 
 import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
@@ -159,7 +159,7 @@ export function OfferScreen({offers, activeOffer}: MainOfferScreenProps): JSX.El
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={DEFAULT_CITY} activeOffer={activeOffer} className={'offer__map map'}/> : null
+              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/> : null
             }
           </section>
         </section>

@@ -6,7 +6,7 @@ export type defaultCityType = {
 }
 
 
-export const DEFAULT_CITY: defaultCityType[] = [{
+export const CITIES_LIST: defaultCityType[] = [{
   title: 'Paris',
   lat: 48.8595107,
   lng: 2.3356635,
