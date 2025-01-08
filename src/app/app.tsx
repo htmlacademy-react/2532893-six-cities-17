@@ -12,11 +12,13 @@ import {PrivateRoute} from '../components/routes/private-route/private-route.tsx
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
-import {IMocksDataProps} from '../mocks/offers.ts';
+import {IMocksData} from '../mocks/offers.ts';
 import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
 import {SetStateAction, useState} from 'react';
+import {useAppSelector} from '../utility/hooks.ts';
 
-export function App({offers}: IMocksDataProps): JSX.Element {
+export function App(): JSX.Element {
+  const OFFERS_DATA_MOCK: IMocksData[] = useAppSelector((store) => store.offers);
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
@@ -26,7 +28,7 @@ export function App({offers}: IMocksDataProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offers={offers} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/>}/>
+          <Route index element={<MainScreen offers={OFFERS_DATA_MOCK} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/>}/>
           <Route
             path={RoutePath.LOGIN}
             element={<LoginScreen/>}
@@ -35,15 +37,15 @@ export function App({offers}: IMocksDataProps): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <PrivateRoute loginStatus={LoginStatus.Auth}>
-                {offers.some((item) => item.isFavorite)
-                  ? <FavoriteScreen offers={offers}/>
+                {OFFERS_DATA_MOCK.some((item) => item.isFavorite)
+                  ? <FavoriteScreen offers={OFFERS_DATA_MOCK}/>
                   : <FavoritesEmptyScreen/>}
               </PrivateRoute>
             }
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={offers} activeOffer={activeOffer}/>}
+            element={<OfferScreen offers={OFFERS_DATA_MOCK} activeOffer={activeOffer}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}
