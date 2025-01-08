@@ -46,7 +46,7 @@ export function useMap(
           lat: city.lat,
           lng: city.lng
         }, city.zoom, {
-          duration: 2.0
+          duration: 0.1
         });
       }
     }
