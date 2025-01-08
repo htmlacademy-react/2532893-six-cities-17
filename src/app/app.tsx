@@ -9,6 +9,7 @@ import {LoginScreen} from '../pages/login-screen/login-screen.tsx';
 import {FavoriteScreen} from '../pages/favorites-screen/favorite-screen.tsx';
 import {OfferScreen} from '../pages/offer-screen/offer-screen.tsx';
 import {PrivateRoute} from '../components/routes/private-route/private-route.tsx';
+import {LoadingElement} from '../components/ui/loading-element/loading-element.tsx';
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
@@ -23,6 +24,13 @@ export function App(): JSX.Element {
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
   };
+  const isOffersDataLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (isOffersDataLoading) {
+    return (
+      <LoadingElement/>
+    );
+  }
 
   return (
     <BrowserRouter>
