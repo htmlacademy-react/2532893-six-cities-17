@@ -18,7 +18,7 @@ import {SetStateAction, useState} from 'react';
 import {useAppSelector} from '../utility/hooks.ts';
 
 export function App(): JSX.Element {
-  const OFFERS_DATA_MOCK: IMocksData[] = useAppSelector((store) => store.offers);
+  const OFFERS: IMocksData[] = useAppSelector((store) => store.offers);
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
@@ -28,7 +28,7 @@ export function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offers={OFFERS_DATA_MOCK} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/>}/>
+          <Route index element={<MainScreen offers={OFFERS} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/>}/>
           <Route
             path={RoutePath.LOGIN}
             element={<LoginScreen/>}
@@ -37,15 +37,15 @@ export function App(): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <PrivateRoute loginStatus={LoginStatus.Auth}>
-                {OFFERS_DATA_MOCK.some((item) => item.isFavorite)
-                  ? <FavoriteScreen offers={OFFERS_DATA_MOCK}/>
+                {OFFERS.some((item) => item.isFavorite)
+                  ? <FavoriteScreen offers={OFFERS}/>
                   : <FavoritesEmptyScreen/>}
               </PrivateRoute>
             }
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={OFFERS_DATA_MOCK} activeOffer={activeOffer}/>}
+            element={<OfferScreen offers={OFFERS} activeOffer={activeOffer}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}
