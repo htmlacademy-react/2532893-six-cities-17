@@ -19,14 +19,14 @@ import {SetStateAction, useState} from 'react';
 import {useAppSelector} from '../utility/hooks.ts';
 
 export function App(): JSX.Element {
-  const OFFERS: IMocksData[] = useAppSelector((store) => store.offers);
+  const offersList: IMocksData[] = useAppSelector((store) => store.offers);
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
   };
-  const isOffersDataLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
+  const isLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
 
-  if (isOffersDataLoading) {
+  if (isLoading) {
     return (
       <LoadingElement/>
     );
@@ -36,7 +36,7 @@ export function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.INDEX}>
-          <Route index element={<MainScreen offers={OFFERS} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/>}/>
+          <Route index element={<MainScreen offers={offersList} onHandleActiveOfferChange={activeOfferHandler} activeOffer={activeOffer}/>}/>
           <Route
             path={RoutePath.LOGIN}
             element={<LoginScreen/>}
@@ -45,15 +45,15 @@ export function App(): JSX.Element {
             path={RoutePath.FAVORITES}
             element={
               <PrivateRoute loginStatus={LoginStatus.Auth}>
-                {OFFERS.some((item) => item.isFavorite)
-                  ? <FavoriteScreen offers={OFFERS}/>
+                {offersList.some((item) => item.isFavorite)
+                  ? <FavoriteScreen offers={offersList}/>
                   : <FavoritesEmptyScreen/>}
               </PrivateRoute>
             }
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={OFFERS} activeOffer={activeOffer}/>}
+            element={<OfferScreen offers={offersList} activeOffer={activeOffer}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}
