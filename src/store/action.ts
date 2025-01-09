@@ -6,3 +6,4 @@ export const changeActiveCity:ActionCreatorWithPayload<string> = createAction<st
 export const loadOffers = createAction<IMocksData[]>('data/loadOffers');
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 export const requireAuthorization = createAction<LoginStatus>('user/requireAuthorization');
+export const setError = createAction<string | null>('data/setError');
