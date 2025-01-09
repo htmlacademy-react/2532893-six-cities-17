@@ -33,7 +33,7 @@ export const CITIES_LIST: defaultCityType[] = [{
   zoom: 12,
 },{
   title: 'Dusseldorf',
-  lat: 51.2087825,
-  lng: 6.7370844,
+  lat: 51.2335743,
+  lng: 6.7775684,
   zoom: 12,
 }];
