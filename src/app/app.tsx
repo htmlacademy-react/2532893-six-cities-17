@@ -25,6 +25,7 @@ export function App(): JSX.Element {
     setActiveOffer(id);
   };
   const isLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus: LoginStatus = useAppSelector((state) => state.authorizationStatus);
 
   if (isLoading) {
     return (
@@ -44,7 +45,7 @@ export function App(): JSX.Element {
           <Route
             path={RoutePath.FAVORITES}
             element={
-              <PrivateRoute loginStatus={LoginStatus.Auth}>
+              <PrivateRoute loginStatus={authorizationStatus}>
                 {offersList.some((item) => item.isFavorite)
                   ? <FavoriteScreen offers={offersList}/>
                   : <FavoritesEmptyScreen/>}

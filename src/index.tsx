@@ -6,8 +6,9 @@ import {Provider} from 'react-redux';
 import {store} from './store';
 import {fetchOffersAction, fetchAuthorizationStatus} from './store/api-actions.ts';
 
-store.dispatch(fetchAuthorizationStatus());
+
 store.dispatch(fetchOffersAction());
+store.dispatch(fetchAuthorizationStatus());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -1,8 +1,35 @@
 // noinspection JSDeprecatedSymbols
 
 import {Layout} from '../../components/layout/layout/layout.tsx';
+import {FormEvent, useRef} from 'react';
+import {useAppDispatch} from '../../utility/hooks.ts';
+import {useNavigate} from 'react-router-dom';
+import {AuthData} from '../../store/types.ts';
+import {loginAction} from '../../store/api-actions.ts';
+import {RoutePath} from '../../data/routes.ts';
 
 export function LoginScreen(): JSX.Element{
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginAction(authData));
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if(loginRef.current !== null && passwordRef.current !== null){
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
+  };
+
   return (
     <div className="page page--gray page--login">
       <Layout/>
@@ -14,10 +41,12 @@ export function LoginScreen(): JSX.Element{
             <form className="login__form form"
               action="#"
               method="post"
+              onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input"
+                  ref={loginRef}
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -27,6 +56,7 @@ export function LoginScreen(): JSX.Element{
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input"
+                  ref={passwordRef}
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -35,6 +65,7 @@ export function LoginScreen(): JSX.Element{
               </div>
               <button className="login__submit form__submit button"
                 type="submit"
+                onClick={() => navigate(RoutePath.INDEX)}
               >Sign in
               </button>
             </form>
