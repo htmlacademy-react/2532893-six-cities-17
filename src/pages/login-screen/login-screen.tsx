@@ -3,9 +3,9 @@
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {FormEvent, useRef} from 'react';
 import {useAppDispatch} from '../../utility/hooks.ts';
-import {useNavigate} from 'react-router-dom';
 import {AuthData} from '../../store/types.ts';
 import {loginAction} from '../../store/api-actions.ts';
+import {useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../data/routes.ts';
 
 export function LoginScreen(): JSX.Element{
@@ -16,7 +16,12 @@ export function LoginScreen(): JSX.Element{
   const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
+    try {
+      dispatch(loginAction(authData));
+      navigate(RoutePath.INDEX);
+    } catch (error){
+      return error;
+    }
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -65,7 +70,7 @@ export function LoginScreen(): JSX.Element{
               </div>
               <button className="login__submit form__submit button"
                 type="submit"
-                onClick={() => navigate(RoutePath.INDEX)}
+                onClick={() => handleSubmit}
               >Sign in
               </button>
             </form>

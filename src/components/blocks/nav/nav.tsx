@@ -37,11 +37,13 @@ export function Nav():JSX.Element{
           <a className="header__nav-link"
             href="#"
           >
-            <span className="header__signout"
-              ref={ref}
-              onClick={handleSubmit}
-            >Sign out
-            </span>
+            <Link to={RoutePath.LOGIN}>
+              <span className="header__signout"
+                ref={ref}
+                onClick={handleSubmit}
+              >Sign out
+              </span>
+            </Link>
           </a>
         </li>
       </ul>
