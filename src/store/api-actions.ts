@@ -26,6 +26,16 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
+export const fetchCurrentOfferAction = createAsyncThunk<IMocksData, string, {
+    state: StateType;
+}>(
+  'offers/fetchCurrentOffer',
+  async (id) => {
+    const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
+    return data;
+  }
+);
+
 export const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;
   state: StateType;
