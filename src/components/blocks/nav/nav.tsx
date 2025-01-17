@@ -1,9 +1,23 @@
-import {ReactNode} from 'react';
-import {Link} from 'react-router-dom';
+import {useRef} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
+import {logoutAction} from '../../../store/api-actions.ts';
+import {useAppDispatch} from '../../../utility/hooks.ts';
 
 
-export function Nav():ReactNode{
+export function Nav():JSX.Element{
+  const ref = useRef<HTMLElement | null>(null);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const onLogoutSubmit = () => {
+    dispatch(logoutAction());
+  };
+
+  const handleSubmit = () => {
+    onLogoutSubmit();
+    navigate(RoutePath.LOGIN);
+  };
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -23,7 +37,13 @@ export function Nav():ReactNode{
           <a className="header__nav-link"
             href="#"
           >
-            <span className="header__signout">Sign out</span>
+            <Link to={RoutePath.LOGIN}>
+              <span className="header__signout"
+                ref={ref}
+                onClick={handleSubmit}
+              >Sign out
+              </span>
+            </Link>
           </a>
         </li>
       </ul>
