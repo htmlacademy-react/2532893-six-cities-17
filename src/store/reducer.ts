@@ -7,7 +7,7 @@ import {
   setOffersDataLoadingStatus,
   requireAuthorization,
   setError,
-  loadCurrentOffer, setCurrentOffer
+  setCurrentOffer, setNearbyOffers
 } from './action.ts';
 import {ReducerWithInitialState} from '@reduxjs/toolkit/dist/createReducer';
 import {LoginStatus} from '../data/login-status.ts';
@@ -18,8 +18,8 @@ export type initialStateType = {
   activeCityName: string;
   offers: IMocksData[];
   currentOffer: IMocksData | null;
-  reviews: [];
-  nearbyOffers: IMocksData[];
+  reviews: [] | null;
+  nearbyOffers: IMocksData[] | null;
   isOffersDataLoading: boolean;
   isCurrentOfferDataLoading: boolean;
   isCommentsDataLoading: boolean;
@@ -61,4 +61,7 @@ export const reducer: ReducerWithInitialState<initialStateType> = createReducer(
   builder.addCase(setCurrentOffer, (state, action) => {
     state.currentOffer = action.payload;
   });
+  builder.addCase(setNearbyOffers, (state, action) => {
+    state.nearbyOffers = action.payload;
+  })
 });

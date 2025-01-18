@@ -6,7 +6,7 @@ import {
   loadOffers,
   redirectToRoute,
   requireAuthorization, setCurrentOffer,
-  setError,
+  setError, setNearbyOffers,
   setOffersDataLoadingStatus
 } from './action.ts';
 import {IMocksData} from '../mocks/offers.ts';
@@ -35,6 +35,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 
 export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
     state: StateType;
+    dispatch: AppDispatchType;
 }>(
   'offers/loadCurrentOffer',
   async (id, {dispatch}) => {
@@ -48,6 +49,24 @@ export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
 
   }
 );
+
+export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
+  state: StateType;
+  dispatch: AppDispatchType;
+}>(
+  'offers/loadCurrentOffer',
+  async (id, {dispatch}) => {
+    try{
+      const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}/nearby`);
+      dispatch(setNearbyOffers(data));
+      return data;
+    } catch {
+      return null;
+    }
+
+  }
+);
+
 
 export const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;

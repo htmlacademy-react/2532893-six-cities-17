@@ -17,7 +17,7 @@ import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-i
 import {MARK_CLASS_NAMES} from '../../data/mark-class-names.ts';
 import {useAppDispatch, useAppSelector} from '../../utility/hooks.ts';
 import {useEffect} from 'react';
-import {fetchCurrentOfferAction} from '../../store/api-actions.ts';
+import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions.ts';
 import {RoutePath} from '../../data/routes.ts';
 
 export type MainOfferScreenProps = {
