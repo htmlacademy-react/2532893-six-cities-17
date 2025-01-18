@@ -8,7 +8,10 @@ export const changeActiveCity = createAction<string>('offers/changeCity');
 export const loadOffers = createAction<IMocksData[]>('data/loadOffers');
 export const setCurrentOffer = createAction<IMocksData>('offers/setCurrentOffer');
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+
 export const requireAuthorization = createAction<LoginStatus>('user/requireAuthorization');
 export const setError = createAction<string | null>('data/setError');
 export const redirectToRoute = createAction<RoutePath>('app/redirectToRoute');
-export const setNearbyOffers = createAction<IMocksData[]>('offer/loadNearbyOffers');
+export const setNearbyOffers = createAction<IMocksData[]>('offer/setNearbyOffers');
+export const setCommentsList = createAction<IMocksData[]>('offer/setCommentsList');
+

@@ -7,10 +7,11 @@ import {
   setOffersDataLoadingStatus,
   requireAuthorization,
   setError,
-  setCurrentOffer, setNearbyOffers
+  setCurrentOffer, setNearbyOffers, setCommentsList
 } from './action.ts';
 import {ReducerWithInitialState} from '@reduxjs/toolkit/dist/createReducer';
 import {LoginStatus} from '../data/login-status.ts';
+import {CommentsType} from './types.ts';
 
 export const defaultCity: defaultCityType = CITIES_LIST[0];
 
@@ -18,7 +19,7 @@ export type initialStateType = {
   activeCityName: string;
   offers: IMocksData[];
   currentOffer: IMocksData | null;
-  reviews: [] | null;
+  comments: CommentsType[] | null;
   nearbyOffers: IMocksData[] | null;
   isOffersDataLoading: boolean;
   isCurrentOfferDataLoading: boolean;
@@ -32,7 +33,7 @@ export const initialState: initialStateType = {
   activeCityName: defaultCity.title,
   offers: [],
   currentOffer: null,
-  reviews: [],
+  comments: [],
   nearbyOffers: [],
   isOffersDataLoading: false,
   isCurrentOfferDataLoading: false,
@@ -63,5 +64,8 @@ export const reducer: ReducerWithInitialState<initialStateType> = createReducer(
   });
   builder.addCase(setNearbyOffers, (state, action) => {
     state.nearbyOffers = action.payload;
-  })
+  });
+  builder.addCase(setCommentsList, (state, action) => {
+    state.comments = action.payload;
+  });
 });

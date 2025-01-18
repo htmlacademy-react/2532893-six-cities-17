@@ -1,11 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatchType, AuthData, StateType, UserData} from './types.ts';
+import {AppDispatchType, AuthData, CommentsType, StateType, UserData} from './types.ts';
 import {AxiosInstance} from 'axios';
 import {APIRoutes, TIMEOUT_SHOW_ERROR} from '../data/server-data.ts';
 import {
   loadOffers,
   redirectToRoute,
-  requireAuthorization, setCurrentOffer,
+  requireAuthorization, setCommentsList, setCurrentOffer,
   setError, setNearbyOffers,
   setOffersDataLoadingStatus
 } from './action.ts';
@@ -54,7 +54,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
   state: StateType;
   dispatch: AppDispatchType;
 }>(
-  'offers/loadCurrentOffer',
+  'offers/fetchNearbyOffersAction',
   async (id, {dispatch}) => {
     try{
       const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}/nearby`);
@@ -67,6 +67,22 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
   }
 );
 
+export const fetchCommentsAction = createAsyncThunk<void, string, {
+  state: StateType;
+  dispatch: AppDispatchType;
+}>(
+  'offers/fetchCommentsAction',
+  async (id, {dispatch}) => {
+    try{
+      const {data} = await api.get<CommentsType[]>(`${APIRoutes.COMMENTS}/${id}`);
+      dispatch(setCommentsList(data));
+      return data;
+    } catch {
+      return null;
+    }
+
+  }
+);
 
 export const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
   dispatch: AppDispatchType;

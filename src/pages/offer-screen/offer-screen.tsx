@@ -164,7 +164,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{REVIEWS_LIST_DATA_MOCK.length}</span></h2>
-                <ReviewsList reviews={REVIEWS_LIST_DATA_MOCK}/>
+                <ReviewsList/>
                 <CommentSendForm/>
               </section>
             </div>
