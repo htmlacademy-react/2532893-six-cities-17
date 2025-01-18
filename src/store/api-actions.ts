@@ -2,12 +2,19 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatchType, AuthData, StateType, UserData} from './types.ts';
 import {AxiosInstance} from 'axios';
 import {APIRoutes, TIMEOUT_SHOW_ERROR} from '../data/server-data.ts';
-import {loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus} from './action.ts';
+import {
+  loadOffers,
+  redirectToRoute,
+  requireAuthorization, setCurrentOffer,
+  setError,
+  setOffersDataLoadingStatus
+} from './action.ts';
 import {IMocksData} from '../mocks/offers.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import {store} from './index.ts';
 import createAPI from '../services/api.ts';
 import {dropToken, saveToken} from '../services/token.ts';
+import {RoutePath} from '../data/routes.ts';
 
 const api: AxiosInstance = createAPI();
 
@@ -26,13 +33,19 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const fetchCurrentOfferAction = createAsyncThunk<IMocksData, string, {
+export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
     state: StateType;
 }>(
-  'offers/fetchCurrentOffer',
-  async (id) => {
-    const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
-    return data;
+  'offers/loadCurrentOffer',
+  async (id, {dispatch}) => {
+    try{
+      const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
+      dispatch(setCurrentOffer(data));
+      return data;
+    } catch {
+      redirectToRoute(RoutePath.NOT_FOUND);
+    }
+
   }
 );
 

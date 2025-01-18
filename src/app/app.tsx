@@ -54,7 +54,7 @@ export function App(): JSX.Element {
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={offersList} activeOffer={activeOffer}/>}
+            element={<OfferScreen activeOffer={activeOffer}/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}
