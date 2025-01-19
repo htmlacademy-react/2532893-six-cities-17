@@ -17,7 +17,7 @@ import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-i
 import {MARK_CLASS_NAMES} from '../../data/mark-class-names.ts';
 import {useAppDispatch, useAppSelector} from '../../utility/hooks.ts';
 import {useEffect} from 'react';
-import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions.ts';
+import {fetchCurrentOfferAction} from '../../store/api-actions.ts';
 import {RoutePath} from '../../data/routes.ts';
 
 export type MainOfferScreenProps = {
@@ -171,7 +171,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/> : null
+              offer && <Map offers={NEARBY_OFFERS_MOCK} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/>
             }
           </section>
         </section>
