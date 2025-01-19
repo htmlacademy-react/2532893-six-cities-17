@@ -58,7 +58,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
   'offers/fetchNearbyOffersAction',
   async (id, {dispatch}) => {
     try{
-      const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}/nearby`);
+      const {data} = await api.get<IMocksData[]>(`${APIRoutes.OFFERS}/${id}/nearby`);
       dispatch(setNearbyOffers(data));
       return data;
     } catch {
