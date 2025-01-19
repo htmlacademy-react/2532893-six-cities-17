@@ -11,7 +11,6 @@ export function Nav():JSX.Element{
     <nav className="header__nav">
       <ul className="header__nav-list">
         {authorizationStatus === LoginStatus.Auth ? <LoggedNavElement/> : <UnloggedNavElement/>}
-
       </ul>
     </nav>
   );

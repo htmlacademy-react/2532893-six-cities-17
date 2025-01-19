@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatchType, AuthData, CommentsType, StateType, UserData} from './types.ts';
+import {AppDispatchType, AuthData, CommentsType, CommentType, StateType, UserData} from './types.ts';
 import {AxiosInstance} from 'axios';
 import {APIRoutes, TIMEOUT_SHOW_ERROR} from '../data/server-data.ts';
 import {
@@ -15,6 +15,7 @@ import {store} from './index.ts';
 import createAPI from '../services/api.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {RoutePath} from '../data/routes.ts';
+import {SendFormType} from '../components/ui/comment-send-form/comment-send-form.tsx';
 
 const api: AxiosInstance = createAPI();
 
@@ -134,3 +135,14 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(LoginStatus.NoAuth));
   },
 );
+export const sendCommentAction = createAsyncThunk<
+  void,
+  { offerId: string; formData: SendFormType },
+  {
+    state: StateType;
+  }>(
+    'comments/sendComment',
+    async ({ offerId, formData }) => {
+      await api.post<CommentType>((`${APIRoutes.COMMENTS}${offerId}`), formData);
+    },
+  );

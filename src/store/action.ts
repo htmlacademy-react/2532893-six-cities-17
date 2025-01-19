@@ -3,6 +3,7 @@ import {IMocksData} from '../mocks/offers.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import {RoutePath} from '../data/routes.ts';
 import {createAction} from '@reduxjs/toolkit';
+import {CommentsType} from './types.ts';
 
 export const changeActiveCity = createAction<string>('offers/changeCity');
 export const loadOffers = createAction<IMocksData[]>('data/loadOffers');
@@ -13,5 +14,4 @@ export const requireAuthorization = createAction<LoginStatus>('user/requireAutho
 export const setError = createAction<string | null>('data/setError');
 export const redirectToRoute = createAction<RoutePath>('app/redirectToRoute');
 export const setNearbyOffers = createAction<IMocksData[]>('offer/setNearbyOffers');
-export const setCommentsList = createAction<IMocksData[]>('offer/setCommentsList');
-
+export const setCommentsList = createAction<CommentsType[]>('offer/setCommentsList');

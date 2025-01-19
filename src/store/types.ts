@@ -26,3 +26,8 @@ export type CommentsType = {
     comment: string;
     rating: number;
 };
+
+export type CommentType = {
+  comment: string;
+  rating: null | number;
+};

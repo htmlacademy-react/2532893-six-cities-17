@@ -4,23 +4,39 @@ import React, {useState} from 'react';
 import {RatingInputValues} from '../../../data/rating-input-values.ts';
 import {CommentSendStarInput} from '../comment-send-star-input/comment-send-star-input.tsx';
 import {createArrayFromObjectValues} from '../../../utility/utility.ts';
+import {useAppDispatch} from '../../../utility/hooks.ts';
+import {sendCommentAction} from '../../../store/api-actions.ts';
+import {useParams} from 'react-router-dom';
 
 const ratingValuesList: number[] = createArrayFromObjectValues(RatingInputValues);
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+export type SendFormType = {
+  comment: string;
+  rating: number | null;
+}
 
 export function CommentSendForm(): JSX.Element{
-
+  const {id: offerId} = useParams();
+  const dispatch = useAppDispatch();
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    text: '',
-    rating: '',
+    comment: '',
+    rating: 0,
   });
 
-  const handleValueChange = (evt: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    const {value} = evt.target;
-    if (evt.target.type === 'textarea'){
-      setFormData({...formData, text: value});
+  const handleValueChange = (evt: React.ChangeEvent<HTMLElement>): void => {
+    const {name, value} = evt.target;
+    setFormData((prevState) => ({
+      ...prevState, [name]: value,
+    }));
+    if (formData.comment.length >= MIN_COMMENT_LENGTH && formData.comment.length < MAX_COMMENT_LENGTH && formData.rating !== 0){
+      setButtonDisabled(false);
     }
-    setFormData({...formData, rating: value});
-
+  };
+  const handleSubmit = (evt: React.ChangeEvent<HTMLElement>): void => {
+    evt.preventDefault();
+    dispatch(sendCommentAction({offerId, formData}));
   };
 
 
@@ -28,6 +44,7 @@ export function CommentSendForm(): JSX.Element{
     <form className="reviews__form form"
       action="#"
       method="post"
+      onSubmit={handleSubmit}
     >
       <label className="reviews__label htmlForm__label"
         htmlFor="review"
@@ -38,7 +55,7 @@ export function CommentSendForm(): JSX.Element{
       </div>
       <textarea className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleValueChange}
       >
@@ -50,7 +67,7 @@ export function CommentSendForm(): JSX.Element{
         </p>
         <button className="reviews__submit form__submit button"
           type="submit"
-          disabled={false}
+          disabled={buttonDisabled}
         >Submit
         </button>
       </div>

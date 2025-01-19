@@ -19,6 +19,7 @@ import {useAppDispatch, useAppSelector} from '../../utility/hooks.ts';
 import {useEffect} from 'react';
 import {fetchCurrentOfferAction} from '../../store/api-actions.ts';
 import {RoutePath} from '../../data/routes.ts';
+import {LoginStatus} from '../../data/login-status.ts';
 
 export type MainOfferScreenProps = {
   activeOffer: string;
@@ -29,6 +30,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
   const offer: IMocksData | null = useAppSelector((state) => state.currentOffer);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -165,7 +167,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{REVIEWS_LIST_DATA_MOCK.length}</span></h2>
                 <ReviewsList/>
-                <CommentSendForm/>
+                {authorizationStatus === LoginStatus.Auth && <CommentSendForm/>}
               </section>
             </div>
           </div>
