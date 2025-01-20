@@ -1,17 +1,16 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatchType, AuthData, CommentsType, CommentType, StateType, UserData} from './types.ts';
 import {AxiosInstance} from 'axios';
-import {APIRoutes, TIMEOUT_SHOW_ERROR} from '../data/server-data.ts';
+import {APIRoutes} from '../data/server-data.ts';
 import {
   loadOffers,
   redirectToRoute,
   requireAuthorization, setCommentsList, setCurrentOffer,
-  setError, setNearbyOffers,
+  setNearbyOffers,
   setOffersDataLoadingStatus
 } from './action.ts';
 import {IMocksData} from '../mocks/offers.ts';
 import {LoginStatus} from '../data/login-status.ts';
-import {store} from './index.ts';
 import createAPI from '../services/api.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {RoutePath} from '../data/routes.ts';
@@ -34,7 +33,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
+export const fetchCurrentOfferAction = createAsyncThunk<IMocksData | undefined, string, {
     state: StateType;
     dispatch: AppDispatchType;
 }>(
@@ -51,7 +50,7 @@ export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
   }
 );
 
-export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
+export const fetchNearbyOffersAction = createAsyncThunk<IMocksData[] | null, string, {
   state: StateType;
   dispatch: AppDispatchType;
 }>(
@@ -68,7 +67,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
   }
 );
 
-export const fetchCommentsAction = createAsyncThunk<void, string, {
+export const fetchCommentsAction = createAsyncThunk<CommentType[] | null, string, {
   state: StateType;
   dispatch: AppDispatchType;
 }>(
@@ -101,15 +100,6 @@ export const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
   }
 );
 
-export const clearErrorAction = createAsyncThunk(
-  'data/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR
-    );
-  }
-);
-
 export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch: AppDispatchType;
     state: StateType;
@@ -137,12 +127,13 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 );
 export const sendCommentAction = createAsyncThunk<
   void,
-  { offerId: string; formData: SendFormType },
+  { offerId: string | undefined; formData: SendFormType },
   {
     state: StateType;
   }>(
     'comments/sendComment',
     async ({ offerId, formData }) => {
-      await api.post<CommentType>((`${APIRoutes.COMMENTS}${offerId}`), formData);
+      const {comment, rating} = formData;
+      await api.post<CommentType>((`${APIRoutes.COMMENTS}/${offerId}`), {comment, rating});
     },
   );
