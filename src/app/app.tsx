@@ -17,6 +17,7 @@ import {IMocksData} from '../mocks/offers.ts';
 import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
 import {SetStateAction, useState} from 'react';
 import {useAppSelector} from '../utility/hooks.ts';
+import OfferNotLoggedScreen from '../pages/offer-not-logged-screen/offer-not-logged-screen.tsx';
 
 export function App(): JSX.Element {
   const offersList: IMocksData[] = useAppSelector((store) => store.offers);
@@ -54,7 +55,7 @@ export function App(): JSX.Element {
           />
           <Route
             path={RoutePath.OFFER}
-            element={<OfferScreen offers={offersList} activeOffer={activeOffer}/>}
+            element={authorizationStatus === LoginStatus.Auth ? <OfferScreen activeOffer={activeOffer}/> : <OfferNotLoggedScreen/>}
           />
           <Route
             path={RoutePath.NOT_FOUND}

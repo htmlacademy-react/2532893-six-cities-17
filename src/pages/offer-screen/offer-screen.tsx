@@ -2,7 +2,7 @@
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {ReviewsList} from '../../components/blocks/reviews-list/reviews-list.tsx';
 import {IMocksData} from '../../mocks/offers.ts';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
 import {CommentSendForm} from '../../components/ui/comment-send-form/comment-send-form.tsx';
@@ -15,17 +15,31 @@ import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
 import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
 import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-inside-list.tsx';
 import {MARK_CLASS_NAMES} from '../../data/mark-class-names.ts';
+import {useAppDispatch, useAppSelector} from '../../utility/hooks.ts';
+import {useEffect} from 'react';
+import {fetchCurrentOfferAction} from '../../store/api-actions.ts';
+import {RoutePath} from '../../data/routes.ts';
+import {LoginStatus} from '../../data/login-status.ts';
 
 export type MainOfferScreenProps = {
-  offers: IMocksData[];
   activeOffer: string;
 }
 // noinspection JSDeprecatedSymbols
-export function OfferScreen({offers, activeOffer}: MainOfferScreenProps): JSX.Element {
+export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
 
-  const params = useParams();
-  const offer: IMocksData | undefined = offers.find((item: IMocksData):boolean => item.id === params.id);
+  const {id: offerId} = useParams();
+  const dispatch = useAppDispatch();
+  const offer: IMocksData | null = useAppSelector((state) => state.currentOffer);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if(offerId){
+      dispatch(fetchCurrentOfferAction(offerId));
+    } else {
+      navigate(RoutePath.NOT_FOUND);
+    }
+  }, [dispatch, offerId]);
   return (
 
     <div className="page">
@@ -152,14 +166,14 @@ export function OfferScreen({offers, activeOffer}: MainOfferScreenProps): JSX.El
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{REVIEWS_LIST_DATA_MOCK.length}</span></h2>
-                <ReviewsList reviews={REVIEWS_LIST_DATA_MOCK}/>
-                <CommentSendForm/>
+                <ReviewsList/>
+                {authorizationStatus === LoginStatus.Auth && <CommentSendForm/>}
               </section>
             </div>
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer ? <Map offers={NEARBY_OFFERS_MOCK} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/> : null
+              offer && <Map offers={NEARBY_OFFERS_MOCK} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/>
             }
           </section>
         </section>

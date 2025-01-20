@@ -14,3 +14,20 @@ export type UserData = {
   email: string;
   token: string;
 };
+
+export type CommentsType = {
+    id: string;
+    date: string;
+    user: {
+      name: string;
+      avatarUrl: string;
+      isPro: boolean;
+    };
+    comment: string;
+    rating: number;
+};
+
+export type CommentType = {
+  comment: string;
+  rating: null | number;
+};

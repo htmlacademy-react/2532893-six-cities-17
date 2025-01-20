@@ -1,13 +1,20 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatchType, AuthData, StateType, UserData} from './types.ts';
+import {AppDispatchType, AuthData, CommentsType, CommentType, StateType, UserData} from './types.ts';
 import {AxiosInstance} from 'axios';
-import {APIRoutes, TIMEOUT_SHOW_ERROR} from '../data/server-data.ts';
-import {loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus} from './action.ts';
+import {APIRoutes} from '../data/server-data.ts';
+import {
+  loadOffers,
+  redirectToRoute,
+  requireAuthorization, setCommentsList, setCurrentOffer,
+  setNearbyOffers,
+  setOffersDataLoadingStatus
+} from './action.ts';
 import {IMocksData} from '../mocks/offers.ts';
 import {LoginStatus} from '../data/login-status.ts';
-import {store} from './index.ts';
 import createAPI from '../services/api.ts';
 import {dropToken, saveToken} from '../services/token.ts';
+import {RoutePath} from '../data/routes.ts';
+import {SendFormType} from '../components/ui/comment-send-form/comment-send-form.tsx';
 
 const api: AxiosInstance = createAPI();
 
@@ -26,13 +33,54 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const fetchCurrentOfferAction = createAsyncThunk<IMocksData, string, {
+export const fetchCurrentOfferAction = createAsyncThunk<IMocksData | undefined, string, {
     state: StateType;
+    dispatch: AppDispatchType;
 }>(
-  'offers/fetchCurrentOffer',
-  async (id) => {
-    const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
-    return data;
+  'offers/loadCurrentOffer',
+  async (id, {dispatch}) => {
+    try{
+      const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
+      dispatch(setCurrentOffer(data));
+      return data;
+    } catch {
+      redirectToRoute(RoutePath.NOT_FOUND);
+    }
+
+  }
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk<IMocksData[] | null, string, {
+  state: StateType;
+  dispatch: AppDispatchType;
+}>(
+  'offers/fetchNearbyOffersAction',
+  async (id, {dispatch}) => {
+    try{
+      const {data} = await api.get<IMocksData[]>(`${APIRoutes.OFFERS}/${id}/nearby`);
+      dispatch(setNearbyOffers(data));
+      return data;
+    } catch {
+      return null;
+    }
+
+  }
+);
+
+export const fetchCommentsAction = createAsyncThunk<CommentType[] | null, string, {
+  state: StateType;
+  dispatch: AppDispatchType;
+}>(
+  'offers/fetchCommentsAction',
+  async (id, {dispatch}) => {
+    try{
+      const {data} = await api.get<CommentsType[]>(`${APIRoutes.COMMENTS}/${id}`);
+      dispatch(setCommentsList(data));
+      return data;
+    } catch {
+      return null;
+    }
+
   }
 );
 
@@ -49,15 +97,6 @@ export const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
     } catch {
       dispatch(requireAuthorization(LoginStatus.NoAuth));
     }
-  }
-);
-
-export const clearErrorAction = createAsyncThunk(
-  'data/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR
-    );
   }
 );
 
@@ -86,3 +125,15 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(LoginStatus.NoAuth));
   },
 );
+export const sendCommentAction = createAsyncThunk<
+  void,
+  { offerId: string | undefined; formData: SendFormType },
+  {
+    state: StateType;
+  }>(
+    'comments/sendComment',
+    async ({ offerId, formData }) => {
+      const {comment, rating} = formData;
+      await api.post<CommentType>((`${APIRoutes.COMMENTS}/${offerId}`), {comment, rating});
+    },
+  );
