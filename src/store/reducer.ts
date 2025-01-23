@@ -30,16 +30,16 @@ export type initialStateType = {
 }
 
 export const initialState: initialStateType = {
-  activeCityName: defaultCity.title,
+  activeCityName: defaultCity.title, //
   offers: [],
-  currentOffer: null,
+  currentOffer: null,//
   comments: [],
   nearbyOffers: [],
   isOffersDataLoading: false,
   isCurrentOfferDataLoading: false,
   isCommentsDataLoading: false,
   isNearbyOffersDataLoading: false,
-  authorizationStatus: LoginStatus.Unknown,
+  authorizationStatus: LoginStatus.Unknown,//
   error: null,
 };
 

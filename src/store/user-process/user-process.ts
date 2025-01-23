@@ -4,11 +4,11 @@ import {createSlice} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
 import {fetchAuthorizationStatus, loginAction, logoutAction} from '../api-actions.ts';
 
-export type UserProcessType = {
+type UserProcessType = {
   authorizationStatus: LoginStatus;
 };
 
-const initialState = {
+const initialState: UserProcessType = {
   authorizationStatus: LoginStatus.Unknown,
 };
 
@@ -32,7 +32,6 @@ export const userProcess = createSlice({
       })
       .addCase(logoutAction.rejected, (state) => {
         state.authorizationStatus = LoginStatus.Auth;
-      })
-    ;
+      });
   }
 });
