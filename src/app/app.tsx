@@ -18,6 +18,7 @@ import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-em
 import {SetStateAction, useState} from 'react';
 import {useAppSelector} from '../utility/hooks.ts';
 import OfferNotLoggedScreen from '../pages/offer-not-logged-screen/offer-not-logged-screen.tsx';
+import {getAuthorizationStatus} from '../store/user-process/user-selectors.ts';
 
 export function App(): JSX.Element {
   const offersList: IMocksData[] = useAppSelector((store) => store.offers);
@@ -26,7 +27,7 @@ export function App(): JSX.Element {
     setActiveOffer(id);
   };
   const isLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
-  const authorizationStatus: LoginStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus: LoginStatus = useAppSelector((getAuthorizationStatus);
 
   if (isLoading) {
     return (

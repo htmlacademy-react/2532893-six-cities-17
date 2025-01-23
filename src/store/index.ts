@@ -1,12 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {reducer} from './reducer.ts';
 import createAPI from '../services/api.ts';
-import {userProcess} from './user-process/user-process.ts';
+import {rootReducer} from './root-reducer.ts';
 
 const api = createAPI();
 
 export const store = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     thunk: {
       extraArgument: api,
@@ -14,4 +13,3 @@ export const store = configureStore({
   })
 });
 
-console.log(userProcess);

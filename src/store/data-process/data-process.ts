@@ -11,13 +11,13 @@ import {
 import {toast} from 'react-toastify';
 
 type DataProcessType = {
-  offers: IMocksData[];//
+  offers: IMocksData[];
   comments: CommentsType[] | null;
-  nearbyOffers: IMocksData[] | null;//
-  isOffersDataLoading: boolean;//
-  isCurrentOfferDataLoading: boolean;//
+  nearbyOffers: IMocksData[] | null;
+  isOffersDataLoading: boolean;
+  isCurrentOfferDataLoading: boolean;
   isCommentsDataLoading: boolean;
-  isNearbyOffersDataLoading: boolean;//
+  isNearbyOffersDataLoading: boolean;
 }
 
 const initialState: DataProcessType = {

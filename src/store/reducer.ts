@@ -2,12 +2,7 @@ import {CITIES_LIST, defaultCityType} from '../mocks/cities-list.ts';
 import {IMocksData} from '../mocks/offers.ts';
 import {createReducer} from '@reduxjs/toolkit';
 import {
-  changeActiveCity,
   loadOffers,
-  setOffersDataLoadingStatus,
-  requireAuthorization,
-  setError,
-  setCurrentOffer, setNearbyOffers, setCommentsList
 } from './action.ts';
 import {ReducerWithInitialState} from '@reduxjs/toolkit/dist/createReducer';
 import {LoginStatus} from '../data/login-status.ts';
