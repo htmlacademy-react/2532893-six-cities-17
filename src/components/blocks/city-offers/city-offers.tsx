@@ -8,6 +8,7 @@ import {useAppSelector} from '../../../utility/hooks.ts';
 import {SetStateAction, useState} from 'react';
 import {SORTING_TYPES} from '../../../data/sorting-types.ts';
 import {getSortedOffersList} from '../../../utility/utility.ts';
+import {getActiveCity} from '../../../store/offers-process/offers-selectors.ts';
 
 
 export type CityOfferPropsType = {
@@ -23,7 +24,7 @@ export type CityOffersPropsType = {
 
 export function CityOffers({offers, onHandleActiveOfferChange}: CityOffersPropsType): JSX.Element {
 
-  const activeCityName = useAppSelector((state) => state.activeCityName);
+  const activeCityName = useAppSelector(getActiveCity);
   const cityOffers: IMocksData[] = offers.filter((item: IMocksData): boolean => item.city.name === activeCityName);
   const offersCount: number = cityOffers.length;
 

@@ -5,6 +5,7 @@ import {useMap} from './useMap.ts';
 import {defaultCityType} from '../../../mocks/cities-list.ts';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../../data/pin-url.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
+import {getActiveCity} from '../../../store/offers-process/offers-selectors.ts';
 
 export type refType = MutableRefObject<HTMLElement | null>
 export type MapPropsType = {
@@ -27,7 +28,7 @@ const currentCustomIcon = new Icon({
 });
 
 export function Map({offers, defaultCity, activeOffer, className}: MapPropsType) {
-  const activeCityName = useAppSelector((state) => state.activeCityName);
+  const activeCityName = useAppSelector(getActiveCity);
   const mapCity: defaultCityType = defaultCity.find((item) => item.title === activeCityName) ?? defaultCity[0];
   const cityOffers: IMocksData[] = offers.filter((offer) => offer.city.name === activeCityName);
   const mapRef = useRef(null);

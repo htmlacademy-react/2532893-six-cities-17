@@ -8,13 +8,14 @@ import {useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
 import {useEffect} from 'react';
 import {fetchNearbyOffersAction} from '../../../store/api-actions.ts';
+import {getNearbyOffersList} from '../../../store/data-process/data-selectors.ts';
 
 const NEARBY_OFFERS_COUNT = 3;
 
 export function NearbyOffersList(): JSX.Element{
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
-  const nearbyOffersList: IMocksData[] | null = useAppSelector((state) => state.nearbyOffers);
+  const nearbyOffersList: IMocksData[] | null = useAppSelector(getNearbyOffersList);
   useEffect(() => {
     if(offerId){
       dispatch(fetchNearbyOffersAction(offerId));

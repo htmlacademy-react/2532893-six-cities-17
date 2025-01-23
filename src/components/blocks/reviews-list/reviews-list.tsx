@@ -4,11 +4,12 @@ import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
 import {CommentsType} from '../../../store/types.ts';
 import {useEffect} from 'react';
 import {fetchCommentsAction} from '../../../store/api-actions.ts';
+import {getCommentsList} from '../../../store/data-process/data-selectors.ts';
 
 export function ReviewsList(){
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
-  const commentsList: CommentsType[] | null = useAppSelector((state) => state.comments);
+  const commentsList: CommentsType[] | null = useAppSelector(getCommentsList);
   useEffect(() => {
     if (offerId){
       dispatch(fetchCommentsAction(offerId));

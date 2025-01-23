@@ -1,6 +1,6 @@
 import {IMocksData} from '../../mocks/offers.ts';
 import {CommentsType} from '../types.ts';
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
 import {
   fetchCommentsAction,
@@ -34,7 +34,11 @@ const initialState: DataProcessType = {
 export const dataProcess = createSlice({
   name: Namespace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    loadOffers: (state, action: PayloadAction<IMocksData[]>) => {
+      state.offers = action.payload;
+    }
+  },
   extraReducers(builder){
     builder
       .addCase(fetchOffersAction.pending, (state) => {
@@ -83,3 +87,5 @@ export const dataProcess = createSlice({
       })
   }
 });
+
+export const {loadOffers} = dataProcess.actions;

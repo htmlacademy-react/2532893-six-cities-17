@@ -20,6 +20,8 @@ import {useEffect} from 'react';
 import {fetchCurrentOfferAction} from '../../store/api-actions.ts';
 import {RoutePath} from '../../data/routes.ts';
 import {LoginStatus} from '../../data/login-status.ts';
+import {getAuthorizationStatus} from '../../store/user-process/user-selectors.ts';
+import {getCurrentOffer} from '../../store/offers-process/offers-selectors.ts';
 
 export type MainOfferScreenProps = {
   activeOffer: string;
@@ -29,8 +31,8 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
 
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
-  const offer: IMocksData | null = useAppSelector((state) => state.currentOffer);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offer: IMocksData | null = useAppSelector(getCurrentOffer);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -3,12 +3,9 @@ import {AppDispatchType, AuthData, CommentsType, CommentType, StateType, UserDat
 import {AxiosInstance} from 'axios';
 import {APIRoutes} from '../data/server-data.ts';
 import {
-  loadOffers,
   redirectToRoute,
-  requireAuthorization, setCommentsList, setCurrentOffer,
-  setNearbyOffers,
-  setOffersDataLoadingStatus
 } from './action.ts';
+import {loadOffers} from './data-process/data-process.ts';
 import {IMocksData} from '../mocks/offers.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import createAPI from '../services/api.ts';
@@ -26,9 +23,9 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_arg, {dispatch}) => {
-    dispatch(setOffersDataLoadingStatus(true));
+    // dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<IMocksData[]>(APIRoutes.OFFERS);
-    dispatch(setOffersDataLoadingStatus(false));
+    // dispatch(setOffersDataLoadingStatus(false));
     dispatch(loadOffers(data));
   }
 );
