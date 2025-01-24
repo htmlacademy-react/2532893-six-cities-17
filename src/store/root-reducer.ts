@@ -9,4 +9,4 @@ export const rootReducer = combineReducers({
   [Namespace.Data]: dataProcess.reducer,
   [Namespace.Offers]: offersProcess.reducer,
   [Namespace.User]: userProcess.reducer,
-})
+});

@@ -64,7 +64,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<IMocksData[] | null, str
   }
 );
 
-export const fetchCommentsAction = createAsyncThunk<CommentType[] | null, string, {
+export const fetchCommentsAction = createAsyncThunk<CommentsType[] | null, string, {
   state: StateType;
   dispatch: AppDispatchType;
 }>(

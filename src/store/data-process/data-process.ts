@@ -9,7 +9,6 @@ import {
   fetchOffersAction
 } from '../api-actions.ts';
 import {toast} from 'react-toastify';
-import {store} from '../index.ts';
 
 type DataProcessType = {
   offers: IMocksData[];
@@ -41,7 +40,7 @@ export const dataProcess = createSlice({
       .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
       })
-      .addCase(fetchOffersAction.fulfilled, (state: DataProcessType, action: PayloadAction<IMocksData[]>) => {
+      .addCase(fetchOffersAction.fulfilled, (state, action: PayloadAction<IMocksData[]>) => {
         state.isOffersDataLoading = false;
         state.offers = action.payload;
       })
@@ -52,19 +51,11 @@ export const dataProcess = createSlice({
       .addCase(fetchCurrentOfferAction.pending, (state) => {
         state.isCurrentOfferDataLoading = true;
       })
-      .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
-        state.isCurrentOfferDataLoading = false;
-      })
-      .addCase(fetchCurrentOfferAction.rejected, (state) => {
-        state.isCurrentOfferDataLoading = false;
-        toast.warn('Something went wrong while loading the offer. Please try again');
-      })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
         state.isNearbyOffersDataLoading = true;
       })
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
+        state.nearbyOffers = action.payload;
         state.isNearbyOffersDataLoading = false;
       })
       .addCase(fetchNearbyOffersAction.rejected, (state) => {
@@ -75,7 +66,7 @@ export const dataProcess = createSlice({
         state.isCommentsDataLoading = true;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
+        state.comments = action.payload;
         state.isCommentsDataLoading = false;
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
