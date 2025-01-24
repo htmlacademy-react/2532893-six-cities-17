@@ -9,6 +9,7 @@ import {
   fetchOffersAction
 } from '../api-actions.ts';
 import {toast} from 'react-toastify';
+import {store} from '../index.ts';
 
 type DataProcessType = {
   offers: IMocksData[];
@@ -34,19 +35,15 @@ const initialState: DataProcessType = {
 export const dataProcess = createSlice({
   name: Namespace.Data,
   initialState,
-  reducers: {
-    loadOffers: (state, action: PayloadAction<IMocksData[]>) => {
-      state.offers = action.payload;
-    }
-  },
+  reducers: {},
   extraReducers(builder){
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
       })
-      .addCase(fetchOffersAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
+      .addCase(fetchOffersAction.fulfilled, (state: DataProcessType, action: PayloadAction<IMocksData[]>) => {
         state.isOffersDataLoading = false;
+        state.offers = action.payload;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
@@ -84,8 +81,7 @@ export const dataProcess = createSlice({
       .addCase(fetchCommentsAction.rejected, (state) => {
         state.isCommentsDataLoading = false;
         toast.warn('Something went wrong while loading the offer. Please try again');
-      })
+      });
   }
 });
 
-export const {loadOffers} = dataProcess.actions;

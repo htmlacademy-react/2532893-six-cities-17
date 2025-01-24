@@ -42,6 +42,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
       navigate(RoutePath.NOT_FOUND);
     }
   }, [dispatch, offerId]);
+
   return (
 
     <div className="page">

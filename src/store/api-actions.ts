@@ -5,32 +5,34 @@ import {APIRoutes} from '../data/server-data.ts';
 import {
   redirectToRoute,
 } from './action.ts';
-import {loadOffers} from './data-process/data-process.ts';
 import {IMocksData} from '../mocks/offers.ts';
-import {LoginStatus} from '../data/login-status.ts';
 import createAPI from '../services/api.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {RoutePath} from '../data/routes.ts';
 import {SendFormType} from '../components/ui/comment-send-form/comment-send-form.tsx';
+import {toast} from 'react-toastify';
+import {setCurrentOffer} from './offers-process/offers-process.ts';
 
 const api: AxiosInstance = createAPI();
 
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<IMocksData[], undefined, {
   dispatch: AppDispatchType;
   state: StateType;
-  extra: AxiosInstance;
 }>(
   'data/fetchOffers',
-  async (_arg, {dispatch}) => {
-    // dispatch(setOffersDataLoadingStatus(true));
-    const {data} = await api.get<IMocksData[]>(APIRoutes.OFFERS);
-    // dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));
+  async () => {
+    try{
+      const {data} = await api.get<IMocksData[]>(APIRoutes.OFFERS);
+      return data;
+    } catch {
+      toast.warn('Something went wrong while loading the offer. Please try again');
+    }
+
   }
 );
 
-export const fetchCurrentOfferAction = createAsyncThunk<IMocksData | undefined, string, {
+export const fetchCurrentOfferAction = createAsyncThunk<IMocksData, string, {
     state: StateType;
     dispatch: AppDispatchType;
 }>(
@@ -39,7 +41,6 @@ export const fetchCurrentOfferAction = createAsyncThunk<IMocksData | undefined, 
     try{
       const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
       dispatch(setCurrentOffer(data));
-      return data;
     } catch {
       redirectToRoute(RoutePath.NOT_FOUND);
     }
@@ -52,10 +53,9 @@ export const fetchNearbyOffersAction = createAsyncThunk<IMocksData[] | null, str
   dispatch: AppDispatchType;
 }>(
   'offers/fetchNearbyOffersAction',
-  async (id, {dispatch}) => {
+  async (id) => {
     try{
       const {data} = await api.get<IMocksData[]>(`${APIRoutes.OFFERS}/${id}/nearby`);
-      dispatch(setNearbyOffers(data));
       return data;
     } catch {
       return null;
@@ -69,10 +69,9 @@ export const fetchCommentsAction = createAsyncThunk<CommentType[] | null, string
   dispatch: AppDispatchType;
 }>(
   'offers/fetchCommentsAction',
-  async (id, {dispatch}) => {
+  async (id) => {
     try{
       const {data} = await api.get<CommentsType[]>(`${APIRoutes.COMMENTS}/${id}`);
-      dispatch(setCommentsList(data));
       return data;
     } catch {
       return null;
@@ -87,12 +86,11 @@ export const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'data/authorizationStatus',
-  async (_arg, {dispatch}) => {
+  async () => {
     try{
       await api.get(APIRoutes.LOGIN);
-      dispatch(requireAuthorization(LoginStatus.Auth));
-    } catch {
-      dispatch(requireAuthorization(LoginStatus.NoAuth));
+    } catch{
+      toast.warn('Something went wrong while loading the offer. Please try again');
     }
   }
 );
@@ -103,10 +101,9 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     extra: AxiosInstance;
 }>(
   'user/login',
-  async ({login: email, password}, {dispatch}) => {
+  async ({login: email, password}) => {
     const {data: {token}} = await api.post<UserData>(APIRoutes.LOGIN, {email, password});
     saveToken(token);
-    dispatch(requireAuthorization(LoginStatus.Auth));
   }
 );
 
@@ -116,10 +113,10 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch}) => {
+  async () => {
     await api.delete(APIRoutes.LOGOUT);
     dropToken();
-    dispatch(requireAuthorization(LoginStatus.NoAuth));
+    // dispatch(requireAuthorization(LoginStatus.NoAuth));
   },
 );
 export const sendCommentAction = createAsyncThunk<
