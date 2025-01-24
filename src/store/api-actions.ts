@@ -11,12 +11,11 @@ import {dropToken, saveToken} from '../services/token.ts';
 import {RoutePath} from '../data/routes.ts';
 import {SendFormType} from '../components/ui/comment-send-form/comment-send-form.tsx';
 import {toast} from 'react-toastify';
-import {setCurrentOffer} from './offers-process/offers-process.ts';
 
 const api: AxiosInstance = createAPI();
 
 
-export const fetchOffersAction = createAsyncThunk<IMocksData[], undefined, {
+export const fetchOffersAction = createAsyncThunk<IMocksData[], {
   dispatch: AppDispatchType;
   state: StateType;
 }>(
@@ -40,7 +39,7 @@ export const fetchCurrentOfferAction = createAsyncThunk<IMocksData, string, {
   async (id, {dispatch}) => {
     try{
       const {data} = await api.get<IMocksData>(`${APIRoutes.OFFERS}/${id}`);
-      dispatch(setCurrentOffer(data));
+      return data;
     } catch {
       redirectToRoute(RoutePath.NOT_FOUND);
     }

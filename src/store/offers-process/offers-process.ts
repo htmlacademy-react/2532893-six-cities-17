@@ -24,9 +24,6 @@ export const offersProcess = createSlice({
     changeActiveCity: (state, action: PayloadAction<string>) => {
       state.activeCityName = action.payload;
     },
-    setCurrentOffer: (state, action: PayloadAction<IMocksData>) => {
-      state.currentOffer = action.payload;
-    },
   },
   extraReducers(builder){
     builder
@@ -39,4 +36,4 @@ export const offersProcess = createSlice({
   }
 });
 
-export const {changeActiveCity, setCurrentOffer} = offersProcess.actions;
+export const {changeActiveCity} = offersProcess.actions;
