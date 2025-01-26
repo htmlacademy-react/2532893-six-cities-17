@@ -3,12 +3,13 @@
 
 import {RoutePath} from '../../data/routes.ts';
 import {Layout} from '../../components/layout/layout/layout.tsx';
-import {IMocksData, IMocksDataProps} from '../../mocks/offers.ts';
+import {OffersDataProps} from '../../mocks/offers.ts';
 import {FavoritesLocationsItem} from '../../components/blocks/favorites-locations-item/favorites-locations-item.tsx';
 import {createFavoriteGroups} from './favorite-groups.ts';
+import {OffersDataType} from '../../store/types.ts';
 
 
-export function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
+export function FavoriteScreen({offers}: OffersDataProps): JSX.Element{
   const offerGroups = createFavoriteGroups(offers.filter((item) => item.isFavorite));
 
   return (
@@ -23,7 +24,7 @@ export function FavoriteScreen({offers}: IMocksDataProps): JSX.Element{
 
               {
                 Object.keys(offerGroups).map((groupKey) => {
-                  const group: IMocksData[] = offerGroups[groupKey];
+                  const group: OffersDataType[] = offerGroups[groupKey];
                   return <FavoritesLocationsItem key={groupKey} offers={group} cityName={groupKey}/>;
                 })
               }

@@ -1,6 +1,6 @@
-import {IMocksData} from '../../mocks/offers.ts';
-import {CommentsType} from '../types.ts';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+
+import {CommentsType, OffersDataType} from '../types.ts';
+import {createSlice} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
 import {
   fetchCommentsAction,
@@ -11,9 +11,9 @@ import {
 import {toast} from 'react-toastify';
 
 type DataProcessType = {
-  offers: IMocksData[];
+  offers: OffersDataType[];
   comments: CommentsType[] | null;
-  nearbyOffers: IMocksData[] | null;
+  nearbyOffers: OffersDataType[] | null;
   isOffersDataLoading: boolean;
   isCurrentOfferDataLoading: boolean;
   isCommentsDataLoading: boolean;
@@ -40,7 +40,7 @@ export const dataProcess = createSlice({
       .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
       })
-      .addCase(fetchOffersAction.fulfilled, (state, action: PayloadAction<IMocksData[]>) => {
+      .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.isOffersDataLoading = false;
         state.offers = action.payload;
       })

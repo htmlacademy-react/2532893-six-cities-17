@@ -1,6 +1,7 @@
 import {RatingInputValuesType} from '../data/rating-input-values.ts';
 import {SORTING_TYPES} from '../data/sorting-types.ts';
 import {IMocksData} from '../mocks/offers.ts';
+import {OffersDataType} from '../store/types.ts';
 
 export const getCapitalizeWord = (value: string):string => value[0].toUpperCase() + value.split('').slice(1).join('').toLowerCase();
 
@@ -11,8 +12,8 @@ export const createArrayFromObjectValues = (value: RatingInputValuesType): numbe
 };
 
 
-export const getSortedOffersList = (list: IMocksData[], typeOfSorting: string) => {
-  let result: IMocksData[];
+export const getSortedOffersList = (list: OffersDataType[], typeOfSorting: string) => {
+  let result: OffersDataType[];
 
   switch (typeOfSorting) {
     case (SORTING_TYPES.POPULAR):

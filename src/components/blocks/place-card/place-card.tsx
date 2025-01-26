@@ -1,14 +1,14 @@
 // noinspection JSDeprecatedSymbols
 
-import {IMocksData} from '../../../mocks/offers.ts';
 import {Link} from 'react-router-dom';
 import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 import {MARK_CLASS_NAMES} from '../../../data/mark-class-names.ts';
 import {SetStateAction} from 'react';
+import {OffersDataType} from '../../../store/types.ts';
 
 
-export type CardPropsType = Pick<IMocksData, 'isPremium' | 'price' | 'previewImage' | 'id'>;
+export type CardPropsType = Pick<OffersDataType, 'isPremium' | 'price' | 'previewImage' | 'id'>;
 
 export type PlaceCardPropsType = CardPropsType & {
   className: string;

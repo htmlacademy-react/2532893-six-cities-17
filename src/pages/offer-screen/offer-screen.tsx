@@ -1,7 +1,6 @@
 // noinspection JSDeprecatedSymbols
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {ReviewsList} from '../../components/blocks/reviews-list/reviews-list.tsx';
-import {IMocksData} from '../../mocks/offers.ts';
 import {useNavigate, useParams} from 'react-router-dom';
 import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
@@ -22,6 +21,7 @@ import {RoutePath} from '../../data/routes.ts';
 import {LoginStatus} from '../../data/login-status.ts';
 import {getAuthorizationStatus} from '../../store/user-process/user-selectors.ts';
 import {getCurrentOffer} from '../../store/offers-process/offers-selectors.ts';
+import {CurrentOfferDataType} from '../../store/types.ts';
 
 export type MainOfferScreenProps = {
   activeOffer: string;
@@ -31,7 +31,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
 
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
-  const offer: IMocksData | null = useAppSelector(getCurrentOffer);
+  const offer: CurrentOfferDataType | undefined = useAppSelector(getCurrentOffer);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 

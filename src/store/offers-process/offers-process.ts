@@ -1,20 +1,21 @@
-import {IMocksData} from '../../mocks/offers.ts';
+
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
 import {CITIES_LIST, defaultCityType} from '../../mocks/cities-list.ts';
 import {fetchCurrentOfferAction} from '../api-actions.ts';
 import {toast} from 'react-toastify';
+import {CurrentOfferDataType} from '../types.ts';
 
 export const defaultCity: defaultCityType = CITIES_LIST[0];
 
 type OffersProcessType = {
     activeCityName: string;
-    currentOffer: IMocksData | null;
+    currentOffer: CurrentOfferDataType | undefined;
 }
 
 const initialState: OffersProcessType = {
   activeCityName: defaultCity.title,
-  currentOffer: null,
+  currentOffer: undefined,
 };
 
 export const offersProcess = createSlice({

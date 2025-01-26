@@ -1,3 +1,4 @@
+import {OffersDataType} from '../store/types.ts';
 
 type AccommodationTypesType = 'apartment' | 'room' | 'house' | 'hotel';
 export type CityNameTypes = string;
@@ -26,7 +27,7 @@ export interface IMocksData {
   rating: number;
 }
 
-export interface IMocksDataProps {
-  offers: IMocksData[];
+export interface OffersDataProps {
+  offers: OffersDataType[];
 }
 
