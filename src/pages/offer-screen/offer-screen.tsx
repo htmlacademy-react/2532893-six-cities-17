@@ -5,6 +5,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
 import {CommentSendForm} from '../../components/ui/comment-send-form/comment-send-form.tsx';
+import {OfferImage} from '../../components/blocks/offer-image/offer-image.tsx';
 
 import {REVIEWS_LIST_DATA_MOCK} from '../../mocks/reviews.ts';
 import {Map} from '../../components/ui/map/map.tsx';
@@ -21,7 +22,6 @@ import {RoutePath} from '../../data/routes.ts';
 import {LoginStatus} from '../../data/login-status.ts';
 import {getAuthorizationStatus} from '../../store/user-process/user-selectors.ts';
 import {getCurrentOffer} from '../../store/offers-process/offers-selectors.ts';
-import {CurrentOfferDataType} from '../../store/types.ts';
 
 export type MainOfferScreenProps = {
   activeOffer: string;
@@ -31,7 +31,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
 
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
-  const offer: CurrentOfferDataType | undefined = useAppSelector(getCurrentOffer);
+  const offer = useAppSelector(getCurrentOffer);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
@@ -52,47 +52,12 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {offer && offer.images.map((item) => <OfferImage imageSRC={item} key={item}/>)}
             </div>
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium ? <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/> : null}
+              {offer?.isPremium && <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/>}
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
@@ -124,10 +89,10 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
                   {offer?.type && getCapitalizeWord(offer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {offer?.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {offer?.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
@@ -136,24 +101,24 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
-                <OfferInsideList/>
+                <OfferInsideList goods={offer?.goods} />
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img className="offer__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src={offer?.host.avatarUrl}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {offer?.host.name}
                   </span>
                   <span className="offer__user-status">
-                    Pro
+                    {offer?.host.isPro && 'Pro'}
                   </span>
                 </div>
                 <div className="offer__description">
