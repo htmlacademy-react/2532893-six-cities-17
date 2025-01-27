@@ -14,12 +14,14 @@ import {LoadingElement} from '../components/ui/loading-element/loading-element.t
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
 import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
-import {SetStateAction, useState} from 'react';
-import {useAppSelector} from '../utility/hooks.ts';
+import {SetStateAction, useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../utility/hooks.ts';
 import OfferNotLoggedScreen from '../pages/offer-not-logged-screen/offer-not-logged-screen.tsx';
 import {getAuthorizationStatus} from '../store/user-process/user-selectors.ts';
 import {getOffers, getOffersDataLoading} from '../store/data-process/data-selectors.ts';
 import {OffersDataType} from '../store/types.ts';
+import {fetchAuthorizationStatus, fetchFavoritesList, fetchOffersAction} from '../store/api-actions.ts';
+
 
 export function App(): JSX.Element {
   const offersList: OffersDataType[] = useAppSelector(getOffers);
@@ -29,6 +31,14 @@ export function App(): JSX.Element {
   };
   const isLoading: boolean = useAppSelector(getOffersDataLoading);
   const authorizationStatus: LoginStatus = useAppSelector(getAuthorizationStatus);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+    dispatch(fetchAuthorizationStatus());
+    dispatch(fetchFavoritesList());
+  }, [dispatch]);
 
   if (isLoading) {
     return (

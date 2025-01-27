@@ -2,10 +2,12 @@ import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';
 import {useRef} from 'react';
 import {logoutAction} from '../../../store/api-actions.ts';
-import {useAppDispatch} from '../../../utility/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
+import {getUserData} from '../../../store/user-process/user-selectors.ts';
 
 
 export function LoggedNavElement(): JSX.Element{
+  const userData = useAppSelector(getUserData);
   const ref = useRef<HTMLElement | null>(null);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -28,7 +30,7 @@ export function LoggedNavElement(): JSX.Element{
           </div>
 
           <span className="header__user-name user__name">
-            <Link to={RoutePath.FAVORITES}>Oliver.conner@gmail.com</Link>
+            <Link to={RoutePath.FAVORITES}>{userData?.email}</Link>
           </span>
           <span className="header__favorite-count">3</span>
         </a>

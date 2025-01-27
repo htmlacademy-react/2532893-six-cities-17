@@ -7,7 +7,7 @@ import {
   OffersDataType,
   UserData
 } from './types.ts';
-import {AxiosInstance} from 'axios';
+import {AxiosInstance, AxiosResponse} from 'axios';
 import {APIRoutes} from '../data/server-data.ts';
 import {
   redirectToRoute,
@@ -74,14 +74,16 @@ export const fetchCommentsAction = createAsyncThunk<CommentsType[] | null, strin
   }
 );
 
-export const fetchAuthorizationStatus = createAsyncThunk<void, undefined>(
+export const fetchAuthorizationStatus = createAsyncThunk<UserData | null, undefined>(
   'data/authorizationStatus',
   async () => {
+    const response: AxiosResponse<UserData, null> = await api.get(APIRoutes.LOGIN);
     try{
-      await api.get(APIRoutes.LOGIN);
+      return response.data;
     } catch{
-      toast.warn('Something went wrong while loading the offer. Please try again');
+      toast.warn('Please sign in to see all features');
     }
+    return response.data;
   }
 );
 
@@ -109,3 +111,17 @@ export const sendCommentAction = createAsyncThunk<
       await api.post<CommentType>((`${APIRoutes.COMMENTS}/${offerId}`), {comment, rating});
     },
   );
+
+export const fetchFavoritesList = createAsyncThunk<OffersDataType[], undefined>(
+  'data/fetchOffers',
+  async (): Promise<OffersDataType[]> => {
+    const {data} = await api.get<OffersDataType[]>(APIRoutes.FAVORITE);
+    try{
+      return data;
+    } catch {
+      toast.warn('There are no favorites offers');
+    }
+    return data;
+
+  }
+);
