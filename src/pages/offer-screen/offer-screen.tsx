@@ -22,6 +22,8 @@ import {RoutePath} from '../../data/routes.ts';
 import {LoginStatus} from '../../data/login-status.ts';
 import {getAuthorizationStatus} from '../../store/user-process/user-selectors.ts';
 import {getCurrentOffer} from '../../store/offers-process/offers-selectors.ts';
+import {FavoriteButton} from '../../components/ui/favorite-button/favorite-button.tsx';
+import {favoriteButtonClassNames} from '../../data/favorite-button-data.ts';
 
 export type MainOfferScreenProps = {
   activeOffer: string;
@@ -63,17 +65,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
                 <h1 className="offer__name">
                   {offer && offer.title}
                 </h1>
-                <button className="offer__bookmark-button button"
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon"
-                    width="31"
-                    height="33"
-                  >
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteButton className={favoriteButtonClassNames.offerPageButton}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
