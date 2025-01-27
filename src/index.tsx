@@ -4,6 +4,10 @@ import {App} from './app/app.tsx';
 import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import {store} from './store';
+import {fetchAuthorizationStatus, fetchOffersAction} from './store/api-actions.ts';
+
+store.dispatch(fetchOffersAction());
+store.dispatch(fetchAuthorizationStatus());
 
 
 const root = ReactDOM.createRoot(

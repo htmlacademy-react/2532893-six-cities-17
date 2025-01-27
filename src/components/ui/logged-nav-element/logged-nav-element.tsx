@@ -4,9 +4,11 @@ import {useRef} from 'react';
 import {logoutAction} from '../../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
 import {getUserData} from '../../../store/user-process/user-selectors.ts';
+import {getOffers} from '../../../store/data-process/data-selectors.ts';
 
 
 export function LoggedNavElement(): JSX.Element{
+  const favoritesCount = useAppSelector(getOffers).filter((item) => item.isFavorite).length;
   const userData = useAppSelector(getUserData);
   const ref = useRef<HTMLElement | null>(null);
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ export function LoggedNavElement(): JSX.Element{
           <span className="header__user-name user__name">
             <Link to={RoutePath.FAVORITES}>{userData?.email}</Link>
           </span>
-          <span className="header__favorite-count">3</span>
+          <span className="header__favorite-count">{favoritesCount}</span>
         </a>
       </li>
       <li className="header__nav-item">
