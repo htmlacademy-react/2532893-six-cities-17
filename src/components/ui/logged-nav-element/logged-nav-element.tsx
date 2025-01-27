@@ -4,11 +4,11 @@ import {useRef} from 'react';
 import {logoutAction} from '../../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
 import {getUserData} from '../../../store/user-process/user-selectors.ts';
-import {getOffers} from '../../../store/data-process/data-selectors.ts';
+import {getFavoritesList} from '../../../store/favorite-process/favorite-selectors.ts';
 
 
 export function LoggedNavElement(): JSX.Element{
-  const favoritesCount = useAppSelector(getOffers).filter((item) => item.isFavorite).length;
+  const favoritesCount = useAppSelector(getFavoritesList).length;
   const userData = useAppSelector(getUserData);
   const ref = useRef<HTMLElement | null>(null);
   const navigate = useNavigate();
