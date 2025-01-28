@@ -4,7 +4,7 @@ import {
   CommentsType,
   CommentType,
   CurrentOfferDataType,
-  OffersDataType,
+  OffersDataType, StateType,
   UserData
 } from './types.ts';
 import {AxiosInstance, AxiosResponse} from 'axios';
@@ -126,11 +126,24 @@ export const fetchFavoritesList = createAsyncThunk<OffersDataType[], undefined>(
   }
 );
 
-export const changeFavoriteStatus = createAsyncThunk<OffersDataType | CurrentOfferDataType, {id: string; isFavorite: boolean}>(
+export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string; isFavorite: boolean}, {state: StateType}>(
   'favorites/changeFavoriteStatus',
-  async({id, isFavorite}) => {
-    const data = await api.post<boolean>(`${APIRoutes.FAVORITE}/${id}/${Number(!isFavorite)}`);
-    return data;
-  }
+  async ({ id: offerId, isFavorite }, {getState}) => {
+    const status = Number(!isFavorite);
+    const { data } = await api.post<OffersDataType>(`${APIRoutes.FAVORITE}/${offerId}/${status}`);
 
+    const {offers} = getState().DATA;
+    const currentOffer = offers.find((offer) => offer.id === data.id);
+
+    if (!currentOffer) {
+      throw new Error('Some Error...');
+    }
+
+    const result: OffersDataType = {
+      ...currentOffer,
+      isFavorite: data.isFavorite,
+    };
+
+    return result;
+  }
 );

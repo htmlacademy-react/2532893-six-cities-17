@@ -9,7 +9,7 @@ import {OffersDataType} from '../../../store/types.ts';
 
 export type refType = MutableRefObject<HTMLElement | null>
 export type MapPropsType = {
-  offers: OffersDataType[];
+  offers: OffersDataType[] | null;
   defaultCity: defaultCityType[];
   activeOffer: string;
   className: string;
@@ -30,27 +30,30 @@ const currentCustomIcon = new Icon({
 export function Map({offers, defaultCity, activeOffer, className}: MapPropsType) {
   const activeCityName = useAppSelector(getActiveCity);
   const mapCity: defaultCityType = defaultCity.find((item) => item.title === activeCityName) ?? defaultCity[0];
-  const cityOffers: OffersDataType[] = offers.filter((offer) => offer.city.name === activeCityName);
+  const cityOffers: OffersDataType[] | null = offers && offers.filter((offer) => offer.city.name === activeCityName);
   const mapRef = useRef(null);
   const map = useMap(mapRef, mapCity);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      cityOffers.forEach((point) => {
-        const marker = new Marker({
-          lat: point.location.latitude,
-          lng: point.location.longitude
-        });
+      if(cityOffers){
+        cityOffers.forEach((point) => {
+          const marker = new Marker({
+            lat: point.location.latitude,
+            lng: point.location.longitude
+          });
 
-        marker
-          .setIcon(
-            activeOffer !== undefined && point.id === activeOffer
-              ? currentCustomIcon
-              : defaultCustomIcon
-          )
-          .addTo(markerLayer);
-      });
+          marker
+            .setIcon(
+              activeOffer !== undefined && point.id === activeOffer
+                ? currentCustomIcon
+                : defaultCustomIcon
+            )
+            .addTo(markerLayer);
+        });
+      }
+
 
       return ():void => {
         map.removeLayer(markerLayer);

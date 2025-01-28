@@ -7,17 +7,21 @@ import {MARK_CLASS_NAMES} from '../../../data/mark-class-names.ts';
 import {SetStateAction} from 'react';
 import {OffersDataType} from '../../../store/types.ts';
 import {FavoriteButton} from '../../ui/favorite-button/favorite-button.tsx';
-import {favoriteButtonClassNames} from '../../../data/favorite-button-data.ts';
+import {
+  favoriteButtonClassNames,
+  SMALL_FAVORITE_BUTTON_HEIGHT,
+  SMALL_FAVORITE_BUTTON_WIDTH
+} from '../../../data/favorite-button-data.ts';
 
 
-export type CardPropsType = Pick<OffersDataType, 'isPremium' | 'price' | 'previewImage' | 'id'>;
+export type CardPropsType = Pick<OffersDataType, 'isPremium' | 'price' | 'previewImage' | 'id' | 'isFavorite'>;
 
 export type PlaceCardPropsType = CardPropsType & {
   className: string;
   onHandleActiveOfferChange(id: SetStateAction<string>): void;
 }
 
-export function PlaceCard({isPremium, previewImage, price, id, className, onHandleActiveOfferChange}:PlaceCardPropsType): JSX.Element {
+export function PlaceCard({isPremium, previewImage, price, id, className, onHandleActiveOfferChange, isFavorite}:PlaceCardPropsType): JSX.Element {
 
   return (
     <article className={`${className}__card place-card`}
@@ -41,7 +45,7 @@ export function PlaceCard({isPremium, previewImage, price, id, className, onHand
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton className={favoriteButtonClassNames.placeCardButton}/>
+          <FavoriteButton className={favoriteButtonClassNames.placeCardButton} id={id} isFavorite={isFavorite} width={SMALL_FAVORITE_BUTTON_WIDTH} height={SMALL_FAVORITE_BUTTON_HEIGHT}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

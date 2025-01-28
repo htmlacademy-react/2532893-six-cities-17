@@ -1,24 +1,42 @@
 
-import {
-  chooseSizeButton,
-  favoriteButtonCommonClassNames,
-  favoriteButtonCommonSVGClassNames
-} from '../../../data/favorite-button-data.ts';
+import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
+import {useNavigate} from 'react-router-dom';
+import {getAuthorizationStatus} from '../../../store/user-process/user-selectors.ts';
+import {LoginStatus} from '../../../data/login-status.ts';
+import {changeFavoriteStatus} from '../../../store/api-actions.ts';
+import {RoutePath} from '../../../data/routes.ts';
 
 type FavoriteButtonPropsType = {
     className: string;
-}
+    id: string;
+    isFavorite: boolean;
+    width: string;
+    height: string;
+};
 
-export function FavoriteButton({className}: FavoriteButtonPropsType): JSX.Element {
-  const buttonClassName = chooseSizeButton(className);
+export function FavoriteButton({className, id, isFavorite, width, height}: FavoriteButtonPropsType): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const favoriteClass = isFavorite ? `${className}__bookmark-button--active` : '';
+
+  const handleFavoriteStatusChange = () => {
+    if (authorizationStatus === LoginStatus.Auth){
+      dispatch(changeFavoriteStatus({id, isFavorite}));
+    } else {
+      navigate(RoutePath.LOGIN);
+    }
+  };
 
   return (
-    <button className={`${className}${favoriteButtonCommonClassNames}`}
+    <button
+      className={`${className}__bookmark-button button ${favoriteClass}`}
       type="button"
+      onClick={handleFavoriteStatusChange}
     >
-      <svg className={`${className}${favoriteButtonCommonSVGClassNames}`}
-        width={buttonClassName.width}
-        height={buttonClassName.height}
+      <svg className={`${className}__bookmark-icon`}
+        width={width}
+        height={height}
       >
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

@@ -1,7 +1,7 @@
 import {OffersDataType} from '../types.ts';
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
-import {fetchFavoritesList} from '../api-actions.ts';
+import {changeFavoriteStatus, fetchFavoritesList} from '../api-actions.ts';
 
 type FavoritesType = {
   favoriteOffers: OffersDataType[];
@@ -19,6 +19,14 @@ export const favoriteProcess = createSlice({
     builder
       .addCase(fetchFavoritesList.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
+      })
+      .addCase(changeFavoriteStatus.fulfilled, (state, {payload}: PayloadAction<OffersDataType>) => {
+        if (payload.isFavorite) {
+          state.favoriteOffers.push(payload);
+        } else {
+          const favoriteIndex = state.favoriteOffers.findIndex((offer) => offer.id === payload.id);
+          state.favoriteOffers.splice(favoriteIndex, 1);
+        }
       });
   }
 });
