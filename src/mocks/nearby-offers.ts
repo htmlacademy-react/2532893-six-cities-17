@@ -1,7 +1,6 @@
-import {IMocksData} from './offers.ts';
+import {OffersDataType} from '../store/types.ts';
 
-
-export const NEARBY_OFFERS_MOCK: IMocksData[] = [
+export const NEARBY_OFFERS_MOCK: OffersDataType[] = [
   {
     'id': '4bd965d2-45a2-495e-be64-094b1196fe9d',
     'title': 'House in countryside',

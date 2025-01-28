@@ -5,6 +5,7 @@ import {logoutAction} from '../../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
 import {getUserData} from '../../../store/user-process/user-selectors.ts';
 import {getFavoritesList} from '../../../store/favorite-process/favorite-selectors.ts';
+import {setFavoritesList} from '../../../store/favorite-process/favorite-process.ts';
 
 
 export function LoggedNavElement(): JSX.Element{
@@ -15,6 +16,7 @@ export function LoggedNavElement(): JSX.Element{
   const dispatch = useAppDispatch();
   const onLogoutSubmit = () => {
     dispatch(logoutAction());
+    dispatch(setFavoritesList([]));
   };
 
   const handleSubmit = () => {

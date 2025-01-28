@@ -21,8 +21,9 @@ export function FavoriteButton({className, id, isFavorite, width, height}: Favor
   const favoriteClass = isFavorite ? `${className}__bookmark-button--active` : '';
 
   const handleFavoriteStatusChange = () => {
+    const status = isFavorite ? 0 : 1;
     if (authorizationStatus === LoginStatus.Auth){
-      dispatch(changeFavoriteStatus({id, isFavorite}));
+      dispatch(changeFavoriteStatus({id, status}));
     } else {
       navigate(RoutePath.LOGIN);
     }

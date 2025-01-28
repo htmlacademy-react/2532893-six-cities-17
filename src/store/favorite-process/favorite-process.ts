@@ -14,7 +14,11 @@ const initialState: FavoritesType = {
 export const favoriteProcess = createSlice({
   name: Namespace.Favorites,
   initialState,
-  reducers: {},
+  reducers: {
+    setFavoritesList(state, { payload }: PayloadAction<OffersDataType[]>) {
+      state.favoriteOffers = payload;
+    }
+  },
   extraReducers(builder){
     builder
       .addCase(fetchFavoritesList.fulfilled, (state, action) => {
@@ -30,3 +34,5 @@ export const favoriteProcess = createSlice({
       });
   }
 });
+
+export const {setFavoritesList} = favoriteProcess.actions;
