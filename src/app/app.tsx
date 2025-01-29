@@ -23,6 +23,7 @@ import {OffersDataType} from '../store/types.ts';
 
 
 export function App(): JSX.Element {
+
   const offersList: OffersDataType[] = useAppSelector(getOffers);
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
   const activeOfferHandler = (id: SetStateAction<string>): void => {
@@ -52,7 +53,7 @@ export function App(): JSX.Element {
             element={
               <PrivateRoute loginStatus={authorizationStatus}>
                 {offersList.some((item) => item.isFavorite)
-                  ? <FavoriteScreen offers={offersList}/>
+                  ? <FavoriteScreen />
                   : <FavoritesEmptyScreen/>}
               </PrivateRoute>
             }

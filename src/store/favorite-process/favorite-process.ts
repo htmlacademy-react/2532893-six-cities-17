@@ -26,10 +26,9 @@ export const favoriteProcess = createSlice({
       })
       .addCase(changeFavoriteStatus.fulfilled, (state, {payload}: PayloadAction<OffersDataType>) => {
         if (payload.isFavorite) {
-          state.favoriteOffers.push(payload);
+          state.favoriteOffers = [...state.favoriteOffers, payload];
         } else {
-          const favoriteIndex = state.favoriteOffers.findIndex((offer) => offer.id === payload.id);
-          state.favoriteOffers.splice(favoriteIndex, 1);
+          state.favoriteOffers.filter(((item) => item.id !== payload.id));
         }
       });
   }

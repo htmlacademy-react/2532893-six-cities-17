@@ -34,7 +34,7 @@ export function LoggedNavElement(): JSX.Element{
           </div>
 
           <span className="header__user-name user__name">
-            <Link to={RoutePath.FAVORITES}>{userData?.email}</Link>
+            <Link to={RoutePath.FAVORITES}>{userData && userData.email}</Link>
           </span>
           <span className="header__favorite-count">{favoritesCount}</span>
         </a>

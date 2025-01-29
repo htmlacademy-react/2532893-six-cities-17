@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from '../../../utility/hooks.ts';
 import {useNavigate} from 'react-router-dom';
 import {getAuthorizationStatus} from '../../../store/user-process/user-selectors.ts';
 import {LoginStatus} from '../../../data/login-status.ts';
-import {changeFavoriteStatus} from '../../../store/api-actions.ts';
+import {changeFavoriteStatus, fetchFavoritesList} from '../../../store/api-actions.ts';
 import {RoutePath} from '../../../data/routes.ts';
 
 type FavoriteButtonPropsType = {
@@ -24,6 +24,7 @@ export function FavoriteButton({className, id, isFavorite, width, height}: Favor
     const status = isFavorite ? 0 : 1;
     if (authorizationStatus === LoginStatus.Auth){
       dispatch(changeFavoriteStatus({id, status}));
+      dispatch(fetchFavoritesList);
     } else {
       navigate(RoutePath.LOGIN);
     }

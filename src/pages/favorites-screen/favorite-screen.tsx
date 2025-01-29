@@ -3,14 +3,18 @@
 
 import {RoutePath} from '../../data/routes.ts';
 import {Layout} from '../../components/layout/layout/layout.tsx';
-import {OffersDataProps} from '../../mocks/offers.ts';
 import {FavoritesLocationsItem} from '../../components/blocks/favorites-locations-item/favorites-locations-item.tsx';
 import {createFavoriteGroups} from './favorite-groups.ts';
 import {OffersDataType} from '../../store/types.ts';
+import {useAppSelector} from '../../utility/hooks.ts';
+import {getFavoritesList} from '../../store/favorite-process/favorite-selectors.ts';
 
 
-export function FavoriteScreen({offers}: OffersDataProps): JSX.Element{
-  const offerGroups = createFavoriteGroups(offers.filter((item) => item.isFavorite));
+export function FavoriteScreen(): JSX.Element{
+
+  const favoriteOffers = useAppSelector(getFavoritesList);
+  const offerGroups = createFavoriteGroups(favoriteOffers);
+
 
   return (
     <div className="page">

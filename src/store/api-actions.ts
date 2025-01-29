@@ -132,8 +132,8 @@ export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string
 
     const { data } = await api.post<OffersDataType>(`${APIRoutes.FAVORITE}/${offerId}/${status}`);
 
-    const {offers} = getState().DATA;
-    const currentOffer = offers.find((offer) => offer.id === data.id);
+    const offers = getState().DATA.offers;
+    const currentOffer = offers && offers.find((offer) => offer.id === data.id);
 
     if (!currentOffer) {
       throw new Error('Some Error...');
@@ -143,7 +143,8 @@ export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string
       ...currentOffer,
       isFavorite: data.isFavorite,
     };
-
+    console.log(status);
+    console.log(result.isFavorite);
     return result;
   }
 );
