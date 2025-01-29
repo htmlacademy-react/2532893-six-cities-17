@@ -33,17 +33,20 @@ export function CommentSendForm(): JSX.Element{
 
   const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     checkButtonDisabledConditions();
-    if (evt.target.name === 'rating'){
-      setFormData((prevState) => ({...prevState, rating: +evt.target.value}));
-    }
-    setFormData((prevState) => ({...prevState, comment: evt.target.value}));
+    const {value} = evt.target;
+    setFormData(evt.target.name === 'comment' ? {...formData, comment: value} : {...formData, rating: Number(value)});
     return formData;
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     if (offerId){
-      dispatch(sendCommentAction({offerId, formData}));
+      dispatch(sendCommentAction({offerId, formData}))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            setFormData({rating: 0, comment: ''});
+          }
+        });
     }
   };
 
@@ -70,6 +73,7 @@ export function CommentSendForm(): JSX.Element{
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        value={formData.comment}
         onChange={handleValueChange}
       >
       </textarea>
