@@ -93,3 +93,10 @@ export type CommentType = {
   comment: string;
   rating: null | number;
 };
+
+export enum Status {
+  Idle = 'Idle',
+  Loading= 'Loading',
+  Success = 'Success',
+  Error = 'Error',
+}

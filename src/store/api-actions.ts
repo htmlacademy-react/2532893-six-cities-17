@@ -104,11 +104,12 @@ export const logoutAction = createAsyncThunk<void, undefined>(
 );
 export const sendCommentAction = createAsyncThunk<
   void,
-  { offerId: string | undefined; formData: SendFormType }>(
+  { offerId: string; formData: SendFormType }>(
     'comments/sendComment',
-    async ({ offerId, formData }) => {
+    async ({ offerId, formData }, {dispatch}) => {
       const {comment, rating} = formData;
       await api.post<CommentType>((`${APIRoutes.COMMENTS}/${offerId}`), {comment, rating});
+      dispatch(fetchCommentsAction(offerId));
     },
   );
 
@@ -128,7 +129,7 @@ export const fetchFavoritesList = createAsyncThunk<OffersDataType[], undefined>(
 
 export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string; status: number}, {state: StateType}>(
   'favorites/changeFavoriteStatus',
-  async ({ id: offerId, status }, {getState}) => {
+  async ({ id: offerId, status }, {getState, dispatch}) => {
 
     const { data } = await api.post<OffersDataType>(`${APIRoutes.FAVORITE}/${offerId}/${status}`);
 
@@ -143,8 +144,9 @@ export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string
       ...currentOffer,
       isFavorite: data.isFavorite,
     };
-    console.log(status);
-    console.log(result.isFavorite);
+    dispatch(fetchOffersAction());
+    dispatch(fetchCurrentOfferAction(offerId));
+    dispatch(fetchFavoritesList());
     return result;
   }
 );

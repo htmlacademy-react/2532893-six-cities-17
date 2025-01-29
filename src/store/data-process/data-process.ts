@@ -1,5 +1,4 @@
-
-import {CommentsType, OffersDataType} from '../types.ts';
+import {CommentsType, OffersDataType, Status} from '../types.ts';
 import {createSlice} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
 import {
@@ -13,6 +12,7 @@ import {toast} from 'react-toastify';
 type DataProcessType = {
   offers: OffersDataType[];
   comments: CommentsType[] | null;
+  reviewPostingStatus: Status;
   nearbyOffers: OffersDataType[] | null;
   isOffersDataLoading: boolean;
   isCurrentOfferDataLoading: boolean;
@@ -22,6 +22,7 @@ type DataProcessType = {
 
 const initialState: DataProcessType = {
   offers: [],
+  reviewPostingStatus: Status.Idle,
   comments: [],
   nearbyOffers: [],
   isOffersDataLoading: false,
@@ -46,7 +47,7 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
-        toast.warn('Something went wrong while loading the offer. Please try again');
+        toast.warn('Something went wrong while loading the offers. Please try again');
       })
       .addCase(fetchCurrentOfferAction.pending, (state) => {
         state.isCurrentOfferDataLoading = true;
@@ -60,18 +61,23 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchNearbyOffersAction.rejected, (state) => {
         state.isNearbyOffersDataLoading = false;
-        toast.warn('Something went wrong while loading the offer. Please try again');
+        toast.warn('Something went wrong while loading the nearby offers. Please try again');
       })
       .addCase(fetchCommentsAction.pending, (state) => {
         state.isCommentsDataLoading = true;
+        state.reviewPostingStatus = Status.Loading;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
+        state.reviewPostingStatus = Status.Success;
         state.comments = action.payload;
+        state.reviewPostingStatus = Status.Idle;
         state.isCommentsDataLoading = false;
+        toast.success('Comment was sent');
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
+        state.reviewPostingStatus = Status.Error;
         state.isCommentsDataLoading = false;
-        toast.warn('Something went wrong while loading the offer. Please try again');
+        toast.warn('Something went wrong while sending the comment, please try again later');
       });
   }
 });
