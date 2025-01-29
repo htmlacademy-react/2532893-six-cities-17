@@ -25,4 +25,4 @@ yarn-error.log*
 *.sublime*
 .vscode
 
-/src/mocks/comments.ts
+/js3-six-cities-e2e

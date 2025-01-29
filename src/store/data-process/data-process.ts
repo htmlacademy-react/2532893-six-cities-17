@@ -72,7 +72,6 @@ export const dataProcess = createSlice({
         state.comments = action.payload;
         state.reviewPostingStatus = Status.Idle;
         state.isCommentsDataLoading = false;
-        toast.success('Comment was sent');
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
         state.reviewPostingStatus = Status.Error;
