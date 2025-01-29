@@ -5,6 +5,9 @@ import {CommentsType} from '../../../store/types.ts';
 import {useEffect} from 'react';
 import {fetchCommentsAction} from '../../../store/api-actions.ts';
 import {getCommentsList} from '../../../store/data-process/data-selectors.ts';
+import {getSortedCommentsList} from '../../../utility/utility.ts';
+
+const MAX_COMMENTS_COUNT = 10;
 
 export function ReviewsList(){
   const {id: offerId} = useParams();
@@ -15,9 +18,11 @@ export function ReviewsList(){
       dispatch(fetchCommentsAction(offerId));
     }
   }, [dispatch, offerId]);
+  const sortedCommentsList = getSortedCommentsList(commentsList);
+
   return (
     <ul className="reviews__list">
-      {commentsList && commentsList.map((review) => <ReviewsItem key={review.id} {...review}/>)}
+      {sortedCommentsList && sortedCommentsList.map((review) => <ReviewsItem key={review.id} {...review}/>).slice(0, MAX_COMMENTS_COUNT)}
     </ul>
   );
 }
