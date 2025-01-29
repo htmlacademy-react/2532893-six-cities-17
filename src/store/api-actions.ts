@@ -128,7 +128,7 @@ export const fetchFavoritesList = createAsyncThunk<OffersDataType[], undefined>(
 
 export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string; status: number}, {state: StateType}>(
   'favorites/changeFavoriteStatus',
-  async ({ id: offerId, status }, {getState}) => {
+  async ({ id: offerId, status }, {getState, dispatch}) => {
 
     const { data } = await api.post<OffersDataType>(`${APIRoutes.FAVORITE}/${offerId}/${status}`);
 
@@ -143,8 +143,8 @@ export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string
       ...currentOffer,
       isFavorite: data.isFavorite,
     };
-    console.log(status);
-    console.log(result.isFavorite);
+    dispatch(fetchOffersAction());
+    dispatch(fetchCurrentOfferAction(offerId));
     return result;
   }
 );
