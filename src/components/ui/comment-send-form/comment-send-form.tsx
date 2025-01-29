@@ -42,7 +42,9 @@ export function CommentSendForm(): JSX.Element{
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
-    dispatch(sendCommentAction({offerId, formData}));
+    if (offerId){
+      dispatch(sendCommentAction({offerId, formData}));
+    }
   };
 
   return (

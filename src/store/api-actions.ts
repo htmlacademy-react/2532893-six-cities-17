@@ -104,11 +104,12 @@ export const logoutAction = createAsyncThunk<void, undefined>(
 );
 export const sendCommentAction = createAsyncThunk<
   void,
-  { offerId: string | undefined; formData: SendFormType }>(
+  { offerId: string; formData: SendFormType }>(
     'comments/sendComment',
-    async ({ offerId, formData }) => {
+    async ({ offerId, formData }, {dispatch}) => {
       const {comment, rating} = formData;
       await api.post<CommentType>((`${APIRoutes.COMMENTS}/${offerId}`), {comment, rating});
+      dispatch(fetchCommentsAction(offerId));
     },
   );
 
