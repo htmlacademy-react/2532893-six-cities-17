@@ -1,6 +1,7 @@
 import {RatingInputValuesType} from '../data/rating-input-values.ts';
 import {SORTING_TYPES} from '../data/sorting-types.ts';
-import {OffersDataType} from '../store/types.ts';
+import {CommentsType, OffersDataType} from '../store/types.ts';
+import {defaultCityType} from '../mocks/cities-list.ts';
 
 export const getCapitalizeWord = (value: string):string => value[0].toUpperCase() + value.split('').slice(1).join('').toLowerCase();
 
@@ -31,5 +32,19 @@ export const getSortedOffersList = (list: OffersDataType[], typeOfSorting: strin
       result = [...list];
       break;
   }
+  return result;
+};
+
+export const getSortedCommentsList = (comments: CommentsType[] | null) => {
+  let sortedComments;
+  if (comments){
+    sortedComments = comments.toSorted((a: CommentsType, b: CommentsType) => Date.parse(a.date) - Date.parse(b.date));
+  }
+  return sortedComments;
+};
+
+export const getRandomCity = (cityList:defaultCityType[]) => {
+  const randomIndex = Math.floor(Math.random() * (cityList.length - 1));
+  const result = cityList[randomIndex];
   return result;
 };

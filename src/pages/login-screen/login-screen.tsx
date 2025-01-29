@@ -5,8 +5,11 @@ import {FormEvent, useRef} from 'react';
 import {useAppDispatch} from '../../utility/hooks.ts';
 import {AuthData} from '../../store/types.ts';
 import {loginAction} from '../../store/api-actions.ts';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../data/routes.ts';
+import {getRandomCity} from '../../utility/utility.ts';
+import {CITIES_LIST} from '../../mocks/cities-list.ts';
+import {changeActiveCity} from '../../store/offers-process/offers-process.ts';
 
 export function LoginScreen(): JSX.Element{
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -14,6 +17,8 @@ export function LoginScreen(): JSX.Element{
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const randomCity = getRandomCity(CITIES_LIST);
 
   const onSubmit = (authData: AuthData) => {
     try {
@@ -33,6 +38,10 @@ export function LoginScreen(): JSX.Element{
         password: passwordRef.current.value,
       });
     }
+  };
+
+  const handleCityClick = () => {
+    dispatch(changeActiveCity(randomCity.title));
   };
 
   return (
@@ -77,11 +86,14 @@ export function LoginScreen(): JSX.Element{
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link"
-                href="#"
+              <Link
+                className="locations__item-link"
+                to={RoutePath.INDEX}
+                onClick={handleCityClick}
               >
-                <span>Amsterdam</span>
-              </a>
+                <span>{randomCity.title}</span>
+              </Link>
+
             </div>
           </section>
         </div>
