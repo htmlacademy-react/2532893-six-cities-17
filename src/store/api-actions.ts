@@ -145,6 +145,7 @@ export const changeFavoriteStatus = createAsyncThunk<OffersDataType, {id: string
     };
     dispatch(fetchOffersAction());
     dispatch(fetchCurrentOfferAction(offerId));
+    dispatch(fetchFavoritesList());
     return result;
   }
 );
