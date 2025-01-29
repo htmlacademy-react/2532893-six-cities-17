@@ -3,10 +3,11 @@
 import {TabsItem} from '../tabs-item/tabs-item.tsx';
 import {CITIES_LIST} from '../../../mocks/cities-list.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
+import {getActiveCity} from '../../../store/offers-process/offers-selectors.ts';
 
 export function Tabs():JSX.Element{
 
-  const activeCityName = useAppSelector((state) => state.activeCityName);
+  const activeCityName = useAppSelector(getActiveCity);
 
   return (
     <ul className="locations__list tabs__list">

@@ -1,7 +1,7 @@
 // noinspection JSDeprecatedSymbols
 
 import {useAppDispatch} from '../../../utility/hooks.ts';
-import {changeActiveCity} from '../../../store/action.ts';
+import {changeActiveCity} from '../../../store/offers-process/offers-process.ts';
 
 type TabsItemPropsType = {
   isActive: boolean;

@@ -1,16 +1,14 @@
 // noinspection JSDeprecatedSymbols
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {ReviewsList} from '../../components/blocks/reviews-list/reviews-list.tsx';
-import {IMocksData} from '../../mocks/offers.ts';
 import {useNavigate, useParams} from 'react-router-dom';
 import {OfferMark} from '../../components/ui/offer-mark/offer-mark.tsx';
 import {getCapitalizeWord} from '../../utility/utility.ts';
 import {CommentSendForm} from '../../components/ui/comment-send-form/comment-send-form.tsx';
+import {OfferImage} from '../../components/blocks/offer-image/offer-image.tsx';
 
-import {REVIEWS_LIST_DATA_MOCK} from '../../mocks/reviews.ts';
 import {Map} from '../../components/ui/map/map.tsx';
 import {CITIES_LIST} from '../../mocks/cities-list.ts';
-import {NEARBY_OFFERS_MOCK} from '../../mocks/nearby-offers.ts';
 
 import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
 import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-inside-list.tsx';
@@ -20,17 +18,28 @@ import {useEffect} from 'react';
 import {fetchCurrentOfferAction} from '../../store/api-actions.ts';
 import {RoutePath} from '../../data/routes.ts';
 import {LoginStatus} from '../../data/login-status.ts';
+import {getAuthorizationStatus} from '../../store/user-process/user-selectors.ts';
+import {getCurrentOffer} from '../../store/offers-process/offers-selectors.ts';
+import {FavoriteButton} from '../../components/ui/favorite-button/favorite-button.tsx';
+import {
+  BIG_FAVORITE_BUTTON_HEIGHT,
+  BIG_FAVORITE_BUTTON_WIDTH,
+  favoriteButtonClassNames
+} from '../../data/favorite-button-data.ts';
+import {getCommentsList, getNearbyOffersList} from '../../store/data-process/data-selectors.ts';
 
 export type MainOfferScreenProps = {
   activeOffer: string;
 }
-// noinspection JSDeprecatedSymbols
+
 export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
 
   const {id: offerId} = useParams();
   const dispatch = useAppDispatch();
-  const offer: IMocksData | null = useAppSelector((state) => state.currentOffer);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offer = useAppSelector(getCurrentOffer);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getCommentsList);
+  const nearbyOffersList = useAppSelector(getNearbyOffersList);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +48,8 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
     } else {
       navigate(RoutePath.NOT_FOUND);
     }
-  }, [dispatch, offerId]);
+  }, [dispatch, offerId, navigate]);
+
   return (
 
     <div className="page">
@@ -49,63 +59,19 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {offer && offer.images.map((item) => <OfferImage imageSRC={item} key={item}/>)}
             </div>
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer?.isPremium ? <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/> : null}
+              {offer && offer.isPremium && <OfferMark className={MARK_CLASS_NAMES.OFFER_MARK} status={'Premium'}/>}
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   {offer && offer.title}
                 </h1>
-                <button className="offer__bookmark-button button"
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon"
-                    width="31"
-                    height="33"
-                  >
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {offer && <FavoriteButton className={favoriteButtonClassNames.offerPageButton} isFavorite={offer.isFavorite} id={offer.id} width={BIG_FAVORITE_BUTTON_WIDTH} height={BIG_FAVORITE_BUTTON_HEIGHT}/>}
+
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -113,44 +79,44 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">
-                  {offer?.rating ? Math.round(offer.rating) : null}
+                  {offer && Math.round(offer.rating)}
                 </span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {offer?.type && getCapitalizeWord(offer.type)}
+                  {offer && offer.type && getCapitalizeWord(offer.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {offer && offer.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {offer && offer.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{offer?.price}</b>
+                <b className="offer__price-value">&euro;{offer && offer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
-                <OfferInsideList/>
+                <OfferInsideList goods={offer && offer.goods} />
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img className="offer__avatar user__avatar"
-                      src="img/avatar-angelina.jpg"
+                      src={offer && offer.host.avatarUrl}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {offer && offer.host.name}
                   </span>
                   <span className="offer__user-status">
-                    Pro
+                    {offer && offer.host.isPro && 'Pro'}
                   </span>
                 </div>
                 <div className="offer__description">
@@ -165,7 +131,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{REVIEWS_LIST_DATA_MOCK.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews && reviews.length}</span></h2>
                 <ReviewsList/>
                 {authorizationStatus === LoginStatus.Auth && <CommentSendForm/>}
               </section>
@@ -173,7 +139,7 @@ export function OfferScreen({activeOffer}: MainOfferScreenProps): JSX.Element {
           </div>
           <section className="offer__map map" style={{height: '579px'}}>
             {
-              offer && <Map offers={NEARBY_OFFERS_MOCK} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/>
+              offer && <Map offers={offer && nearbyOffersList} defaultCity={CITIES_LIST} activeOffer={activeOffer} className={'offer__map map'}/>
             }
           </section>
         </section>

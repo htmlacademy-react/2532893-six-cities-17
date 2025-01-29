@@ -2,11 +2,12 @@
 // noinspection JSDeprecatedSymbols
 
 import {PlaceCard} from '../place-card/place-card.tsx';
-import {CityNameTypes, IMocksData} from '../../../mocks/offers.ts';
+import {CityNameTypes} from '../../../mocks/offers.ts';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
+import {OffersDataType} from '../../../store/types.ts';
 
 type FavoritesItemType = {
-  offers: IMocksData[];
+  offers: OffersDataType[];
   cityName: CityNameTypes;
 }
 
@@ -26,7 +27,7 @@ export function FavoritesLocationsItem({offers, cityName}: FavoritesItemType):JS
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteCityOffers.map((item: IMocksData):JSX.Element => <PlaceCard {...item} key={item.id} onHandleActiveOfferChange={() => {}} className={CARD_CLASS_NAMES.FAVORITES_CARD}/>)}
+        {favoriteCityOffers.map((item: OffersDataType):JSX.Element => <PlaceCard {...item} key={item.id} onHandleActiveOfferChange={() => {}} className={CARD_CLASS_NAMES.FAVORITES_CARD}/>)}
 
       </div>
     </li>

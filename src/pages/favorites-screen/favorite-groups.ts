@@ -1,9 +1,9 @@
 import {CityNameTypes} from '../../mocks/offers.ts';
-import {IMocksData} from '../../mocks/offers.ts';
+import {OffersDataType} from '../../store/types.ts';
 
-type FavoriteGroupsType = Record<CityNameTypes, IMocksData[]>
+type FavoriteGroupsType = Record<CityNameTypes, OffersDataType[]>
 
-export const createFavoriteGroups = (offers: IMocksData[]): FavoriteGroupsType => {
+export const createFavoriteGroups = (offers: OffersDataType[]): FavoriteGroupsType => {
   const result: FavoriteGroupsType = {};
 
   offers.forEach((item) => {

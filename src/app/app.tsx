@@ -13,20 +13,25 @@ import {LoadingElement} from '../components/ui/loading-element/loading-element.t
 
 import {RoutePath} from '../data/routes.ts';
 import {LoginStatus} from '../data/login-status.ts';
-import {IMocksData} from '../mocks/offers.ts';
 import {FavoritesEmptyScreen} from '../pages/favorites-empty-screen/favorites-empty-screen.tsx';
 import {SetStateAction, useState} from 'react';
 import {useAppSelector} from '../utility/hooks.ts';
 import OfferNotLoggedScreen from '../pages/offer-not-logged-screen/offer-not-logged-screen.tsx';
+import {getAuthorizationStatus} from '../store/user-process/user-selectors.ts';
+import {getOffers, getOffersDataLoading} from '../store/data-process/data-selectors.ts';
+import {OffersDataType} from '../store/types.ts';
+
 
 export function App(): JSX.Element {
-  const offersList: IMocksData[] = useAppSelector((store) => store.offers);
+
+  const offersList: OffersDataType[] = useAppSelector(getOffers);
   const [activeOffer, setActiveOffer]: ActiveOfferTupleType = useState('');
   const activeOfferHandler = (id: SetStateAction<string>): void => {
     setActiveOffer(id);
   };
-  const isLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
-  const authorizationStatus: LoginStatus = useAppSelector((state) => state.authorizationStatus);
+  const isLoading: boolean = useAppSelector(getOffersDataLoading);
+  const authorizationStatus: LoginStatus = useAppSelector(getAuthorizationStatus);
+
 
   if (isLoading) {
     return (
@@ -48,7 +53,7 @@ export function App(): JSX.Element {
             element={
               <PrivateRoute loginStatus={authorizationStatus}>
                 {offersList.some((item) => item.isFavorite)
-                  ? <FavoriteScreen offers={offersList}/>
+                  ? <FavoriteScreen />
                   : <FavoritesEmptyScreen/>}
               </PrivateRoute>
             }
@@ -65,4 +70,5 @@ export function App(): JSX.Element {
       </Routes>
     </BrowserRouter>
   );
+
 }

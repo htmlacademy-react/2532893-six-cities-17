@@ -1,0 +1,78 @@
+
+import {CommentsType, OffersDataType} from '../types.ts';
+import {createSlice} from '@reduxjs/toolkit';
+import {Namespace} from '../namespace.ts';
+import {
+  fetchCommentsAction,
+  fetchCurrentOfferAction,
+  fetchNearbyOffersAction,
+  fetchOffersAction
+} from '../api-actions.ts';
+import {toast} from 'react-toastify';
+
+type DataProcessType = {
+  offers: OffersDataType[];
+  comments: CommentsType[] | null;
+  nearbyOffers: OffersDataType[] | null;
+  isOffersDataLoading: boolean;
+  isCurrentOfferDataLoading: boolean;
+  isCommentsDataLoading: boolean;
+  isNearbyOffersDataLoading: boolean;
+}
+
+const initialState: DataProcessType = {
+  offers: [],
+  comments: [],
+  nearbyOffers: [],
+  isOffersDataLoading: false,
+  isCurrentOfferDataLoading: false,
+  isCommentsDataLoading: false,
+  isNearbyOffersDataLoading: false,
+};
+
+
+export const dataProcess = createSlice({
+  name: Namespace.Data,
+  initialState,
+  reducers: {},
+  extraReducers(builder){
+    builder
+      .addCase(fetchOffersAction.pending, (state) => {
+        state.isOffersDataLoading = true;
+      })
+      .addCase(fetchOffersAction.fulfilled, (state, action) => {
+        state.isOffersDataLoading = false;
+        state.offers = action.payload;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        toast.warn('Something went wrong while loading the offer. Please try again');
+      })
+      .addCase(fetchCurrentOfferAction.pending, (state) => {
+        state.isCurrentOfferDataLoading = true;
+      })
+      .addCase(fetchNearbyOffersAction.pending, (state) => {
+        state.isNearbyOffersDataLoading = true;
+      })
+      .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
+        state.nearbyOffers = action.payload;
+        state.isNearbyOffersDataLoading = false;
+      })
+      .addCase(fetchNearbyOffersAction.rejected, (state) => {
+        state.isNearbyOffersDataLoading = false;
+        toast.warn('Something went wrong while loading the offer. Please try again');
+      })
+      .addCase(fetchCommentsAction.pending, (state) => {
+        state.isCommentsDataLoading = true;
+      })
+      .addCase(fetchCommentsAction.fulfilled, (state, action) => {
+        state.comments = action.payload;
+        state.isCommentsDataLoading = false;
+      })
+      .addCase(fetchCommentsAction.rejected, (state) => {
+        state.isCommentsDataLoading = false;
+        toast.warn('Something went wrong while loading the offer. Please try again');
+      });
+  }
+});
+

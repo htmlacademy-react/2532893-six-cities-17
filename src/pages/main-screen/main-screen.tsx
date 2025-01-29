@@ -6,11 +6,11 @@ import {Layout} from '../../components/layout/layout/layout.tsx';
 import {SetStateAction} from 'react';
 import {Cities} from '../../components/blocks/cities/cities.tsx';
 import {MainEmptyBlock} from '../../components/blocks/main-empty-block/main-empty-block.tsx';
-import {IMocksData} from '../../mocks/offers.ts';
+import {OffersDataType} from '../../store/types.ts';
 
 export type ActiveOfferTupleType = [string, React.Dispatch<SetStateAction<string>>];
 export type MainScreenProps = {
-  offers: IMocksData[];
+  offers: OffersDataType[];
   onHandleActiveOfferChange(id: SetStateAction<string>): void;
   activeOffer: string;
 }
