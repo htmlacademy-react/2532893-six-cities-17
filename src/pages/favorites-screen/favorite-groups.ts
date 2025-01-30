@@ -1,4 +1,4 @@
-import {CityNameTypes} from '../../mocks/offers.ts';
+import {CityNameTypes} from '../../store/types.ts';
 import {OffersDataType} from '../../store/types.ts';
 
 type FavoriteGroupsType = Record<CityNameTypes, OffersDataType[]>

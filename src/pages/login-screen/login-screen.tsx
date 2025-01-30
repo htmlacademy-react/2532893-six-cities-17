@@ -8,7 +8,7 @@ import {loginAction} from '../../store/api-actions.ts';
 import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../data/routes.ts';
 import {getRandomCity} from '../../utility/utility.ts';
-import {CITIES_LIST} from '../../mocks/cities-list.ts';
+import {CITIES_LIST} from '../../data/cities-list.ts';
 import {changeActiveCity} from '../../store/offers-process/offers-process.ts';
 
 export function LoginScreen(): JSX.Element{

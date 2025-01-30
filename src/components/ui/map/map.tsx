@@ -1,7 +1,7 @@
 import {Icon, Marker, layerGroup} from 'leaflet';
 import {MutableRefObject, useEffect, useRef} from 'react';
 import {useMap} from './useMap.ts';
-import {defaultCityType} from '../../../mocks/cities-list.ts';
+import {defaultCityType} from '../../../data/cities-list.ts';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../../data/pin-url.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
 import {getActiveCity} from '../../../store/offers-process/offers-selectors.ts';

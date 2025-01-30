@@ -3,7 +3,7 @@
 import {CityOffers} from '../city-offers/city-offers.tsx';
 import {CityOfferPropsType} from '../city-offers/city-offers.tsx';
 import {Map} from '../../ui/map/map.tsx';
-import {CITIES_LIST} from '../../../mocks/cities-list.ts';
+import {CITIES_LIST} from '../../../data/cities-list.ts';
 
 
 export function Cities({offers, onHandleActiveOfferChange, activeOffer}: CityOfferPropsType): JSX.Element{
