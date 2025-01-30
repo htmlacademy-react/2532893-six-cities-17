@@ -1,5 +1,4 @@
 
-// noinspection JSDeprecatedSymbols
 
 import {Logo} from '../../ui/logo/logo.tsx';
 import {Nav} from '../../blocks/nav/nav.tsx';

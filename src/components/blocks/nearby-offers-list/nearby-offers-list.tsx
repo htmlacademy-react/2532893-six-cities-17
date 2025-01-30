@@ -1,6 +1,4 @@
-// noinspection JSDeprecatedSymbols
 
-// noinspection JSDeprecatedSymbols;
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 import {useParams} from 'react-router-dom';

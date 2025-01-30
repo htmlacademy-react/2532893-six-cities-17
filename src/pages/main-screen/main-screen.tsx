@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import React from 'react';
 import {Tabs} from '../../components/blocks/tabs/tabs.tsx';

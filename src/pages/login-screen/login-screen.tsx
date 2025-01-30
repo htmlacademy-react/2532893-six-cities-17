@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {FormEvent, useRef} from 'react';

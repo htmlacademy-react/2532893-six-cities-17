@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {Header} from '../header/header.tsx';
 import {Outlet} from 'react-router-dom';

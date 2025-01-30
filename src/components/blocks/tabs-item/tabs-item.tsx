@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {useAppDispatch} from '../../../utility/hooks.ts';
 import {changeActiveCity} from '../../../store/offers-process/offers-process.ts';
