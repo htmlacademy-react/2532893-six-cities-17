@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {SortingList} from '../sorting-list/sorting-list.tsx';

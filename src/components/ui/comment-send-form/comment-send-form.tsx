@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {RatingInputValues} from '../../../data/rating-input-values.ts';

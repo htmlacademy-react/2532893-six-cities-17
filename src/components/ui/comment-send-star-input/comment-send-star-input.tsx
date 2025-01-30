@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import React from 'react';
 

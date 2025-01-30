@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {Navigate} from 'react-router-dom';
 import {RoutePath} from '../../../data/routes.ts';

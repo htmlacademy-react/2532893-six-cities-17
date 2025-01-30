@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {Link} from 'react-router-dom';
 import {OfferMark} from '../../ui/offer-mark/offer-mark.tsx';

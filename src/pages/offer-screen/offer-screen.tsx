@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 import {Layout} from '../../components/layout/layout/layout.tsx';
 import {ReviewsList} from '../../components/blocks/reviews-list/reviews-list.tsx';
 import {useNavigate, useParams} from 'react-router-dom';

@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {Link} from 'react-router-dom';
 import styles from './not-found-screen.module.css';

@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {TabsItem} from '../tabs-item/tabs-item.tsx';
 import {CITIES_LIST} from '../../../data/cities-list.ts';

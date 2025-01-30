@@ -1,5 +1,4 @@
 
-// noinspection JSDeprecatedSymbols
 
 import {useEffect} from 'react';
 import {getSortedOffersList} from '../../../utility/utility.ts';

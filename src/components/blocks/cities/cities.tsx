@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 
 import {CityOffers} from '../city-offers/city-offers.tsx';
 import {CityOfferPropsType} from '../city-offers/city-offers.tsx';

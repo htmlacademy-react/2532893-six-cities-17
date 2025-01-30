@@ -1,5 +1,4 @@
 
-// noinspection JSDeprecatedSymbols
 
 import {SortingItem} from '../sorting-item/sorting-item.tsx';
 import {SORTING_TYPES} from '../../../data/sorting-types.ts';

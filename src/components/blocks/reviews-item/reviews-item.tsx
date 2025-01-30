@@ -12,11 +12,7 @@ export type ReviewType = {
   rating: number;
 }
 
-export type ReviewsPropsType = {
-  reviews: ReviewType[];
-}
 
-// noinspection JSDeprecatedSymbols
 export function ReviewsItem(review: ReviewType): JSX.Element{
   const { date, rating, user, comment} = review;
 

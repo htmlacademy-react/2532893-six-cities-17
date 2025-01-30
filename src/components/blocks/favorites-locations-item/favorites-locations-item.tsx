@@ -1,5 +1,4 @@
 
-// noinspection JSDeprecatedSymbols
 
 import {PlaceCard} from '../place-card/place-card.tsx';
 import {CityNameTypes} from '../../../store/types.ts';

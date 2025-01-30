@@ -1,4 +1,4 @@
-// noinspection JSDeprecatedSymbols
+
 import {RoutePath} from '../../data/routes.ts';
 import {Layout} from '../../components/layout/layout/layout.tsx';
 

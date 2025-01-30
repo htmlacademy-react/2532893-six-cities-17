@@ -1,4 +1,3 @@
-// noinspection JSDeprecatedSymbols
 
 import {OfferInsideItem} from '../offer-inside-item/offer-inside-item.tsx';
 
