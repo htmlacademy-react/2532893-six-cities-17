@@ -2,7 +2,7 @@
 // noinspection JSDeprecatedSymbols
 
 import {PlaceCard} from '../place-card/place-card.tsx';
-import {CityNameTypes} from '../../../mocks/offers.ts';
+import {CityNameTypes} from '../../../store/types.ts';
 import {CARD_CLASS_NAMES} from '../../../data/card-class-names.ts';
 import {OffersDataType} from '../../../store/types.ts';
 

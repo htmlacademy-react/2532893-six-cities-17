@@ -8,7 +8,7 @@ import {CommentSendForm} from '../../components/ui/comment-send-form/comment-sen
 import {OfferImage} from '../../components/blocks/offer-image/offer-image.tsx';
 
 import {Map} from '../../components/ui/map/map.tsx';
-import {CITIES_LIST} from '../../mocks/cities-list.ts';
+import {CITIES_LIST} from '../../data/cities-list.ts';
 
 import {NearbyOffersList} from '../../components/blocks/nearby-offers-list/nearby-offers-list.tsx';
 import {OfferInsideList} from '../../components/blocks/offer-inside-list/offer-inside-list.tsx';

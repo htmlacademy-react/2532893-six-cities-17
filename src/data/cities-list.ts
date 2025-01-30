@@ -37,3 +37,4 @@ export const CITIES_LIST: defaultCityType[] = [{
   lng: 6.7775684,
   zoom: 12,
 }];
+

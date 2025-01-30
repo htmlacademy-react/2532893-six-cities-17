@@ -1,7 +1,7 @@
 // noinspection JSDeprecatedSymbols
 
 import {TabsItem} from '../tabs-item/tabs-item.tsx';
-import {CITIES_LIST} from '../../../mocks/cities-list.ts';
+import {CITIES_LIST} from '../../../data/cities-list.ts';
 import {useAppSelector} from '../../../utility/hooks.ts';
 import {getActiveCity} from '../../../store/offers-process/offers-selectors.ts';
 

@@ -2,7 +2,7 @@ import {useEffect, useState, useRef} from 'react';
 import {Map, TileLayer} from 'leaflet';
 import {refType} from './map.tsx';
 import {LeafletData} from '../../../data/leaflet-data.ts';
-import {defaultCityType} from '../../../mocks/cities-list.ts';
+import {defaultCityType} from '../../../data/cities-list.ts';
 
 
 export function useMap(

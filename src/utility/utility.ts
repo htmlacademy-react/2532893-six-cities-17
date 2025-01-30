@@ -1,7 +1,7 @@
 import {RatingInputValuesType} from '../data/rating-input-values.ts';
 import {SORTING_TYPES} from '../data/sorting-types.ts';
 import {CommentsType, OffersDataType} from '../store/types.ts';
-import {defaultCityType} from '../mocks/cities-list.ts';
+import {defaultCityType} from '../data/cities-list.ts';
 
 export const getCapitalizeWord = (value: string):string => value[0].toUpperCase() + value.split('').slice(1).join('').toLowerCase();
 

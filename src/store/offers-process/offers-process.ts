@@ -1,7 +1,7 @@
 
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Namespace} from '../namespace.ts';
-import {CITIES_LIST, defaultCityType} from '../../mocks/cities-list.ts';
+import {CITIES_LIST, defaultCityType} from '../../data/cities-list.ts';
 import {fetchCurrentOfferAction} from '../api-actions.ts';
 import {toast} from 'react-toastify';
 import {CurrentOfferDataType} from '../types.ts';
